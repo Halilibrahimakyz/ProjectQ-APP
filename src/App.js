@@ -5,13 +5,23 @@ import {
   HomeScreen,
 } from '@/screens';
 import Colors from '@/constants/Colors';
+import { store } from './storeReduxToolkit/store';
+import { Provider } from 'react-redux';
+import { persistor } from './storeReduxToolkit/store';
+import { PersistGate } from 'redux-persist/integration/react';
+
+
 const App = props => {
 
  
   return (
-   <View style={{flex:1,backgroundColor:Colors.darkWhite}}>
-    <HomeScreen/>
-   </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <View style={{flex:1,backgroundColor:Colors.darkWhite}}>
+          <HomeScreen/>
+        </View>
+      </PersistGate>
+    </Provider>
   );
 };
 
