@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import {
   HomeScreen,
 } from '@/screens';
-import Colors from '@/constants/Colors';
 import { store } from './storeReduxToolkit/store';
 import { Provider } from 'react-redux';
 import { persistor } from './storeReduxToolkit/store';
@@ -17,9 +16,9 @@ const App = props => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View style={{flex:1,backgroundColor:Colors.darkWhite}}>
+       
           <HomeScreen/>
-        </View>
+        
       </PersistGate>
     </Provider>
   );
