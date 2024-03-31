@@ -1,14 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import '../locales/i18n'; 
+import {setLanguage as setLanguageAction} from '../storeReduxToolkit/languageSlice'
 
-// Bir hook olarak getVal işlevselliğini sağlayın
-export const useGetVal = () => {
-  const { t } = useTranslation();
+export const useLanguage = () => {
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
-  const getVal = (ref, params = {}) => {
-    // i18next kullanarak çeviriyi gerçekleştirin
-    return t(ref, params);
+  const changeLanguage = (languageCode) => {
+    i18n.changeLanguage(languageCode).then(() => {
+      dispatch(setLanguageAction(languageCode));
+    });
   };
 
-  return getVal;
+  return {
+    getVal: (ref, params = {}) => t(ref, params),
+    changeLanguage,
+  };
 };

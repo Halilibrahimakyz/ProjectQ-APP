@@ -23,7 +23,5 @@ export const languageSlice = createSlice({
     },
 });
 
-// Action creators are generated for each case reducer function
 export const { setLanguage, setTurkish, setEnglish } = languageSlice.actions;
-
 export default languageSlice.reducer;

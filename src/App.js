@@ -1,5 +1,4 @@
-
-import { StyleSheet, LogBox, SafeAreaView, Platform,StatusBar, View,Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
 import {
   HomeScreen,
@@ -9,16 +8,12 @@ import { Provider } from 'react-redux';
 import { persistor } from './storeReduxToolkit/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-
 const App = props => {
 
- 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-       
-          <HomeScreen/>
-        
+      <PersistGate loading={null} persistor={persistor} >
+        <HomeScreen />
       </PersistGate>
     </Provider>
   );
