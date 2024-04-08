@@ -1,24 +1,33 @@
-import { StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
-import {
-  HomeScreen,
-} from '@/screens';
-import { store } from './storeReduxToolkit/store';
-import { Provider } from 'react-redux';
-import { persistor } from './storeReduxToolkit/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { StyleSheet, View, Text } from 'react-native';
 
-const App = props => {
+import { startApp } from './navigator/navigation';
+import registerScreens from './navigator/registerScreens';
+
+registerScreens();
+
+const App = (props) => {
+  useEffect(() => {
+    initApp();
+  }, []);
+
+  const initApp = () => {
+    startApp();
+  };
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor} >
-        <HomeScreen />
-      </PersistGate>
-    </Provider>
+    <View style={styles.container}>
+      <Text>Loading...</Text>
+    </View>
   );
 };
 
 export default App;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

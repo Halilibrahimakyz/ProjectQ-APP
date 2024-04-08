@@ -1,4 +1,8 @@
 {
-  "welcome": "Uygulamamıza hoş geldiniz!",
-  "description": "i18next'in React'te nasıl kullanılacağına dair bir örnektir."
+  "welcome": "HOŞ GELDİNİZ",
+  "description": "i18next'in React'te nasıl kullanılacağına dair bir örnektir.",
+  "This_is_where_your_ideas":"Burası fikirlerinizin değer bulduğu ve hayallerinizin büyüdüğü yer",
+  "lets_start":"Hadi Başlayalım",
+  "have_acc":"Zaten aramızda mısın?",
+  "log_in":"Giriş yap"
 }

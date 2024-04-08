@@ -1,4 +1,8 @@
 {
-  "welcome": "Welcome to our application!",
-  "description": "This is an example of how to use i18next in React."
+  "welcome": "WELCOME",
+  "description": "This is an example of how to use i18next in React.",
+  "This_is_where_your_ideas":"This is where your ideas find value and your dreams grow",
+  "lets_start":"Let's Start",
+  "have_acc":"Already one of us?",
+  "log_in":"Log in"
 }

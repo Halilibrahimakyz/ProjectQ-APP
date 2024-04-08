@@ -10,27 +10,17 @@ import {useLanguage} from '@/constants/language'
 import Welcome from '../../assets/svg/Welcome.svg'
 import Dark from '@/assets/svg/Dark.svg'
 import Light from '@/assets/svg/Light.svg'
-import { Navigation } from "react-native-navigation";
 
-const HomeScreen = props => {
+const TestScreen = props => {
 
   const counterNum = useSelector((state) => state.counter.value);
   const language= useSelector((state) => state.language.value);
   const theme= useSelector((state) => state.theme.value);
   const userDonor= useSelector((state) => state.userDonor);
   const userStudent= useSelector((state) => state.userStudent.userInfo);
-  console.log("userDonor: ",userDonor)
   const { getVal, changeLanguage } = useLanguage();
 
   const dispatch = useDispatch();
-  goToSecondScreen = () => {
-    console.log("props.componentId: ",props.componentId)
-    Navigation.push(props.componentId, {
-      component: {
-        name: 'TestScreen'
-      }
-    });
-  };
 
   return (
     <ScrollView style={{flex: 1,backgroundColor:useTheme().background, width: "100%", height: "100%"}}>
@@ -44,17 +34,8 @@ const HomeScreen = props => {
           }
         
         </View>
-        <Button title="Increment" onPress={() => dispatch(increment())} />
-        <Button title="Decrement" onPress={() => dispatch(decrement())} />
-        <Button title="setTurkish" onPress={() => changeLanguage('tr')} />
-        <Button title="setEnglish" onPress={() => changeLanguage('en')} />
-        <Button title="setDarkTheme" onPress={() => dispatch(setDarkTheme())} />
-        <Button title="setLightTheme" onPress={() => dispatch(setLightTheme())} />
-        <Button title="loginSuccess" onPress={() => dispatch(loginSuccess({name:"test",surname:"test2"}))} />
-        <Button title="logout" onPress={() => dispatch(logout())} />
-        <Button title="goToSecondScreen" onPress={() => goToSecondScreen()} />
         </ScrollView>
   );
 };
 
-export default HomeScreen;
+export default TestScreen;
