@@ -23,6 +23,9 @@ export const lightTheme = {
   background2: '#151619',
   secondary: '#262934',
   lightGrey: '#838383',
+  onBoardBackButton: '#838383',
+  onBoardSkipButton: '#A9A9A9',
+  onBoardDescText: '#292929',
   type:'light'
 };
 
@@ -32,6 +35,9 @@ export const darkTheme = {
   background2: '#EBEEF2',
   secondary: '#838383', // Assuming this was intended to be different in dark mode
   lightGrey: '#838383',
+  onBoardBackButton: '#A9A9A9',
+  onBoardSkipButton: '#838383',
+  onBoardDescText: '#fff',
   type:'dark'
 };
 
