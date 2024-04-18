@@ -1,47 +1,37 @@
 import React, { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useTheme } from '@/constants/Colors';
+import { useTheme } from '@/constants/colors';
 
 const OnBoardPagination = memo(function ({ activeIndex, totalItems }) {
-  const dots = [];
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
-  for (let i = 0; i < totalItems; i++) {
-    dots.push(
-      <View
-        key={i}
-        style={activeIndex == i ? styles.activeIcon : styles.inactiveIcon}
-      />,
-    );
-  }
+  const dots = Array.from({ length: totalItems }, (_, i) => {
+    const width = useAnimatedStyle(() => {
+      return {
+        width: withTiming(activeIndex === i ? 40 : 10, { duration: 300 }),
+        backgroundColor: withTiming(activeIndex === i ? theme.primary : theme.lightGrey, { duration: 300 })
+      };
+    });
+
+    return <Animated.View key={i} style={[styles.icon, width]} />;
+  });
 
   return <View style={styles.container}>{dots}</View>;
 });
 
-const commonIcon = {
-  width: 10,
-  height: 10,
-  borderRadius: 5,
-  borderTopLeftRadius: 5,
-  borderTopRightRadius: 5,
-  borderBottomLeftRadius: 5,
-  borderBottomRightRadius: 5,
-  marginHorizontal: 15,
-};
-
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  activeIcon: {
-    ...commonIcon,
-    backgroundColor: "#13B156",
-  },
-  inactiveIcon: {
-    ...commonIcon,
-    backgroundColor: "gray",
+  icon: {
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 10,
   },
 });
 

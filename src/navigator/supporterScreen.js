@@ -1,10 +1,9 @@
 import { Navigation } from 'react-native-navigation';
-import withReduxProvider from '../hoc/withReduxProvider';
-import withGestureHandler from '../hoc/withGestureHandler';
+import withProviders from '../hoc/withProviders';
 import {
     testSupporterPageScreen
 } from '@/screens'
 
 export const registerSupportScreens = () => {
-    Navigation.registerComponent('testSupporterPageScreen', () => withGestureHandler(testSupporterPageScreen));
+    Navigation.registerComponent('testSupporterPageScreen', () => withProviders(testSupporterPageScreen));
 };

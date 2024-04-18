@@ -5,12 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment } from '../../storeReduxToolkit/counterSlice';
 import { setDarkTheme, setLightTheme } from '../../storeReduxToolkit/themeSlice';
 import { loginSuccess, logout } from '../../storeReduxToolkit/userDonorSlice';
-import {useTheme} from '@/constants/Colors';
+import {useTheme} from '@/constants/colors';
 import {useLanguage} from '@/constants/language'
-import Welcome from '../../assets/svg/Welcome.svg'
-import Dark from '@/assets/svg/Dark.svg'
-import Light from '@/assets/svg/Light.svg'
 import { Navigation } from "react-native-navigation";
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HomeScreen = props => {
 
@@ -38,12 +36,6 @@ const HomeScreen = props => {
         <Text style={{color:useTheme().primary,fontSize:34}}>Language: {language} {getVal("welcome")}</Text>
         <Text style={{color:useTheme().primary,fontSize:34}}>userDonor: {userDonor.userInfo?.name} </Text>
         <Text style={{color:useTheme().primary,fontSize:34}}>isAuthenticated: {userDonor.isAuthenticated ? "true": "false"} </Text>
-        <View style={{alignItems:'center'}}>
-          {theme === 'dark'?(<Dark  width={300} height={300} />):(<Light  width={300} height={300} />)
-
-          }
-        
-        </View>
         <Button title="Increment" onPress={() => dispatch(increment())} />
         <Button title="Decrement" onPress={() => dispatch(decrement())} />
         <Button title="setTurkish" onPress={() => changeLanguage('tr')} />

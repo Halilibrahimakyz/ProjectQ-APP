@@ -1,44 +1,45 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux'
+import { useTheme } from '../../constants/colors';
+import { Container,CustomButton, DynamicSVG } from '@/components';
 
-import Dark from '@/assets/svg/Dark.svg'
-import Light from '@/assets/svg/Light.svg'
-import { useTheme } from '../../constants/Colors';
+const OnBoardCarouselItem = ({svg,titleText,descText}) => {
 
-const OnBoardCarouselItem = (props) => {
-
-  const theme = useSelector((state) => state.theme.value)
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
   return (
-    <View style={styles.container}>
-      {props.svg}
-      <Text style={styles.titleText}>{props.titleText}</Text>
-      <Text style={[styles.descText, {color: useTheme().onBoardDescText}]}>{props.descText}</Text>
-    </View>
+    <Container style={styles.container}>
+      <DynamicSVG fileName={svg} width={200} height={200} />
+      <Text style={styles.header}>{titleText}</Text>
+      <Text style={[styles.subHeader]}>{descText}</Text>
+      </Container>
   );
 }
 
 export default OnBoardCarouselItem;
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 10,
+    // backgroundColor:'white'
+    // paddingHorizontal: 10,
   },
-  titleText: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#13B156",
-    textAlign: "center",
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  descText: {
-    fontSize: 18,
-    textAlign: "center",
-  },
+  header: {
+    color: theme.primary,
+    fontSize: theme.fontSize.display1,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textAlign: 'center',
+},
+subHeader: {
+    color: theme.secondary,
+    fontSize: theme.fontSize.title,
+    textAlign: 'center',
+    marginTop: 20,
+},
 });

@@ -29,7 +29,7 @@ const userType="student"
         stack: {
           children: [{
             component: {
-              name: userType === 'admin' ? 'AdminDashboard' : 'HomeScreen',
+              name: userType === 'student' ? 'HomeScreen' : 'HomeScreen',
               options: {
                 topBar: {
                   visible: false,

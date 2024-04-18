@@ -6,26 +6,28 @@ export const pushScreen = (componentId, screenName) => {
     component: {
       name: screenName,
       options: {
-        // animations: {
-        //   push: {
-        //     content: {
-        //       translationX: {
-        //         from: require('react-native').Dimensions.get('window').width,
-        //         to: 0,
-        //         duration: 50
-        //       }
-        //     }
-        //   },
-        //   pop: {
-        //     content: {
-        //       translationX: {
-        //         from: 0,
-        //         to: require('react-native').Dimensions.get('window').width,
-        //         duration: 50
-        //       }
-        //     }
-        //   }
-        // },
+        animations: {
+          push: {
+            waitForRender: true, //We prevent from going to the page before it is rendered.
+            content: {
+              translationX: {
+                from: require('react-native').Dimensions.get('window').width,
+                to: 0,
+                duration: 300
+              }
+            }
+          },
+          pop: {
+            waitForRender: true, //We prevent from going to the page before it is rendered.
+            content: {
+              translationX: {
+                from: 0,
+                to: require('react-native').Dimensions.get('window').width,
+                duration: 300
+              }
+            }
+          }
+        },
         topBar: {
           visible: false, 
           drawBehind: true, 
