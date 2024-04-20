@@ -18,7 +18,9 @@ const OnBoardScreen = props => {
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu'
-    }}>
+    }}
+    compId={props.componentId}
+    >
       <View style={styles.content}>
         <DynamicSVG fileName="OnBoard" width={300} height={300} />
         <Text style={styles.header}>{getVal("on_board_title")}</Text>

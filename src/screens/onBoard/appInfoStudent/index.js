@@ -71,7 +71,9 @@ const AppInfoStudentScreen = props => {
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu'
-    }}>
+    }}
+    compId={props.componentId}
+    >
       <View style={styles.content}>
         <Carousel
           vertical={false}

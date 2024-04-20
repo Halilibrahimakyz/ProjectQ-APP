@@ -71,7 +71,9 @@ const AppInfoSupporterScreen = props => {
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu'
-    }}>
+    }}
+    compId={props.componentId}
+    >
       <View style={styles.content}>
         <Carousel
           vertical={false}
@@ -96,7 +98,7 @@ const AppInfoSupporterScreen = props => {
         <TouchableOpacity onPress={handleNext} style={[styles.button1, { width: '48%' }]}>
           <Text style={[styles.buttonText]}>{getVal("next")}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => pushScreen(props.componentId, "testStudentPageScreen")} style={[styles.button1, { width: '25%', borderTopRightRadius: 30, borderBottomRightRadius: 30, backgroundColor: theme.lightGrey, justifyContent: 'flex-start' }]}>
+        <TouchableOpacity onPress={() => pushScreen(props.componentId, "testSupporterPageScreen")} style={[styles.button1, { width: '25%', borderTopRightRadius: 30, borderBottomRightRadius: 30, backgroundColor: theme.lightGrey, justifyContent: 'flex-start' }]}>
           <Text style={[styles.buttonText]}>{getVal("skip")}</Text>
         </TouchableOpacity>
       </View>

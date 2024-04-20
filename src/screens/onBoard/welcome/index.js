@@ -13,7 +13,7 @@ const WelcomeScreen = props => {
     const styles = getStyles(theme);
 
     return (
-        <Container style={styles.container}>
+        <Container style={styles.container} compId={props.componentId}>
             <View style={styles.content}>
             <DynamicSVG fileName="Welcome" width={300} height={300} />
                 <Text style={styles.header}>{getVal("welcome")}</Text>

@@ -2,11 +2,14 @@ import React from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/constants/colors';
 import { CustomTopBar } from '@/components';
+import { setStatusBar } from '@/functions/setStatusBar';
 
-const Container = ({ children, style, topBarProps }) => {
+const Container = ({ children, style, topBarProps, compId }) => {
     
     const theme = useTheme();
     const styles = getStyles(theme);
+
+    setStatusBar(compId, theme)
     
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
