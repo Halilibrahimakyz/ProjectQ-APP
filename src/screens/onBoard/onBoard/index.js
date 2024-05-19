@@ -1,15 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
-
+import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { popScreen, pushScreen } from '@/navigator/navFunctions';
+import { popScreen, pushScreen } from '@/navigator/navigationFunctions';
 import { Container, DynamicSVG } from '@/components';
 
 const OnBoardScreen = props => {
-  const { getVal, changeLanguage } = useLanguage();
+
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
 
   return (
     <Container style={styles.container} topBarProps={{
@@ -22,7 +22,7 @@ const OnBoardScreen = props => {
     compId={props.componentId}
     >
       <View style={styles.content}>
-        <DynamicSVG fileName="OnBoard" width={300} height={300} />
+        <DynamicSVG fileName="OnBoard" width={200} height={200} />
         <Text style={styles.header}>{getVal("on_board_title")}</Text>
         <Text style={styles.subHeader}>
           {getVal("on_board_desc")}
@@ -46,18 +46,20 @@ const getStyles = (theme) => StyleSheet.create({
     justifyContent: 'space-between',
   },
   content: {
+    flex: 1,
     alignItems: 'center',
-    marginTop: 20,
+    justifyContent: 'center',
+    paddingBottom:30
   },
   header: {
     color: theme.primary,
-    fontSize: theme.fontSize.display1,
+    fontSize: theme.fontSize.heading,
     fontWeight: 'bold',
     marginTop: 20,
   },
   subHeader: {
     color: theme.secondary,
-    fontSize: theme.fontSize.title,
+    fontSize: theme.fontSize.medium,
     textAlign: 'center',
     marginTop: 20,
   },

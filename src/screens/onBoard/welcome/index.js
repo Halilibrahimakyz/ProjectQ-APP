@@ -1,16 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { pushScreen } from '@/navigator/navFunctions';
+import { pushScreen } from '@/navigator/navigationFunctions';
 import { Container, CustomButton,DynamicSVG } from '@/components';
 
 const WelcomeScreen = props => {
-
-    const { getVal, changeLanguage } = useLanguage();
     
     const theme = useTheme();
-    const styles = getStyles(theme);
+    const styles = useMemo(() => getStyles(theme), [theme]);
+    const { getVal } = useLanguage();
 
     return (
         <Container style={styles.container} compId={props.componentId}>
@@ -49,13 +48,13 @@ const getStyles = (theme) => StyleSheet.create({
     },
     header: {
         color: theme.primary,
-        fontSize: theme.fontSize.display1,
+        fontSize: theme.fontSize.heading,
         fontWeight: 'bold',
         marginTop: 20,
     },
     subHeader: {
         color: theme.secondary,
-        fontSize: theme.fontSize.title,
+        fontSize: theme.fontSize.medium,
         textAlign: 'center',
         marginTop: 20,
     },

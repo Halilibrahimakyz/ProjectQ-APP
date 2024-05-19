@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './counterSlice'
 import themeReducer from './themeSlice'
 import languageReducer from './languageSlice'
-import userDonorReducer from './userDonorSlice'
+import userSupporterReducer from './userSupporterSlice'
 import userStudentReducer from './userStudentSlice'
 import {
   persistReducer,
@@ -34,8 +34,8 @@ const languagePersistConfig = {
   storage,
 };
 
-const userDonorPersistConfig = {
-  key: 'userDonor',
+const userSupporterPersistConfig = {
+  key: 'userSupporter',
   version: 1,
   storage,
 };
@@ -49,7 +49,7 @@ const userStudentPersistConfig = {
 const persistedCounterReducer = persistReducer(counterPersistConfig, counterReducer);
 const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
 const persistedLanguageReducer = persistReducer(languagePersistConfig, languageReducer);
-const persistedUserDonorReducer = persistReducer(userDonorPersistConfig, userDonorReducer);
+const persistedUserDonorReducer = persistReducer(userSupporterPersistConfig, userSupporterReducer);
 const persistedUserStudentReducer = persistReducer(userStudentPersistConfig, userStudentReducer);
 
 
@@ -58,7 +58,7 @@ export const store = configureStore({
     counter: persistedCounterReducer,
     theme: persistedThemeReducer,
     language: persistedLanguageReducer,
-    userDonor:persistedUserDonorReducer,
+    userSupporter:persistedUserDonorReducer,
     userStudent:persistedUserStudentReducer
   },
   middleware: (getDefaultMiddleware) =>

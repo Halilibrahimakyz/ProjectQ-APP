@@ -3,15 +3,14 @@ import React from 'react';
 
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { pushScreen } from '@/navigator/navFunctions';
+import { pushScreen } from '@/navigator/navigationFunctions';
 import { Container, CustomButton } from '@/components';
 
 const JoinScreen = props => {
-
-    const { getVal, changeLanguage } = useLanguage();
-
+    
     const theme = useTheme();
     const styles = getStyles(theme);
+    const { getVal } = useLanguage();
 
     return (
         <Container>

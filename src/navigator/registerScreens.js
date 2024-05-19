@@ -1,6 +1,6 @@
 import { registerAuthScreens } from './authScreens';
 import { registerStudentScreens } from './studentScreens';
-import { registerSupportScreens } from './supporterScreen';
+import { registerSupportScreens } from './supporterScreens';
 
 const registerScreens = () => {
     registerAuthScreens();

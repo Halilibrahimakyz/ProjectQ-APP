@@ -8,8 +8,6 @@ const Container = ({ children, style, topBarProps, compId }) => {
     
     const theme = useTheme();
     const styles = getStyles(theme);
-
-    setStatusBar(compId, theme)
     
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>

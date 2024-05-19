@@ -1,20 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux'
+import React, { useMemo } from 'react';
 import { useTheme } from '../../constants/colors';
-import { Container,CustomButton, DynamicSVG } from '@/components';
+import { Container, DynamicSVG } from '@/components';
 
-const OnBoardCarouselItem = ({svg,titleText,descText}) => {
+const OnBoardCarouselItem = ({ svg, titleText, descText }) => {
 
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = useMemo(() => getStyles(theme), [theme]);
 
   return (
     <Container style={styles.container}>
       <DynamicSVG fileName={svg} width={200} height={200} />
       <Text style={styles.header}>{titleText}</Text>
       <Text style={[styles.subHeader]}>{descText}</Text>
-      </Container>
+    </Container>
   );
 }
 
@@ -24,22 +23,20 @@ const getStyles = (theme) => StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    // justifyContent: "center",
+    justifyContent: "center",
     alignItems: "center",
-    // backgroundColor:'white'
-    // paddingHorizontal: 10,
   },
   header: {
     color: theme.primary,
-    fontSize: theme.fontSize.display1,
+    fontSize: theme.fontSize.heading,
     fontWeight: 'bold',
     marginTop: 20,
     textAlign: 'center',
-},
-subHeader: {
+  },
+  subHeader: {
     color: theme.secondary,
-    fontSize: theme.fontSize.title,
+    fontSize: theme.fontSize.medium,
     textAlign: 'center',
     marginTop: 20,
-},
+  },
 });

@@ -8,6 +8,7 @@ import com.facebook.soloader.SoLoader
 import com.reactnativenavigation.NavigationApplication
 import com.reactnativenavigation.react.NavigationReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
+import com.reactnativerestart.RestartPackage;
 
 class MainApplication : NavigationApplication() {
     private val mReactNativeHost: NavigationReactNativeHost =

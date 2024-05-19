@@ -1,28 +1,30 @@
 import { View, Text, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState, useRef } from 'react';
-
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { popScreen, pushScreen } from '@/navigator/navFunctions';
+import { popScreen, pushScreen, setRootScreen } from '@/navigator/navigationFunctions';
 import Carousel from 'react-native-reanimated-carousel';
 import { Container } from '@/components';
 import OnBoardCarouselItem from '@/components/onBoard/OnBoardCarouselItem';
 import OnBoardPagination from '@/components/onBoard/OnBoardPagination';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '@/storeReduxToolkit/userSupporterSlice';
+
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const AppInfoSupporterScreen = props => {
-  
-  const width = Dimensions.get('window').width;
-  const height = Dimensions.get('window').height;
 
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
+  const dispatch = useDispatch();
 
   const [activeSlide, setActiveSlide] = useState(0);
   const carouselRef = useRef(null);
 
-  const { getVal } = useLanguage();
-
-  const carouselItemData = [
+  const carouselItemData = useMemo(() => [
     {
       svg: 'OnBoardSupporter1',
       titleText: getVal("on_board_supporter_1_title"),
@@ -38,31 +40,40 @@ const AppInfoSupporterScreen = props => {
       titleText: getVal("on_board_supporter_3_title"),
       descText: getVal("on_board_supporter_3_desc")
     },
-  ];
+  ], [getVal]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (carouselRef.current) {
       if (activeSlide < carouselItemData.length - 1) {
         const nextIndex = activeSlide + 1;
         setActiveSlide(nextIndex);
         carouselRef.current.scrollTo({ count: 1, animated: true });
       } else {
-        pushScreen(props.componentId, "testSupporterPageScreen")
+        dispatch(loginSuccess({ name: "test", surname: "test2" }))
+        // pushScreen(props.componentId, "StudentHomeScreen");
+        setRootScreen({ isLoggedIn: true, userType: "supporter" });
       }
     }
-  };
+  }, [activeSlide, carouselItemData.length, props.componentId]);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     if (carouselRef.current) {
       if (activeSlide > 0) {
         const prevIndex = activeSlide - 1;
         setActiveSlide(prevIndex);
         carouselRef.current.scrollTo({ count: -1, animated: true });
       } else {
-        popScreen(props.componentId)
+        popScreen(props.componentId);
       }
     }
-  };
+  }, [activeSlide, props.componentId]);
+
+  const handleSkip = useCallback(() => {
+    dispatch(loginSuccess({ name: "test", surname: "test2" }))
+    setRootScreen({ isLoggedIn: true, userType: "supporter" });
+  }, [props.componentId]);
+
+
 
   return (
     <Container style={styles.container} topBarProps={{
@@ -72,7 +83,7 @@ const AppInfoSupporterScreen = props => {
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu'
     }}
-    compId={props.componentId}
+      compId={props.componentId}
     >
       <View style={styles.content}>
         <Carousel
@@ -82,6 +93,7 @@ const AppInfoSupporterScreen = props => {
           width={width}
           autoPlay={false}
           data={carouselItemData}
+          windowSize={3}
           pagingEnabled={true}
           scrollAnimationDuration={300}
           onSnapToItem={(index) => setActiveSlide(index)}
@@ -92,13 +104,13 @@ const AppInfoSupporterScreen = props => {
         <OnBoardPagination activeIndex={activeSlide} totalItems={carouselItemData.length} />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleBack} style={[styles.button1, { width: '25%', borderTopLeftRadius: 30, borderBottomLeftRadius: 30 }]}>
+        <TouchableOpacity onPress={handleBack} style={[styles.button, { width: '25%', borderTopLeftRadius: 30, borderBottomLeftRadius: 30 }]}>
           <Text style={[styles.buttonText]}>{getVal("back")}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleNext} style={[styles.button1, { width: '48%' }]}>
+        <TouchableOpacity onPress={handleNext} style={[styles.button, { width: '48%' }]}>
           <Text style={[styles.buttonText]}>{getVal("next")}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => pushScreen(props.componentId, "testSupporterPageScreen")} style={[styles.button1, { width: '25%', borderTopRightRadius: 30, borderBottomRightRadius: 30, backgroundColor: theme.lightGrey, justifyContent: 'flex-start' }]}>
+        <TouchableOpacity onPress={handleSkip} style={[styles.button, { width: '25%', borderTopRightRadius: 30, borderBottomRightRadius: 30, backgroundColor: theme.lightGrey, justifyContent: 'flex-start' }]}>
           <Text style={[styles.buttonText]}>{getVal("skip")}</Text>
         </TouchableOpacity>
       </View>
@@ -114,32 +126,14 @@ const getStyles = (theme) => StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  header: {
-    color: theme.primary,
-    fontSize: theme.fontSize.display1,
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
-  subHeader: {
-    color: theme.secondary,
-    fontSize: theme.fontSize.title,
-    textAlign: 'center',
-    marginTop: 20,
-  },
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
-    marginBottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20,
   },
-  skipText: {
-    marginBottom: 10,
-    color: theme.lightGrey,
-    fontSize: theme.fontSize.body,
-  },
-  button1: {
+  button: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: theme.primary,
@@ -153,9 +147,8 @@ const getStyles = (theme) => StyleSheet.create({
   },
   buttonText: {
     fontSize: theme.fontSize.button,
-    color: theme.background
-  },
+    color: theme.background,
+  }
 });
-
 
 export default AppInfoSupporterScreen;

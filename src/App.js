@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-
-import { startApp } from './navigator/navigation';
+import { Navigation } from 'react-native-navigation';
 import registerScreens from './navigator/registerScreens';
+import { useAuth } from '@/functions/authenticate';
+import { useDefaultOptions } from './navigator/navigationConfig';
+import { setRootScreen } from './navigator/navigationFunctions';
 
 registerScreens();
 
 const App = (props) => {
-  useEffect(() => {
-    initApp();
-  }, []);
 
-  const initApp = () => {
-    startApp();
-  };
+  const { userType, isLoggedIn } = useAuth();
+  const defaultOptions = useDefaultOptions();
+
+  useEffect(() => {   
+
+    Navigation.setDefaultOptions(defaultOptions);
+    setRootScreen({ isLoggedIn: isLoggedIn, userType: userType});
+
+  }, []);
 
   return (
     <View style={styles.container}>

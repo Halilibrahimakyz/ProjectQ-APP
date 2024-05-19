@@ -6,8 +6,8 @@ const initialState = {
     error: null, // Hata mesajları için
 };
 
-export const userDonorSlice = createSlice({
-    name: 'userDonor',
+export const userSupporterSlice = createSlice({
+    name: 'userSupporter',
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
@@ -26,5 +26,5 @@ export const userDonorSlice = createSlice({
     },
 })
 
-export const { loginSuccess, logout, loginFailure } = userDonorSlice.actions;
-export default userDonorSlice.reducer;
+export const { loginSuccess, logout, loginFailure } = userSupporterSlice.actions;
+export default userSupporterSlice.reducer;

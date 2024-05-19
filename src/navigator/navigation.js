@@ -1,45 +1,12 @@
-import { Navigation } from 'react-native-navigation';
+// import { Navigation } from 'react-native-navigation';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import { useDefaultOptions } from './navigationConfig';
+// import { setRootScreen } from './navigationFunctions';
 
-export const startApp = () => {
-const isLoggedIn=true
-const userType="student"
-  if (isLoggedIn) {
-    Navigation.setRoot({
-      root: {
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'WelcomeScreen',
-                options: {
-                  topBar: {
-                    visible: false,
-                    drawBehind: true,
-                  },
-                },
-              },
-            },
-          ],
-        },
-      },
-    });
-  } else {
-    Navigation.setRoot({
-      root: {
-        stack: {
-          children: [{
-            component: {
-              name: userType === 'student' ? 'HomeScreen' : 'HomeScreen',
-              options: {
-                topBar: {
-                  visible: false,
-                  drawBehind: true,
-                },
-              },
-            },
-          }],
-        },
-      },
-    });
-  }
-};
+
+// export const startApp = (isLoggedIn,userType,theme) => {
+//   const defaultOptions = useDefaultOptions();
+//   Navigation.setDefaultOptions(defaultOptions);
+//   setRootScreen(isLoggedIn,userType);
+
+// };
