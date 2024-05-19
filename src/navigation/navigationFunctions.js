@@ -16,29 +16,10 @@ export const popScreen = (componentId) => {
 };
 
 export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
-  console.log("isLoggedIn: ",isLoggedIn)
-  if (!isLoggedIn) {
-    Navigation.setRoot({
-      root: {
-        stack: {
-          children: [
-            {
-              component: {
-                name: 'WelcomeScreen',
-                options: {
-                  topBar: {
-                    visible: false,
-                    drawBehind: true,
-                  },
-                },
-              },
-            },
-          ],
-        },
-      },
-    });
-  } else if (userType === "supporter") {
-    Navigation.setRoot({
+  let root;
+
+  if (isLoggedIn) {
+    root = {
       root: {
         bottomTabs: {
           id: 'BottomTabsId',
@@ -48,11 +29,11 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: 'SupporterHomeScreen',
+                      name:  userType === 'supporter' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('home',28),
-                          testID: 'SupporterHome', // unique ID for this tab button
+                          testID:  userType === 'supporter' ?'SupporterHome':'StudentHome', // unique ID for this tab button
                         },
                       },
                     },
@@ -65,7 +46,7 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: 'SupporterListScreen',
+                      name:  userType === 'supporter' ? 'SupporterListScreen' : 'StudentListScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('format-list-bulleted',28),
@@ -82,10 +63,10 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: 'SupporterHistoryScreen',
+                      name: userType === 'supporter' ? 'SupporterHistoryScreen' : 'StudentCreateScreen',
                       options: {
                         bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('clipboard-text-clock-outline',28),
+                          icon:  userType === 'supporter' ? MaterialCommunityIcons.getImageSourceSync('clipboard-text-clock-outline',28):MaterialCommunityIcons.getImageSourceSync('plus-box-outline',28),
                           testID: 'SupporterHistory', // unique ID for this tab button
                         },
                       },
@@ -99,7 +80,7 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: 'SupporterMessagesScreen',
+                      name: userType === 'supporter' ? 'SupporterMessagesScreen' : 'StudentMessagesScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('message-processing-outline',28),
@@ -116,7 +97,7 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: 'SupporterProfileScreen',
+                      name: userType === 'supporter' ? 'SupporterProfileScreen' : 'StudentProfileScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('account',28),
@@ -136,107 +117,28 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
           },
         },
       },
-    });
+    };
   } else {
-    Navigation.setRoot({
+    root = {
       root: {
-        bottomTabs: {
-          id: 'BottomTabsId',
+        stack: {
           children: [
             {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'StudentHomeScreen',
-                      options: {
-                        bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('home',28),
-                          testID: 'StudentHome', // unique ID for this tab button
-                        },
-                      },
-                    },
+              component: {
+                name: 'WelcomeScreen',
+                options: {
+                  topBar: {
+                    visible: false,
+                    drawBehind: true,
                   },
-                ],
-              },
-            },
-            {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'StudentListScreen',
-                      options: {
-                        bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('format-list-bulleted',28),
-                          testID: 'StudentList', // unique ID for this tab button
-                        },
-                      },
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'StudentCreateScreen',
-                      options: {
-                        bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('plus-box-outline',28),
-                          testID: 'StudentCreate', // unique ID for this tab button
-                        },
-                      },
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'StudentMessagesScreen',
-                      options: {
-                        bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('message-processing-outline',28),
-                          testID: 'StudentMessages', // unique ID for this tab button
-                        },
-                      },
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'StudentProfileScreen',
-                      options: {
-                        bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('account',28),
-                          testID: 'StudentProfile', // unique ID for this tab button
-                        },
-                      },
-                    },
-                  },
-                ],
+                },
               },
             },
           ],
-          options: {
-            bottomTabs: {
-              currentTabIndex: initialTab,
-            },
-          },
         },
       },
-    });
+    };
   }
-};
 
+  Navigation.setRoot(root);
+};

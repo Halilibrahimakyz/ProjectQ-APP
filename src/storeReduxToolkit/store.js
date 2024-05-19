@@ -15,6 +15,7 @@ import {
   REGISTER
 } from 'redux-persist'
 import storage from '@react-native-async-storage/async-storage'
+import themeMiddleware from './reduxMiddleware';
 
 // Define persist configurations
 const persistConfig = (key) => ({
@@ -45,7 +46,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(themeMiddleware),
 });
 
 export const persistor = persistStore(store)

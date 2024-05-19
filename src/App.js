@@ -5,19 +5,20 @@ import registerScreens from './navigation/registerScreens';
 import { useAuth } from '@/functions/authenticate';
 import { useDefaultOptions } from './navigation/navigationConfig';
 import { setRootScreen } from './navigation/navigationFunctions';
+import {useTheme} from '@/constants/colors';
 
 registerScreens();
 
 const App = (props) => {
 
   const { userType, isLoggedIn } = useAuth();
-  const defaultOptions = useDefaultOptions();
+  const theme = useTheme();
+  // const defaultOptions = useDefaultOptions();
 
   useEffect(() => {   
-
+    const defaultOptions = useDefaultOptions(theme);
     Navigation.setDefaultOptions(defaultOptions);
     setRootScreen({ isLoggedIn: isLoggedIn, userType: userType});
-
   }, []);
 
   return (

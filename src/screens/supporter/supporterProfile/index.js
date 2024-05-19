@@ -38,12 +38,10 @@ const SupporterProfileScreen = props => {
 
   const handleSetDarkTheme = () => {
     dispatch(setDarkTheme());
-    RNRestart.restart()
   };
 
   const handleSetLightTheme = () => {
     dispatch(setLightTheme());
-    RNRestart.restart()
   };
 
   const handleLogout = () => {

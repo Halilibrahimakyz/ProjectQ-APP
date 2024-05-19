@@ -11,15 +11,14 @@ const getAnimationDuration = () => {
   }
 };
 
-export const useDefaultOptions = () => {
-  const theme = useTheme();
+export const useDefaultOptions = (theme) => {
   return {
     bottomTabs: {
       visible: true,
       drawBehind: true,
       backgroundColor: theme.background,
       titleDisplayMode: 'alwaysHide',
-      hideShadow:false
+      hideShadow:false,
     },
     bottomTab: {
       iconColor: theme.lightGrey,
@@ -86,71 +85,3 @@ export const useDefaultOptions = () => {
     },
   };
 };
-  // Navigation.setDefaultOptions({
-  //   // statusBar: {
-  //   //   backgroundColor: currentColorTheme.black
-  //   // },
-  //   // layout: {
-  //   //   orientation: ['portrait'],
-  //   //   backgroundColor: currentColorTheme.screenBackgroundColor
-  //   // },
-  //   bottomTabs: {
-  //     visible: true,
-  //     drawBehind: true,
-  //     backgroundColor: theme.background,
-  //     titleDisplayMode: 'alwaysShow'
-  //   },
-  //   bottomTab: {
-  //     iconColor: theme.background2,
-  //     selectedIconColor: theme.primary,
-  //     textColor: theme.primary,
-  //     selectedTextColor: theme.primary
-  //   },
-  //   topBar: {
-  //     visible: false,
-  //     // leftButtonColor: currentColorTheme.navBarButtonColor,
-  //     // rightButtonColor: currentColorTheme.navBarButtonColor,
-  //     // title: {
-  //     //   color: currentColorTheme.navBarTextColor
-  //     // },
-  //     // subtitle: {
-  //     //   fontSize: 12,
-  //     //   color: currentColorTheme.transluscentText
-  //     // },
-  //     // background: {
-  //     //   color: currentColorTheme.navBarBackgroundColor
-  //     // },
-  //     // backButton: {
-  //     //   color: currentColorTheme.navBarButtonColor,
-  //     //   showTitle: false
-  //     // }
-  //   },
-  //   animations: {
-  //     push: {
-  //       waitForRender: true, //We prevent from going to the page before it is rendered.
-  //       content: {
-  //         translationX: {
-  //           from: windowWidth,
-  //           to: 0,
-  //           duration: animationDuration,
-  //         }
-  //       }
-  //     },
-  //     pop: {
-  //       waitForRender: true, //We prevent from going to the page before it is rendered.
-  //       content: {
-  //         translationX: {
-  //           from: 0,
-  //           to: windowWidth,
-  //           duration: 300,
-  //           duration: animationDuration,
-  //         }
-  //       }
-  //     }
-  //   },
-  //   // animations: {
-  //   //   push: {
-  //   //     waitForRender: true
-  //   //   }
-  //   // }
-  // })
