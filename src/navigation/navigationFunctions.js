@@ -15,7 +15,7 @@ export const popScreen = (componentId) => {
   Navigation.pop(componentId, {});
 };
 
-export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
+export const setRootScreen = ({ isLoggedIn, userType, initialTab = 0 }) => {
   let root;
 
   if (isLoggedIn) {
@@ -29,11 +29,11 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name:  userType === 'supporter' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
+                      name: userType === 'supporter' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
                       options: {
                         bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('home',28),
-                          testID:  userType === 'supporter' ?'SupporterHome':'StudentHome', // unique ID for this tab button
+                          icon: MaterialCommunityIcons.getImageSourceSync('home', 28),
+                          testID: userType === 'supporter' ? 'SupporterHome' : 'StudentHome',
                         },
                       },
                     },
@@ -46,11 +46,11 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name:  userType === 'supporter' ? 'SupporterListScreen' : 'StudentListScreen',
+                      name: userType === 'supporter' ? 'SupporterListScreen' : 'StudentListScreen',
                       options: {
                         bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('format-list-bulleted',28),
-                          testID: 'SupporterList', // unique ID for this tab button
+                          icon: MaterialCommunityIcons.getImageSourceSync('format-list-bulleted', 28),
+                          testID: userType === 'supporter' ? 'SupporterList' : 'StudentList',
                         },
                       },
                     },
@@ -66,8 +66,8 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                       name: userType === 'supporter' ? 'SupporterHistoryScreen' : 'StudentCreateScreen',
                       options: {
                         bottomTab: {
-                          icon:  userType === 'supporter' ? MaterialCommunityIcons.getImageSourceSync('clipboard-text-clock-outline',28):MaterialCommunityIcons.getImageSourceSync('plus-box-outline',28),
-                          testID: 'SupporterHistory', // unique ID for this tab button
+                          icon: userType === 'supporter' ? MaterialCommunityIcons.getImageSourceSync('clipboard-text-clock-outline', 28) : MaterialCommunityIcons.getImageSourceSync('plus-box-outline', 28),
+                          testID: userType === 'supporter' ? 'SupporterHistory' : 'StudentCreate',
                         },
                       },
                     },
@@ -83,8 +83,8 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                       name: userType === 'supporter' ? 'SupporterMessagesScreen' : 'StudentMessagesScreen',
                       options: {
                         bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('message-processing-outline',28),
-                          testID: 'SupporterMessages', // unique ID for this tab button
+                          icon: MaterialCommunityIcons.getImageSourceSync('message-processing-outline', 28),
+                          testID: userType === 'supporter' ? 'SupporterMessages' : 'StudentMessages',
                         },
                       },
                     },
@@ -100,8 +100,8 @@ export const setRootScreen = ({ isLoggedIn, userType,initialTab = 0 }) => {
                       name: userType === 'supporter' ? 'SupporterProfileScreen' : 'StudentProfileScreen',
                       options: {
                         bottomTab: {
-                          icon: MaterialCommunityIcons.getImageSourceSync('account',28),
-                          testID: 'SupporterProfile', // unique ID for this tab button
+                          icon: MaterialCommunityIcons.getImageSourceSync('account', 28),
+                          testID: userType === 'supporter' ? 'SupporterProfile' : 'StudentProfile',
                         },
                       },
                     },
