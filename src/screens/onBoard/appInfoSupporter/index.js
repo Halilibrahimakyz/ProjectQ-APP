@@ -49,7 +49,7 @@ const AppInfoSupporterScreen = props => {
         setActiveSlide(nextIndex);
         carouselRef.current.scrollTo({ count: 1, animated: true });
       } else {
-        dispatch(loginSuccess({ name: "test", surname: "test2" }))
+        dispatch(loginSuccess({ name: "userSupporter", surname: "test2" }))
         // pushScreen(props.componentId, "StudentHomeScreen");
         setRootScreen({ isLoggedIn: true, userType: "supporter" });
       }
@@ -69,7 +69,7 @@ const AppInfoSupporterScreen = props => {
   }, [activeSlide, props.componentId]);
 
   const handleSkip = useCallback(() => {
-    dispatch(loginSuccess({ name: "test", surname: "test2" }))
+    dispatch(loginSuccess({ name: "userSupporter", surname: "test2" }))
     setRootScreen({ isLoggedIn: true, userType: "supporter" });
   }, [props.componentId]);
 
