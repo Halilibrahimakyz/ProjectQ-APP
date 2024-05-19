@@ -7,7 +7,7 @@ const CustomTopBar = ({ title, onLeftPress, leftIcon, onRightPress, rightIcon ,s
 
     const theme = useTheme();
     const styles = getStyles(theme, shadow);
-    console.log("shadow: ",shadow)
+    
     return (
         <View style={styles.container}>
             {leftIcon && (
