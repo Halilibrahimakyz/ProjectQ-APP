@@ -34,8 +34,6 @@ const StudentProfileScreen = props => {
     });
   };
 
-
-
   const handleSetDarkTheme = () => {
     dispatch(setDarkTheme());
   };
@@ -48,7 +46,6 @@ const StudentProfileScreen = props => {
     dispatch(logout())
     setRootScreen({ isLoggedIn: false, userType: null });
   };
-
 
   return (
     <Container style={styles.container} topBarProps={{

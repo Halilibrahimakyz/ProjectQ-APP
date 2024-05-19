@@ -31,7 +31,6 @@ const persistedLanguageReducer = persistReducer(persistConfig('language'), langu
 const persistedUserSupporterReducer = persistReducer(persistConfig('userSupporter'), userSupporterReducer);
 const persistedUserStudentReducer = persistReducer(persistConfig('userStudent'), userStudentReducer);
 
-
 // Configure store with persisted reducers and middleware
 export const store = configureStore({
   reducer: {

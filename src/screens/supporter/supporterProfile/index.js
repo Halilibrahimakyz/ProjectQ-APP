@@ -34,8 +34,6 @@ const SupporterProfileScreen = props => {
     });
   };
 
-
-
   const handleSetDarkTheme = () => {
     dispatch(setDarkTheme());
   };

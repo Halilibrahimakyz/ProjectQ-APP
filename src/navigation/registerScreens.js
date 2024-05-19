@@ -7,4 +7,5 @@ const registerScreens = () => {
     registerStudentScreens();
     registerSupportScreens();
 };
+
 export default registerScreens;

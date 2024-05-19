@@ -19,8 +19,7 @@ import SupporterListScreen from './supporter/supporterList';
 import SupporterMessagesScreen from './supporter/supporterMessages';
 import SupporterProfileScreen from './supporter/supporterProfile';
 
-//Other
-
+//Others
 
 export {
     WelcomeScreen,
