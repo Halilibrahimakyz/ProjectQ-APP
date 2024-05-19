@@ -8,10 +8,10 @@ import { loginSuccess, logout } from '../../storeReduxToolkit/userSupporterSlice
 import {useTheme} from '@/constants/colors';
 import {useLanguage} from '@/constants/language'
 import { Navigation } from "react-native-navigation";
-import { defaultOptions } from '../../navigator/navigationConfig';
+import { defaultOptions } from '../../navigation/navigationConfig';
 import RNRestart from 'react-native-restart';
-import { useDefaultOptions } from '../../navigator/navigationConfig';
-import { setRootScreen } from '../../navigator/navigationFunctions';
+import { useDefaultOptions } from '../../navigation/navigationConfig';
+import { setRootScreen } from '../../navigation/navigationFunctions';
 import { Container } from '@/components';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 

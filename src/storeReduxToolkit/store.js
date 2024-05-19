@@ -16,57 +16,36 @@ import {
 } from 'redux-persist'
 import storage from '@react-native-async-storage/async-storage'
 
-const counterPersistConfig = {
-  key: 'counter',
+// Define persist configurations
+const persistConfig = (key) => ({
+  key,
   version: 1,
   storage,
-};
+});
 
-const themePersistConfig = {
-  key: 'theme',
-  version: 1,
-  storage,
-};
-
-const languagePersistConfig = {
-  key: 'language',
-  version: 1,
-  storage,
-};
-
-const userSupporterPersistConfig = {
-  key: 'userSupporter',
-  version: 1,
-  storage,
-};
-
-const userStudentPersistConfig = {
-  key: 'userStudent',
-  version: 1,
-  storage,
-};
-
-const persistedCounterReducer = persistReducer(counterPersistConfig, counterReducer);
-const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
-const persistedLanguageReducer = persistReducer(languagePersistConfig, languageReducer);
-const persistedUserDonorReducer = persistReducer(userSupporterPersistConfig, userSupporterReducer);
-const persistedUserStudentReducer = persistReducer(userStudentPersistConfig, userStudentReducer);
+// Persisted reducers
+const persistedCounterReducer = persistReducer(persistConfig('counter'), counterReducer);
+const persistedThemeReducer = persistReducer(persistConfig('theme'), themeReducer);
+const persistedLanguageReducer = persistReducer(persistConfig('language'), languageReducer);
+const persistedUserSupporterReducer = persistReducer(persistConfig('userSupporter'), userSupporterReducer);
+const persistedUserStudentReducer = persistReducer(persistConfig('userStudent'), userStudentReducer);
 
 
+// Configure store with persisted reducers and middleware
 export const store = configureStore({
   reducer: {
     counter: persistedCounterReducer,
     theme: persistedThemeReducer,
     language: persistedLanguageReducer,
-    userSupporter:persistedUserDonorReducer,
-    userStudent:persistedUserStudentReducer
+    userSupporter: persistedUserSupporterReducer,
+    userStudent: persistedUserStudentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    })
-})
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
 export const persistor = persistStore(store)

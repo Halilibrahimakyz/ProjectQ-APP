@@ -9,7 +9,7 @@ import { setStatusBar } from '@/functions/setStatusBar';
 
 import { Container } from '@/components';
 
-import { popScreen, pushScreen } from '@/navigator/navigationFunctions';
+import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 
 
 const testStudentPageScreen = props => {

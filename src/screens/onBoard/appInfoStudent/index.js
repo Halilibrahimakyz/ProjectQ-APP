@@ -2,7 +2,7 @@ import { View, Text, Dimensions, StyleSheet, TouchableOpacity } from 'react-nati
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { popScreen, pushScreen, setRootScreen } from '@/navigator/navigationFunctions';
+import { popScreen, pushScreen, setRootScreen } from '@/navigation/navigationFunctions';
 import Carousel from "react-native-reanimated-carousel";
 import { Container } from '@/components';
 import OnBoardCarouselItem from '@/components/onBoard/OnBoardCarouselItem';

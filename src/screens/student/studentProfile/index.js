@@ -9,7 +9,7 @@ import {useTheme} from '@/constants/colors';
 import {useLanguage} from '@/constants/language'
 import { Navigation } from "react-native-navigation";
 import RNRestart from 'react-native-restart';
-import { setRootScreen } from '@/navigator/navigationFunctions';
+import { setRootScreen } from '@/navigation/navigationFunctions';
 import { Container } from '@/components';
 
 const StudentProfileScreen = props => {

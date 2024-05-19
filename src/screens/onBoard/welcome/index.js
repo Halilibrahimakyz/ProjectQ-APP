@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { pushScreen } from '@/navigator/navigationFunctions';
+import { pushScreen } from '@/navigation/navigationFunctions';
 import { Container, CustomButton,DynamicSVG } from '@/components';
 
 const WelcomeScreen = props => {

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { popScreen, pushScreen } from '@/navigator/navigationFunctions';
+import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 import { Container, DynamicSVG } from '@/components';
 
 const OnBoardScreen = props => {
