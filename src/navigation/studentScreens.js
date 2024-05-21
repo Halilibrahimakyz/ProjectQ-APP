@@ -6,6 +6,8 @@ import {
     StudentListScreen,
     StudentMessagesScreen,
     StudentProfileScreen,
+    StudentSettingsScreen,
+    StudentWalletScreen,
 } from '@/screens'
 
 export const registerStudentScreens = () => {
@@ -14,4 +16,6 @@ export const registerStudentScreens = () => {
     Navigation.registerComponent('StudentListScreen', () => withProviders(StudentListScreen));
     Navigation.registerComponent('StudentMessagesScreen', () => withProviders(StudentMessagesScreen));
     Navigation.registerComponent('StudentProfileScreen', () => withProviders(StudentProfileScreen));
+    Navigation.registerComponent('StudentSettingsScreen', () => withProviders(StudentSettingsScreen));
+    Navigation.registerComponent('StudentWalletScreen', () => withProviders(StudentWalletScreen));
 };

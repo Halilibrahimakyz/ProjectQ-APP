@@ -11,6 +11,8 @@ import StudentCreateScreen from './student/studentCreate';
 import StudentListScreen from './student/studentList';
 import StudentMessagesScreen from './student/studentMessages';
 import StudentProfileScreen from './student/studentProfile';
+import StudentSettingsScreen from './student/studentSettings';
+import StudentWalletScreen from './student/studentWalletScreen';
 
 //Supporter
 import SupporterHomeScreen from './supporter/supporterHome';
@@ -32,6 +34,8 @@ export {
     StudentListScreen,
     StudentMessagesScreen,
     StudentProfileScreen,
+    StudentSettingsScreen,
+    StudentWalletScreen,
     SupporterHomeScreen,
     SupporterHistoryScreen,
     SupporterListScreen,
