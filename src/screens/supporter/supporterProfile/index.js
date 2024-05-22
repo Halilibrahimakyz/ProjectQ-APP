@@ -55,7 +55,7 @@ const SupporterProfileScreen = props => {
       leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu',
-      shadow: true
+      shadow: false
     }}
       compId={props.componentId}
     >

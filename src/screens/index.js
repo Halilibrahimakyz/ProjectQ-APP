@@ -22,6 +22,7 @@ import SupporterMessagesScreen from './supporter/supporterMessages';
 import SupporterProfileScreen from './supporter/supporterProfile';
 
 //Others
+import ProjectScreen from './project'
 
 export {
     WelcomeScreen,
@@ -40,5 +41,6 @@ export {
     SupporterHistoryScreen,
     SupporterListScreen,
     SupporterMessagesScreen,
-    SupporterProfileScreen
+    SupporterProfileScreen,
+    ProjectScreen
 }

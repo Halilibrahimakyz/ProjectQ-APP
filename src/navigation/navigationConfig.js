@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const getAnimationDuration = () => {
   if (Platform.OS === 'android') {
-    return 400;
+    return 250;
   } else {
     return 300;
   }

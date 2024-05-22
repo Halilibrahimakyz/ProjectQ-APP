@@ -7,34 +7,32 @@ const CustomTopBar = ({ title, onLeftPress, leftIcon, onRightPress, rightIcon ,s
 
     const theme = useTheme();
     const styles = getStyles(theme, shadow);
-    
+    // console.log("rightIcon: ",rightIcon)
     return (
         <View style={styles.container}>
-            {leftIcon && (
-                <TouchableOpacity onPress={onLeftPress} style={styles.iconButton}>
-                    <MaterialCommunityIcons
-                        name={leftIcon}
-                        color={theme.primary}
-                        size={28}
-                    />
-                </TouchableOpacity>
-            )}
+            <View style={styles.iconPlaceholder}>
+                {leftIcon && (
+                    <TouchableOpacity onPress={onLeftPress} style={styles.iconButton}>
+                        <MaterialCommunityIcons
+                            name={leftIcon}
+                            color={theme.primary}
+                            size={28}
+                        />
+                    </TouchableOpacity>
+                )}
+            </View>
             <Text style={styles.title}>{title}</Text>
-            {rightIcon ? (
-                <TouchableOpacity onPress={onRightPress} style={styles.iconButton}>
-                    <MaterialCommunityIcons
-                        name={rightIcon}
-                        color={theme.primary}
-                        size={28}
-                    />
-                </TouchableOpacity>
-            ) : (<TouchableOpacity onPress={onRightPress} style={styles.iconButton}>
-                <MaterialCommunityIcons
-                    name={'menu'}
-                    color={theme.background}
-                    size={28}
-                />
-            </TouchableOpacity>)}
+            <View style={styles.iconPlaceholder}>
+                {rightIcon && (
+                    <TouchableOpacity onPress={onRightPress} style={styles.iconButton}>
+                        <MaterialCommunityIcons
+                            name={rightIcon}
+                            color={theme.primary}
+                            size={28}
+                        />
+                    </TouchableOpacity>
+                )}
+            </View>
         </View>
     );
 };
@@ -64,6 +62,11 @@ const getStyles = (theme, shadow) => StyleSheet.create({
     },
     iconButton: {
         padding: 10,
+    },
+    iconPlaceholder: {
+        width: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

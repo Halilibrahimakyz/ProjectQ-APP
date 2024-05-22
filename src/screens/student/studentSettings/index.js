@@ -18,7 +18,7 @@ const StudentSettingsScreen = props => {
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
       // rightIcon: 'menu',
-      shadow: true
+      shadow: false
     }}
       compId={props.componentId}
     >

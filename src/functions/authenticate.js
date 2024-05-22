@@ -15,7 +15,7 @@ export const useAuth = () => {
     isLoggedIn = true;
   }
 
-  console.log('userType:', userType, 'isLoggedIn:', isLoggedIn); // Debug log
+  console.log('useAuth userType:', userType, 'isLoggedIn:', isLoggedIn); // Debug log
 
   return { userType, isLoggedIn };
 };

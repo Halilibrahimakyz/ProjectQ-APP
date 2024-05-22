@@ -13,7 +13,6 @@ const App = (props) => {
 
   const { userType, isLoggedIn } = useAuth();
   const theme = useTheme();
-  // const defaultOptions = useDefaultOptions();
 
   useEffect(() => {   
     const defaultOptions = useDefaultOptions(theme);

@@ -17,7 +17,8 @@ const baseTheme = {
   accent: '#09101D',//Dark Blue
   black: '#151619',//Black
   white: '#FBFBFB',//White
-  purple: '#8B13B1'
+  purple: '#8B13B1',
+  darkwhite:'#B9B9B9'
 };
 
 export const lightTheme = {

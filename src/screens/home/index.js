@@ -72,7 +72,7 @@ const HomeScreen = props => {
       onLeftPress: () => { popScreen(props.componentId) },
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
-      // rightIcon: 'menu'
+      rightIcon: null
     }}
       compId={props.componentId}
     >

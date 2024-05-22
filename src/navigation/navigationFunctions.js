@@ -1,11 +1,12 @@
 import { Navigation } from "react-native-navigation";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export const pushScreen = (componentId, screenName) => {
+export const pushScreen = (componentId, screenName, passProps = {}) => {
   console.log("Component ID: ", componentId);
   Navigation.push(componentId, {
     component: {
-      name: screenName
+      name: screenName,
+      passProps: passProps
     },
   });
 };
@@ -29,7 +30,7 @@ export const setRootScreen = ({ isLoggedIn, userType, initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: userType === 'supporter' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
+                      name: userType === 'student' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('home', 28),
