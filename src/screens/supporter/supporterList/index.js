@@ -12,7 +12,7 @@ const SupporterListScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'List',
+      title: getVal('list'),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },

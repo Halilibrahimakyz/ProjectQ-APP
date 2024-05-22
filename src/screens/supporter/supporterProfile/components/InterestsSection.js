@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
+import { useLanguage } from '@/constants/language';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import InterestComponent from './InterestComponent';
@@ -9,11 +10,12 @@ import InterestComponent from './InterestComponent';
 const InterestsSection = ({interestsArray}) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Interests</Text>
+        <Text style={styles.headerText}>{getVal("profile_interests")}</Text>
         <MaterialCommunityIcons name="pencil" color={theme.primary} size={22} style={{ marginLeft: 10 }} />
       </View>
       <View style={styles.interestsContainer}>

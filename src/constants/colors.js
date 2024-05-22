@@ -18,11 +18,14 @@ const baseTheme = {
   black: '#151619',//Black
   white: '#FBFBFB',//White
   purple: '#8B13B1',
+  red: "#b11313",
   darkwhite:'#B9B9B9'
 };
 
 export const lightTheme = {
   ...baseTheme,
+  primarySupport: "#d3e3d3",
+  redSupport: "#e3d3d3",
   background: '#EBEEF2',//Dark White
   background2: '#151619',//Black
   secondary: '#262934',//Grey
@@ -32,6 +35,8 @@ export const lightTheme = {
 
 export const darkTheme = {
   ...baseTheme,
+  primarySupport: "#282b28",
+  redSupport: "#2b2828",
   background: '#151619',
   background2: '#EBEEF2',
   secondary: '#838383', // Assuming this was intended to be different in dark mode

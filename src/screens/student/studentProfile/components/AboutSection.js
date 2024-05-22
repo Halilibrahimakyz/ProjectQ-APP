@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
+import { useLanguage } from '@/constants/language';
 
-
-
-const AboutSection = ({aboutText}) => {
+const AboutSection = ({ aboutText }) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>About</Text>
+      <Text style={styles.header}>{getVal('profile_about')}</Text>
       <Text style={styles.body}>{aboutText}</Text>
     </View>
   );

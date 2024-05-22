@@ -1,27 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
+import { useLanguage } from '@/constants/language';
 
-
-const SocialStatistics = ({initiativesNum, followersNum, followingNum}) => {
+const SocialStatistics = ({ initiativesNum, followersNum, followingNum }) => {
   const theme = useTheme();
-  const styles = useMemo(() => getStyles(theme), [theme])
+  const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
 
   return (
     <View style={styles.container}>
       <View style={styles.socialSection}>
         <Text style={styles.sectionNumber}>{initiativesNum}</Text>
-        <Text style={styles.sectionDescription}>Initiatives</Text>
+        <Text style={styles.sectionDescription}>{getVal('profile_initiatives')}</Text>
       </View>
       <View style={styles.verticalRuler} />
       <View style={styles.socialSection}>
         <Text style={styles.sectionNumber}>{followersNum}</Text>
-        <Text style={styles.sectionDescription}>Followers</Text>
+        <Text style={styles.sectionDescription}>{getVal('profile_followers')}</Text>
       </View>
       <View style={styles.verticalRuler} />
       <View style={styles.socialSection}>
         <Text style={styles.sectionNumber}>{followingNum}</Text>
-        <Text style={styles.sectionDescription}>Following</Text>
+        <Text style={styles.sectionDescription}>{getVal('profile_following')}</Text>
       </View>
     </View>
   );
@@ -53,7 +54,7 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: theme.fontSize.medium
   },
   verticalRuler: {
-    width: 1,
+    width: StyleSheet.hairlineWidth,
     height: "90%",
     backgroundColor: theme.lightGrey
   }

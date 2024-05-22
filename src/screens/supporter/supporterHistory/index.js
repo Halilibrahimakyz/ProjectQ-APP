@@ -12,7 +12,7 @@ const SupporterHistoryScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'History',
+      title: getVal('history'),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },

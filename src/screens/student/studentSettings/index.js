@@ -55,7 +55,7 @@ const StudentSettingsScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'Settings',
+      title: getVal('settings'),
       onLeftPress: () => { popScreen(props.componentId); },
       leftIcon: 'arrow-left',
       onRightPress: () => { console.log('Sağ tıklandı'); },
@@ -70,76 +70,77 @@ const StudentSettingsScreen = props => {
         contentContainerStyle={{alignItems: "center"}}
       >
         <SettingsItem 
-          title="Edit Profile" 
+          title={getVal('settings_edit_profile')} 
           icon="account" 
           hasChevron={true} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Notification" 
+          title={getVal('settings_notifications')} 
           icon="bell" 
           hasChevron={true} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Security" 
+          title={getVal('settings_security')} 
           icon="lock" 
           hasChevron={true} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Change Theme" 
+          title={getVal('settings_change_theme')} 
           icon="brightness-4" 
-          hasChevron={true} 
+          hasChevron={false} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
           onPress={handleChangeTheme}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Change Language" 
+          title={getVal('settings_change_language')} 
           icon="translate" 
-          hasChevron={true} 
+          hasChevron={false} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
           onPress={handleChangeLanguage}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Help" 
+          title={getVal('settings_help')} 
           icon="information" 
           hasChevron={true} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Invite Friends" 
+          title={getVal('settings_invite_friends')} 
           icon="account-multiple" 
           hasChevron={true} 
           iconColor={theme.primary} 
-          containerColor={"#d3e3d4"}
+          containerColor={theme.primarySupport}
         />
         <View style={styles.horizontalRuler}/>
         <SettingsItem 
-          title="Logout" 
+          title={getVal('settings_logout')} 
           icon="exit-to-app" 
           hasChevron={false} 
-          iconColor={"#b11313"} 
-          containerColor={"#e3d3d3"}
+          iconColor={theme.red} 
+          containerColor={theme.redSupport}
           onPress={handleLogout}
         />
-        <View style={{height: 200}}/>
+        <View style={{height: 50}}/>
       </ScrollView>
     </Container>
   );
-};
+}
+
 
 const getStyles = (theme) => StyleSheet.create({
   container: {

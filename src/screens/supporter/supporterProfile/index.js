@@ -29,6 +29,8 @@ const SupporterProfileScreen = props => {
 
   const language = useSelector((state) => state.language.value);
 
+  const { getVal } = useLanguage();
+
   const userSupporter = useSelector((state) => state.userSupporter);
   const userStudent = useSelector((state) => state.userStudent);
 
@@ -62,7 +64,7 @@ const SupporterProfileScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'Profile',
+      title: getVal("profile"),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { pushScreen(props.componentId, "SupporterSettingsScreen"); },

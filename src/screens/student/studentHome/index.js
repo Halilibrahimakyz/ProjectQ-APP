@@ -12,7 +12,7 @@ const StudentHomeScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'Home',
+      title: getVal('home'),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },

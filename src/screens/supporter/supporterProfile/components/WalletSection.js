@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '@/constants/colors';
+import { useLanguage } from '@/constants/language';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const WalletSection = ({balanceAmount, onTopUpPress}) => {
+const WalletSection = ({ balanceAmount, onTopUpPress }) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
+  const { getVal } = useLanguage();
 
   return (
     <View style={styles.container}>
@@ -15,11 +17,11 @@ const WalletSection = ({balanceAmount, onTopUpPress}) => {
         </View>
         <View style={styles.balanceTextContainer}>
           <Text style={styles.balanceAmountText}>${balanceAmount}</Text>
-          <Text style={styles.balanceDescriptionText}>My wallet balance</Text>
+          <Text style={styles.balanceDescriptionText}>{getVal('profile_wallet_desc')}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={onTopUpPress} style={styles.topUpButton}>
-        <Text style={styles.topUpButtonText}>Top up</Text>
+        <Text style={styles.topUpButtonText}>{getVal('profile_wallet_topup')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -49,7 +51,7 @@ const getStyles = (theme) => StyleSheet.create({
     height: 42, 
     width: 42, 
     borderRadius: 21, 
-    backgroundColor: "#d3e3d4"
+    backgroundColor: theme.primarySupport
   },
   balanceTextContainer: {
     justifyContent: "center", 
@@ -66,7 +68,7 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: theme.fontSize.small
   },
   topUpButton: {
-    width: "30%", 
+    paddingHorizontal: 15,
     height: 38, 
     borderWidth: 1.5, 
     borderRadius: 20, 

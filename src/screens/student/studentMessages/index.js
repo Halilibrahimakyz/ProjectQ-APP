@@ -12,7 +12,7 @@ const StudentMessagesScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'Messages',
+      title: getVal('messages'),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },

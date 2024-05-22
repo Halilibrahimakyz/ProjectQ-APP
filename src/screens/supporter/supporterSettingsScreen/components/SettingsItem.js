@@ -10,13 +10,13 @@ const SettingsItem = ({title, onPress, icon, hasChevron, containerColor, iconCol
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <View style={styles.nameIconContainer}>
+      <View style={styles.nameAndIconContainer}>
         <View style={[styles.iconContainer, {backgroundColor: containerColor}]}>
-          <MaterialCommunityIcons name={icon} color={iconColor} size={26} />
+          <MaterialCommunityIcons name={icon} color={iconColor} size={22} />
         </View>
         <Text style={styles.settingText}>{title}</Text>
       </View>
-      {hasChevron ? <MaterialCommunityIcons name="chevron-right" color={theme.primary} size={26} /> : <View/>}
+      {hasChevron ? <MaterialCommunityIcons name="chevron-right" color={theme.primary} size={22} /> : <View/>}
     </TouchableOpacity>
   );
 }
@@ -24,21 +24,21 @@ const SettingsItem = ({title, onPress, icon, hasChevron, containerColor, iconCol
 const getStyles = (theme) => StyleSheet.create({
   container: {
     width: "100%", 
-    height: 85, 
+    height: 75, 
     flexDirection: "row", 
     justifyContent: "space-between", 
     alignItems: "center"
   },
-  nameIconContainer: {
+  nameAndIconContainer: {
     flexDirection: "row", 
     justifyContent: "flex-start", 
     alignItems: "center"
   },
   iconContainer: {
-    width: 56, 
-    height: 56, 
-    backgroundColor: "#d3e3d4", 
-    borderRadius: 28, 
+    width: 46, 
+    height: 46, 
+    backgroundColor: "#1a1c1a", 
+    borderRadius: 24, 
     justifyContent: "center", 
     alignItems: "center"
   },

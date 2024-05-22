@@ -32,7 +32,7 @@ const StudentProfileScreen = props => {
   const userSupporter = useSelector((state) => state.userSupporter);
   const userStudent = useSelector((state) => state.userStudent);
 
-  const { changeLanguage } = useLanguage();
+  const { getVal, changeLanguage } = useLanguage();
 
   const interestsArray = ['Medical', 'Disaster', 'Education', 'Social', 'Humanity', 'Environment'];
   const aboutText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -62,7 +62,7 @@ const StudentProfileScreen = props => {
 
   return (
     <Container style={styles.container} topBarProps={{
-      title: 'Profile',
+      title: getVal('profile'),
       onLeftPress: () => { console.log('sol tıklandı'); },
       leftIcon: 'menu',
       onRightPress: () => { pushScreen(props.componentId, "StudentSettingsScreen"); },
@@ -104,7 +104,7 @@ const getStyles = (theme) => StyleSheet.create({
     height: "100%"
   },
   horizontalRuler: {
-    height: 1,
+    height: StyleSheet.hairlineWidth,
     width: "100%",
     backgroundColor: theme.lightGrey,
     marginTop: 16
