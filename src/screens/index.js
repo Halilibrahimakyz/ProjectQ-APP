@@ -20,6 +20,9 @@ import SupporterHistoryScreen from './supporter/supporterHistory';
 import SupporterListScreen from './supporter/supporterList';
 import SupporterMessagesScreen from './supporter/supporterMessages';
 import SupporterProfileScreen from './supporter/supporterProfile';
+import SupporterSettingsScreen from './supporter/supporterSettingsScreen';
+import SupporterWalletScreen from './supporter/supporterWalletScreen';
+
 
 //Others
 import ProjectScreen from './project'
@@ -42,5 +45,7 @@ export {
     SupporterListScreen,
     SupporterMessagesScreen,
     SupporterProfileScreen,
+    SupporterSettingsScreen,
+    SupporterWalletScreen,
     ProjectScreen
 }

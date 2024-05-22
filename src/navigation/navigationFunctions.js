@@ -30,7 +30,7 @@ export const setRootScreen = ({ isLoggedIn, userType, initialTab = 0 }) => {
                 children: [
                   {
                     component: {
-                      name: userType === 'student' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
+                      name: userType === 'supporter' ? 'SupporterHomeScreen' : 'StudentHomeScreen',
                       options: {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('home', 28),

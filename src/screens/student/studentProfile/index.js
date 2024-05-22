@@ -19,7 +19,7 @@ import WalletSection from './components/WalletSection';
 import AboutSection from './components/AboutSection';
 import InterestsSection from './components/InterestsSection';
 
-const demoImage = require("@/assets/images/DemoProfileSquare.jpg");
+const demoImage = require("@/assets/images/DemoStudentProfilePicture.jpg");
 
 
 const StudentProfileScreen = props => {

@@ -5,7 +5,9 @@ import {
     SupporterHistoryScreen,
     SupporterListScreen,
     SupporterMessagesScreen,
-    SupporterProfileScreen
+    SupporterProfileScreen,
+    SupporterSettingsScreen,
+    SupporterWalletScreen
 } from '@/screens'
 
 export const registerSupportScreens = () => {
@@ -14,4 +16,6 @@ export const registerSupportScreens = () => {
     Navigation.registerComponent('SupporterListScreen', () => withProviders(SupporterListScreen));
     Navigation.registerComponent('SupporterMessagesScreen', () => withProviders(SupporterMessagesScreen));
     Navigation.registerComponent('SupporterProfileScreen', () => withProviders(SupporterProfileScreen));
+    Navigation.registerComponent('SupporterSettingsScreen', () => withProviders(SupporterSettingsScreen));
+    Navigation.registerComponent('SupporterWalletScreen', () => withProviders(SupporterWalletScreen));
 };

@@ -13,7 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import SettingsItem from './components/SettingsItem';
 
-const StudentSettingsScreen = props => {
+const SupporterSettingsScreen = props => {
 
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
@@ -158,4 +158,4 @@ const getStyles = (theme) => StyleSheet.create({
   }
 });
 
-export default StudentSettingsScreen;
+export default SupporterSettingsScreen;
