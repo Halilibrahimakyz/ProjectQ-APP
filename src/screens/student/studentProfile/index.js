@@ -11,7 +11,6 @@ import RNRestart from 'react-native-restart';
 import { setRootScreen } from '@/navigation/navigationFunctions';
 import { Container } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ProfilePictureContainer from './components/ProfilePictureContainer';
 import ProfileNameText from './components/ProfileNameText';
