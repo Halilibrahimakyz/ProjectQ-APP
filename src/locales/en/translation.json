@@ -26,6 +26,7 @@
   "skip":"Skip",
   "profile": "Profile",
   "settings": "Settings",
+  "wallet": "Wallet",
   "home": "Home",
   "list": "List",
   "history": "History",
@@ -46,5 +47,6 @@
   "settings_change_language": "Change Language",
   "settings_help": "Help",
   "settings_invite_friends": "Invite Friends",
-  "settings_logout": "Logout"
+  "settings_logout": "Logout",
+  "wallet_balance": "Balance"
 }

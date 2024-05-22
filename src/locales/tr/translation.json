@@ -26,6 +26,7 @@
   "skip":"Atla",
   "profile": "Profil",
   "settings": "Ayarlar",
+  "wallet": "Cüzdan",
   "home": "Anasayfa",
   "list": "Liste",
   "history": "Geçmiş",
@@ -46,5 +47,6 @@
   "settings_change_language": "Dili Değiştir",
   "settings_help": "Yardım",
   "settings_invite_friends": "Arkadaşlarını Davet Et",
-  "settings_logout": "Çıkış Yap"
+  "settings_logout": "Çıkış Yap",
+  "wallet_balance": "Bakiye"
 }
