@@ -48,5 +48,7 @@
   "settings_help": "Yardım",
   "settings_invite_friends": "Arkadaşlarını Davet Et",
   "settings_logout": "Çıkış Yap",
-  "wallet_balance": "Bakiye"
+  "wallet_balance": "Bakiye",
+  "wallet_topup": "Bakiye yükle",
+  "wallet_withdraw": "Bakiye çek"
 }

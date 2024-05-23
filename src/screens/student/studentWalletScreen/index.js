@@ -6,6 +6,7 @@ import { Container } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 
 import BalanceDisplay from './components/BalanceDisplay';
+import WalletActionButton from './components/WalletActionButton';
 
 const StudentWalletScreen = props => {
 
@@ -30,6 +31,23 @@ const StudentWalletScreen = props => {
         contentContainerStyle={{alignItems: "center"}}
       >
         <BalanceDisplay balance={349}/>
+        <View style={styles.buttonContainer}>
+          <WalletActionButton 
+            bgColor={theme.primary} 
+            borderColor={theme.primary}
+            icon={"upload"}
+            title={getVal("wallet_topup")}
+            textColor={theme.background}
+          />
+          <WalletActionButton 
+            bgColor={theme.background} 
+            borderColor={theme.primary}
+            icon={"download"}
+            title={getVal("wallet_withdraw")}
+            textColor={theme.primary}
+          />
+        </View>
+        <View style={styles.horizontalRuler}/>
       </ScrollView>
     </Container>
   );
@@ -50,6 +68,13 @@ const getStyles = (theme) => StyleSheet.create({
     width: "100%",
     backgroundColor: theme.lightGrey,
     marginTop: 16
+  },
+  buttonContainer: {
+    width: "100%",
+    marginTop: 24,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   }
 });
 
