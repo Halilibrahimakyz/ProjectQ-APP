@@ -9,7 +9,7 @@ const SettingsItem = ({title, onPress, icon, hasChevron, containerColor, iconCol
 
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} activeOpacity={1} style={styles.container}>
       <View style={styles.nameAndIconContainer}>
         <View style={[styles.iconContainer, {backgroundColor: containerColor}]}>
           <MaterialCommunityIcons name={icon} color={iconColor} size={22} />

@@ -46,11 +46,12 @@ const SegmentedControl = ({ onCategoryChange }) => {
 
 const getStyles = (theme) => StyleSheet.create({
   wrapper: {
-    paddingVertical: 10,
+    paddingBottom: 10,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: theme.padding.default,
   },
   categoryButton: {
     paddingVertical: 10,
@@ -58,7 +59,7 @@ const getStyles = (theme) => StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: theme.primary,
-    marginHorizontal: 5,
+    marginRight: 5,
     backgroundColor: 'transparent',
   },
   selectedCategoryButton: {

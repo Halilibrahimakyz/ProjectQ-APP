@@ -26,7 +26,6 @@ const InterestsSection = ({ interestsArray }) => {
   );
 }
 
-
 const getStyles = (theme) => StyleSheet.create({
   container: {
     marginTop: 22,
@@ -42,7 +41,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   headerText: {
     color: theme.secondary,
-    fontSize: theme.fontSize.large,
+    fontSize: theme.fontSize.medium,
     fontWeight: "bold"
   },
   interestsContainer: {

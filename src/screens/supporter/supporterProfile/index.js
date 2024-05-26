@@ -50,9 +50,9 @@ const SupporterProfileScreen = props => {
     });
   };
 
-  useEffect(() => {
-    setStatusBar(props.componentId,theme)
-  }, [theme, props.componentId]);
+  // useEffect(() => {
+  //   setStatusBar(props.componentId,theme)
+  // }, [theme, props.componentId]);
 
   return (
     <Container style={styles.container} topBarProps={{
@@ -61,9 +61,9 @@ const SupporterProfileScreen = props => {
       leftIcon: 'theme-light-dark',
       onRightPress: () => { pushScreen(props.componentId, "SupporterSettingsScreen"); },
       rightIcon: 'cog',
-      style: { backgroundColor: theme.primary },
-      textStyle: { color: theme.background },
-      buttonColor: theme.background
+      // style: { backgroundColor: theme.primary },
+      // textStyle: { color: theme.background },
+      // buttonColor: theme.background
     }}
       compId={props.componentId}
     >
@@ -92,6 +92,7 @@ const SupporterProfileScreen = props => {
 const getStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'space-between',
+    paddingHorizontal: theme.padding.default,
   },
   scroller: {
     flex: 1,

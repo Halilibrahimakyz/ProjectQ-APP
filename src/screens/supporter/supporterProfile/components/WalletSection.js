@@ -60,7 +60,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   balanceAmountText: {
     color: theme.secondary, 
-    fontSize: theme.fontSize.heading, 
+    fontSize: theme.fontSize.title, 
     fontWeight: "bold"
   },
   balanceDescriptionText: {
@@ -70,7 +70,7 @@ const getStyles = (theme) => StyleSheet.create({
   topUpButton: {
     paddingHorizontal: 15,
     height: 38, 
-    borderWidth: 1.5, 
+    borderWidth: 1, 
     borderRadius: 20, 
     borderColor: theme.primary, 
     justifyContent: "center", 

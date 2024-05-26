@@ -39,19 +39,19 @@ const getStyles = (theme) => StyleSheet.create({
   },
   socialSection: {
     width: "32%",
-    height: "100%",
+    // height: "100%",
     backgroundColor: theme.background,
     justifyContent: "space-evenly",
     alignItems: "center"
   },
   sectionNumber: {
     color: theme.secondary,
-    fontSize: theme.fontSize.heading,
+    fontSize: theme.fontSize.title,
     fontWeight: "bold"
   },
   sectionDescription: {
     color: theme.secondary,
-    fontSize: theme.fontSize.medium
+    fontSize: theme.fontSize.title
   },
   verticalRuler: {
     width: StyleSheet.hairlineWidth,

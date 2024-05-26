@@ -6,7 +6,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import InterestComponent from './InterestComponent';
 
-
 const InterestsSection = ({interestsArray}) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
@@ -42,7 +41,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   headerText: {
     color: theme.secondary,
-    fontSize: theme.fontSize.large,
+    fontSize: theme.fontSize.medium,
     fontWeight: "bold"
   },
   interestsContainer: {

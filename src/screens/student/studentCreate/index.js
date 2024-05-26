@@ -14,9 +14,7 @@ const StudentCreateScreen = props => {
     <Container style={styles.container} topBarProps={{
       title: getVal('create'),
       onLeftPress: () => { console.log('sol tıklandı'); },
-      leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },
-      // rightIcon: 'menu',
       shadow: false
     }}
       compId={props.componentId}

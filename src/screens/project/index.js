@@ -85,7 +85,6 @@ import {
             </View>
             <Text style={styles.sectionSubtitle}>Verified</Text>
           </View>
-  
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Description</Text>
             <Text style={styles.storyText}>
@@ -107,18 +106,14 @@ import {
     },
     imageContainer: {
       position: 'relative',
-      // top:-100,
-      // zIndex:999
     },
     projectImage: {
       width: '100%',
       height: 300,
-      justifyContent: 'flex-end',
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
     },
     projectInfo: {
       paddingTop: 10,
+      paddingHorizontal: theme.padding.default,
       backgroundColor: theme.background,
     },
     saveButton: {
@@ -190,6 +185,7 @@ import {
       backgroundColor: theme.background,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
+      paddingHorizontal: theme.padding.default,
       paddingTop: 10,
     },
     sectionTitle: {

@@ -2,7 +2,7 @@ import { Button, View, ScrollView, Text, StyleSheet, TouchableOpacity } from 're
 import React, { useMemo } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
+import { setDarkTheme, setLightTheme,changeTheme } from '@/storeReduxToolkit/themeSlice';
 import { loginSuccess, logout } from '@/storeReduxToolkit/userStudentSlice';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
@@ -58,8 +58,8 @@ const StudentProfileScreen = props => {
   return (
     <Container style={styles.container} topBarProps={{
       title: getVal('profile'),
-      onLeftPress: () => {handleChangeTheme},
-      leftIcon: 'menu',
+      onLeftPress: () => {dispatch(changeTheme())},
+      leftIcon: 'theme-light-dark',
       onRightPress: () => { pushScreen(props.componentId, "StudentSettingsScreen"); },
       rightIcon: 'cog',
       shadow: false
@@ -91,6 +91,7 @@ const StudentProfileScreen = props => {
 const getStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'space-between',
+    paddingHorizontal: theme.padding.default,
   },
   scroller: {
     flex: 1,

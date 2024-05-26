@@ -46,16 +46,16 @@ export const useDefaultOptions = (theme) => {
           // }
         },
     animations: {
-      // push: {
-      //   waitForRender: true,
-      //   content: {
-      //     translationX: {
-      //       from: windowWidth,
-      //       to: 0,
-      //       duration: getAnimationDuration(),
-      //     }
-      //   }
-      // },
+      push: {
+        waitForRender: true,
+        content: {
+          translationX: {
+            from: windowWidth,
+            to: 0,
+            duration: getAnimationDuration(),
+          }
+        }
+      },
       pop: {
         waitForRender: true,
         content: {

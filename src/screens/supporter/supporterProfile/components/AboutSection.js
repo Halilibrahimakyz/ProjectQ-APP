@@ -27,14 +27,13 @@ const getStyles = (theme) => StyleSheet.create({
   },
   header: {
     color: theme.secondary, 
-    fontSize: theme.fontSize.large, 
+    fontSize: theme.fontSize.title, 
     fontWeight: "bold"
   },
   body: {
     color: theme.secondary, 
     fontSize: theme.fontSize.medium, 
     marginTop: 6, 
-    lineHeight: 24
   }
 });
 

@@ -19,7 +19,7 @@ const getStyles = (theme) => StyleSheet.create({
   container: {
     height: 38,
     borderRadius: 19,
-    borderWidth: 1.5,
+    borderWidth: 1,
     borderColor: theme.primary,
     paddingHorizontal: 12,
     justifyContent: "center",

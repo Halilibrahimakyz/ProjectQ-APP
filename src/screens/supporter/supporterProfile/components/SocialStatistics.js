@@ -46,12 +46,12 @@ const getStyles = (theme) => StyleSheet.create({
   },
   sectionNumber: {
     color: theme.secondary,
-    fontSize: theme.fontSize.heading,
+    fontSize: theme.fontSize.title,
     fontWeight: "bold"
   },
   sectionDescription: {
     color: theme.secondary,
-    fontSize: theme.fontSize.medium,
+    fontSize: theme.fontSize.title,
     textAlign: "center"
   },
   verticalRuler: {

@@ -11,19 +11,11 @@ const StudentHomeScreen = props => {
   const styles = useMemo(() => getStyles(theme), [theme]);
   const { getVal } = useLanguage();
 
-  useEffect(() => {
-    setStatusBar(props.componentId,theme)
-  }, [theme, props.componentId]);
-
   return (
     <Container style={styles.container} topBarProps={{
       title: getVal('home'),
       onLeftPress: () => { console.log('sol tıklandı'); },
-      leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },
-      style: { backgroundColor: theme.primary },
-      textStyle: { color: theme.background },
-      buttonColor: theme.background
     }}
       compId={props.componentId}
     >
