@@ -3,31 +3,30 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/constants/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CustomTopBar = ({ title, onLeftPress, leftIcon, onRightPress, rightIcon ,shadow }) => {
+const CustomTopBar = ({ title, onLeftPress, leftIcon, onRightPress, rightIcon, shadow, style,textStyle,buttonColor }) => {
 
     const theme = useTheme();
     const styles = getStyles(theme, shadow);
-    // console.log("rightIcon: ",rightIcon)
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <View style={styles.iconPlaceholder}>
                 {leftIcon && (
                     <TouchableOpacity onPress={onLeftPress} style={styles.iconButton}>
                         <MaterialCommunityIcons
                             name={leftIcon}
-                            color={theme.primary}
+                            color={buttonColor?buttonColor:theme.primary}
                             size={28}
                         />
                     </TouchableOpacity>
                 )}
             </View>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title,textStyle]}>{title}</Text>
             <View style={styles.iconPlaceholder}>
                 {rightIcon && (
                     <TouchableOpacity onPress={onRightPress} style={styles.iconButton}>
                         <MaterialCommunityIcons
                             name={rightIcon}
-                            color={theme.primary}
+                            color={buttonColor?buttonColor:theme.primary}
                             size={28}
                         />
                     </TouchableOpacity>

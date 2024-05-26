@@ -1,14 +1,14 @@
 import { Navigation } from 'react-native-navigation';
 import { useDefaultOptions } from '../navigation/navigationConfig';
 import { setRootScreen } from '../navigation/navigationFunctions';
-import { setLightTheme, setDarkTheme } from './themeSlice'; // Theme eylemlerini import edin
+import { setLightTheme, setDarkTheme,changeTheme } from './themeSlice'; // Theme eylemlerini import edin
 import { lightTheme, darkTheme } from '@/constants/colors'; // Temaları import edin
 
 const themeMiddleware = store => next => action => {
 
   let result = next(action);
 
-  if (action.type === setLightTheme.type || action.type === setDarkTheme.type) {
+  if (action.type === setLightTheme.type || action.type === setDarkTheme.type || action.type === changeTheme.type) {
 
     const state = store.getState();
     const theme = state.theme.value === 'light' ? lightTheme : darkTheme;
@@ -21,7 +21,8 @@ const themeMiddleware = store => next => action => {
 
     let userType = null;
     let isLoggedIn = false;
-
+    console.log("isSupporterLoggedIn: ",isSupporterLoggedIn)
+    console.log("isStudentLoggedIn: ",isStudentLoggedIn)
     if (isSupporterLoggedIn) {
       userType = 'supporter';
       isLoggedIn = true;

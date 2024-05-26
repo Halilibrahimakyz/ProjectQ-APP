@@ -6,7 +6,7 @@ import { useLanguage } from '@/constants/language';
 import { Container } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
-import { loginSuccess, logout } from '@/storeReduxToolkit/userStudentSlice';
+import { loginSuccess, logout } from '@/storeReduxToolkit/userSupporterSlice';
 import { setRootScreen } from '@/navigation/navigationFunctions';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,7 +18,7 @@ const SupporterSettingsScreen = props => {
   const styles = useMemo(() => getStyles(theme), [theme]);
 
   const language = useSelector((state) => state.language.value);
-
+console.log("StyleSheet.hairlineWidth: ",StyleSheet.hairlineWidth,)
   const { getVal, changeLanguage } = useLanguage();
 
   const dispatch = useDispatch();
@@ -150,7 +150,7 @@ const getStyles = (theme) => StyleSheet.create({
     height: "100%"
   },
   horizontalRuler: {
-    height: 1,
+    height:StyleSheet.hairlineWidth,
     width: "100%",
     backgroundColor: theme.lightGrey,
   }

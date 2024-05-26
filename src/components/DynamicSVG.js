@@ -10,6 +10,9 @@ import DarkOnBoardSupporter1 from '../assets/svg/Dark/OnBoardSupporter1.svg';
 import DarkOnBoardSupporter2 from '../assets/svg/Dark/OnBoardSupporter2.svg';
 import DarkOnBoardSupporter3 from '../assets/svg/Dark/OnBoardSupporter3.svg';
 import DarkWelcome from '../assets/svg/Dark/Welcome.svg';
+import LetsYouIn from '../assets/svg/Dark/LetsYouIn.svg'
+import Apple_logo_black from '../assets/svg/Dark/Apple_logo_black'
+import google from '../assets/svg/Dark/google'
 
 import LightOnBoard from '../assets/svg/Light/OnBoard.svg';
 import LightOnBoardStudent1 from '../assets/svg/Light/OnBoardStudent1.svg';
@@ -19,6 +22,7 @@ import LightOnBoardSupporter1 from '../assets/svg/Light/OnBoardSupporter1.svg';
 import LightOnBoardSupporter2 from '../assets/svg/Light/OnBoardSupporter2.svg';
 import LightOnBoardSupporter3 from '../assets/svg/Light/OnBoardSupporter3.svg';
 import LightWelcome from '../assets/svg/Light/Welcome.svg';
+import Apple_logo_white from '../assets/svg/Light/Apple_logo_white'
 
 const svgComponents = {
   dark: {
@@ -30,6 +34,9 @@ const svgComponents = {
     OnBoardSupporter2: DarkOnBoardSupporter2,
     OnBoardSupporter3: DarkOnBoardSupporter3,
     Welcome: DarkWelcome,
+    LetsYouIn:LetsYouIn,
+    AppleLogo:Apple_logo_white,
+    GoogleLogo:google
   },
   light: {
     OnBoard: LightOnBoard,
@@ -40,6 +47,9 @@ const svgComponents = {
     OnBoardSupporter2: LightOnBoardSupporter2,
     OnBoardSupporter3: LightOnBoardSupporter3,
     Welcome: LightWelcome,
+    LetsYouIn:LetsYouIn,
+    AppleLogo:Apple_logo_black,
+    GoogleLogo:google
   },
 };
 // const importAll = (context) => {

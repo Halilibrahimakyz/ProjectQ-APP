@@ -41,6 +41,7 @@ const WelcomeScreen = props => {
 const getStyles = (theme) => StyleSheet.create({
     container: {
         justifyContent: 'space-between',
+        paddingHorizontal: theme.padding.default,
     },
     content: {
         alignItems: 'center', 

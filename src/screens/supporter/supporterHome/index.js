@@ -1,4 +1,4 @@
-import { Text, StyleSheet, ScrollView, View, Image, Dimensions } from 'react-native';
+import { Text, StyleSheet, ScrollView, View, Image, Dimensions,FlatList } from 'react-native';
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import { useTheme } from '@/constants/colors';
@@ -6,6 +6,7 @@ import { useLanguage } from '@/constants/language'
 import { Container, ProjectCard, SegmentedControl } from '@/components';
 import { FlashList } from '@shopify/flash-list';
 import { dummyProjects } from './data';
+import { setStatusBar } from '@/functions/setStatusBar';
 
 const student1 = require("@/assets/images/student1.jpg");
 const student2 = require("@/assets/images/student2.jpg");
@@ -40,13 +41,21 @@ const SupporterHomeScreen = props => {
     },
   ];
 
-  const renderProjectCard = ({ item }) => (
-    <ProjectCard
-      project={item}
-      onSave={() => console.log("save")}
-      componentId={props.componentId}
-    />
-  );
+  useEffect(() => {
+    setStatusBar(props.componentId,theme)
+  }, [theme, props.componentId]);
+
+  const renderProjectCard = ({ item }) => {
+    console.log("item.image:", item.image);
+    return (
+      <ProjectCard
+        project={item}
+        onSave={() => console.log("save")}
+        componentId={props.componentId}
+      />
+    );
+  };
+  
   const renderBanner = ({ item }) => (
     <View style={styles.bannerItem}>
       <Image source={item.image} style={styles.bannerImage} resizeMode="cover" />
@@ -54,6 +63,7 @@ const SupporterHomeScreen = props => {
       <Text style={styles.bannerTitle}>{item.title}</Text>
     </View>
   );
+  
 
   const filteredProjects = useMemo(() => {
     return selectedCategory === 'All'
@@ -81,8 +91,9 @@ const SupporterHomeScreen = props => {
       onLeftPress: () => { console.log('sol tıklandı'); },
       // leftIcon: 'menu',
       onRightPress: () => { console.log('Sağ tıklandı'); },
-      // rightIcon: 'menu',
-      shadow: false
+      style: { backgroundColor: theme.primary },
+      textStyle: { color: theme.background },
+      buttonColor: theme.background
     }}
       compId={props.componentId}
     >
@@ -100,19 +111,16 @@ const SupporterHomeScreen = props => {
         </View>
         <Text style={styles.sectionTitle}>Empower Initiatives</Text>
         <SegmentedControl onCategoryChange={handleCategoryChange} />
-        <ScrollView
-          horizontal
-          ref={horizontalScrollViewRef}
-          showsHorizontalScrollIndicator={false}
-          style={styles.horizontalScrollView}>
+        
+          
           <FlashList
             horizontal
             data={filteredProjects}
             renderItem={renderProjectCard}
             keyExtractor={(item, index) => index.toString()}
             estimatedItemSize={200}
+            showsHorizontalScrollIndicator={false}
           />
-        </ScrollView>
         <Text style={styles.sectionTitle}>Featured Projects</Text>
         <ScrollView
           horizontal

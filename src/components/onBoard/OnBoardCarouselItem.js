@@ -1,7 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Dimensions } from 'react-native';
 import React, { useMemo } from 'react';
 import { useTheme } from '../../constants/colors';
 import { Container, DynamicSVG } from '@/components';
+
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const OnBoardCarouselItem = ({ svg, titleText, descText }) => {
 
@@ -21,10 +25,11 @@ export default OnBoardCarouselItem;
 
 const getStyles = (theme) => StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
+    width: width,
+    // height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: theme.padding.default,
   },
   header: {
     color: theme.primary,

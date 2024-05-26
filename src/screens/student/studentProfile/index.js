@@ -47,27 +47,22 @@ const StudentProfileScreen = props => {
     });
   };
 
-  const handleSetDarkTheme = () => {
-    dispatch(setDarkTheme());
-  };
-
-  const handleSetLightTheme = () => {
-    dispatch(setLightTheme());
-  };
-
-  const handleLogout = () => {
-    dispatch(logout())
-    setRootScreen({ isLoggedIn: false, userType: null });
-  };
+  const handleChangeTheme = () => {
+    if (theme.type === "dark") {
+      dispatch(setLightTheme());
+    } else {
+      dispatch(setDarkTheme());
+    }
+  }
 
   return (
     <Container style={styles.container} topBarProps={{
       title: getVal('profile'),
-      onLeftPress: () => { console.log('sol tıklandı'); },
+      onLeftPress: () => {handleChangeTheme},
       leftIcon: 'menu',
       onRightPress: () => { pushScreen(props.componentId, "StudentSettingsScreen"); },
       rightIcon: 'cog',
-      shadow: true
+      shadow: false
     }}
       compId={props.componentId}
     >

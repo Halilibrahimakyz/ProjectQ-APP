@@ -49,7 +49,7 @@ const getStyles = (theme) => StyleSheet.create({
   projectCard: {
     borderRadius: 10,
     overflow: 'hidden',
-    marginRight: 15,
+    marginHorizontal: 10,
     width: 250,
   },
   imageContainer: {

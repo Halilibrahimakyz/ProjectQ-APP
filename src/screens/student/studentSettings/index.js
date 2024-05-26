@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { Container } from '@/components';
+import { Container,CustomSeparator } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
 import { loginSuccess, logout } from '@/storeReduxToolkit/userStudentSlice';
@@ -24,19 +24,11 @@ const StudentSettingsScreen = props => {
 
   const dispatch = useDispatch();
 
-  const handleSetDarkTheme = () => {
-    dispatch(setDarkTheme());
-  };
-
-  const handleSetLightTheme = () => {
-    dispatch(setLightTheme());
-  };
-
   const handleChangeTheme = () => {
     if (theme.type === "dark") {
-      handleSetLightTheme();
+      dispatch(setLightTheme());
     } else {
-      handleSetDarkTheme();
+      dispatch(setDarkTheme());
     }
   }
 
@@ -76,7 +68,7 @@ const StudentSettingsScreen = props => {
           iconColor={theme.primary} 
           containerColor={theme.primarySupport}
         />
-        <View style={styles.horizontalRuler}/>
+        <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_notifications')} 
           icon="bell" 
@@ -84,7 +76,7 @@ const StudentSettingsScreen = props => {
           iconColor={theme.primary} 
           containerColor={theme.primarySupport}
         />
-        <View style={styles.horizontalRuler}/>
+       <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_security')} 
           icon="lock" 
@@ -92,7 +84,7 @@ const StudentSettingsScreen = props => {
           iconColor={theme.primary} 
           containerColor={theme.primarySupport}
         />
-        <View style={styles.horizontalRuler}/>
+        <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_change_theme')} 
           icon="brightness-4" 
@@ -101,7 +93,7 @@ const StudentSettingsScreen = props => {
           containerColor={theme.primarySupport}
           onPress={handleChangeTheme}
         />
-        <View style={styles.horizontalRuler}/>
+        <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_change_language')} 
           icon="translate" 
@@ -110,7 +102,7 @@ const StudentSettingsScreen = props => {
           containerColor={theme.primarySupport}
           onPress={handleChangeLanguage}
         />
-        <View style={styles.horizontalRuler}/>
+        <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_help')} 
           icon="information" 
@@ -118,7 +110,7 @@ const StudentSettingsScreen = props => {
           iconColor={theme.primary} 
           containerColor={theme.primarySupport}
         />
-        <View style={styles.horizontalRuler}/>
+       <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_invite_friends')} 
           icon="account-multiple" 
@@ -126,7 +118,7 @@ const StudentSettingsScreen = props => {
           iconColor={theme.primary} 
           containerColor={theme.primarySupport}
         />
-        <View style={styles.horizontalRuler}/>
+        <CustomSeparator/>
         <SettingsItem 
           title={getVal('settings_logout')} 
           icon="exit-to-app" 
@@ -150,7 +142,8 @@ const getStyles = (theme) => StyleSheet.create({
     flex: 1,
     backgroundColor: theme.background,
     width: "100%",
-    height: "100%"
+    height: "100%",
+    paddingHorizontal:10
   },
   horizontalRuler: {
     height: 1,

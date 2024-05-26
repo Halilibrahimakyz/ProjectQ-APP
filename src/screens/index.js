@@ -4,6 +4,7 @@ import OnBoardScreen from './onBoard/onBoard';
 import AppInfoStudentScreen from './onBoard/appInfoStudent';
 import AppInfoSupporterScreen from './onBoard/appInfoSupporter';
 import JoinScreen from './onBoard/join';
+import SignUpStudentScreen from './onBoard/signUpStudent'
 
 //Student
 import StudentHomeScreen from './student/studentHome'
@@ -33,6 +34,7 @@ export {
     AppInfoStudentScreen,
     AppInfoSupporterScreen,
     JoinScreen,
+    SignUpStudentScreen,
     StudentHomeScreen,
     StudentCreateScreen,
     StudentListScreen,

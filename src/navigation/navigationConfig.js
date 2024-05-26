@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const getAnimationDuration = () => {
   if (Platform.OS === 'android') {
-    return 250;
+    return 300;
   } else {
     return 300;
   }
@@ -46,16 +46,16 @@ export const useDefaultOptions = (theme) => {
           // }
         },
     animations: {
-      push: {
-        waitForRender: true,
-        content: {
-          translationX: {
-            from: windowWidth,
-            to: 0,
-            duration: getAnimationDuration(),
-          }
-        }
-      },
+      // push: {
+      //   waitForRender: true,
+      //   content: {
+      //     translationX: {
+      //       from: windowWidth,
+      //       to: 0,
+      //       duration: getAnimationDuration(),
+      //     }
+      //   }
+      // },
       pop: {
         waitForRender: true,
         content: {

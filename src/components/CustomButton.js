@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useTheme } from '@/constants/colors';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import { View } from 'react-native-reanimated/lib/typescript/Animated';
 
-const CustomButton = ({ title, onPress, style, textStyle }) => {
+const CustomButton = ({ title, onPress, style, textStyle}) => {
 
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), [theme]);
@@ -28,11 +30,15 @@ const getStyles = theme => StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
         shadowOpacity: 0.3,
+        flexDirection: 'row'
     },
     text: {
         color: theme.background,
         fontSize: theme.fontSize.button,
     },
+    iconContainer:{
+        paddingRight:10
+    }
 });
 
 export default CustomButton;

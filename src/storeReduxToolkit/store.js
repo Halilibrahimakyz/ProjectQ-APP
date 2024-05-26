@@ -4,6 +4,8 @@ import themeReducer from './themeSlice'
 import languageReducer from './languageSlice'
 import userSupporterReducer from './userSupporterSlice'
 import userStudentReducer from './userStudentSlice'
+import studentFormReducer from './studentFormSlice'
+
 import {
   persistReducer,
   persistStore,
@@ -39,6 +41,7 @@ export const store = configureStore({
     language: persistedLanguageReducer,
     userSupporter: persistedUserSupporterReducer,
     userStudent: persistedUserStudentReducer,
+    studentForm:studentFormReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -3,7 +3,7 @@ import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
 import { popScreen, pushScreen, setRootScreen } from '@/navigation/navigationFunctions';
-import Carousel from "react-native-reanimated-carousel";
+import { FlashList } from '@shopify/flash-list';
 import { Container } from '@/components';
 import OnBoardCarouselItem from '@/components/onBoard/OnBoardCarouselItem';
 import OnBoardPagination from '@/components/onBoard/OnBoardPagination';
@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '@/storeReduxToolkit/userStudentSlice';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 const AppInfoStudentScreen = props => {
 
@@ -21,7 +20,7 @@ const AppInfoStudentScreen = props => {
   const dispatch = useDispatch();
 
   const [activeSlide, setActiveSlide] = useState(0);
-  const carouselRef = useRef(null);
+  const flashListRef = useRef(null);
 
   const carouselItemData = useMemo(() => [
     {
@@ -42,24 +41,24 @@ const AppInfoStudentScreen = props => {
   ], [getVal]);
 
   const handleNext = useCallback(() => {
-    if (carouselRef.current) {
+    if (flashListRef.current) {
       if (activeSlide < carouselItemData.length - 1) {
         const nextIndex = activeSlide + 1;
         setActiveSlide(nextIndex);
-        carouselRef.current.scrollTo({ count: 1, animated: true });
+        flashListRef.current.scrollToIndex({ index: nextIndex, animated: true });
       } else {
-        dispatch(loginSuccess({ name: "Student", surname: "test2" }))
+        dispatch(loginSuccess({ name: "Student", surname: "test2" }));
         setRootScreen({ isLoggedIn: true, userType: "student" });
       }
     }
-  }, [activeSlide, carouselItemData.length, props.componentId]);
+  }, [activeSlide, carouselItemData.length, dispatch]);
 
   const handleBack = useCallback(() => {
-    if (carouselRef.current) {
+    if (flashListRef.current) {
       if (activeSlide > 0) {
         const prevIndex = activeSlide - 1;
         setActiveSlide(prevIndex);
-        carouselRef.current.scrollTo({ count: -1, animated: true });
+        flashListRef.current.scrollToIndex({ index: prevIndex, animated: true });
       } else {
         popScreen(props.componentId);
       }
@@ -67,33 +66,43 @@ const AppInfoStudentScreen = props => {
   }, [activeSlide, props.componentId]);
 
   const handleSkip = useCallback(() => {
-    dispatch(loginSuccess({ name: "Student", surname: "test2" }))
-    setRootScreen({ isLoggedIn: true, userType: "student" });
+    const someProps = {
+      userType: "student",
+    };
+    pushScreen(props.componentId, "JoinScreen", someProps);
   }, [props.componentId]);
 
+  const renderItem = useCallback(({ item, index }) => (
+    <OnBoardCarouselItem svg={item.svg} titleText={item.titleText} descText={item.descText} />
+  ), []);
+
   return (
-    <Container style={styles.container} topBarProps={{
-      // title: 'Ana Sayfa',
-      onLeftPress: () => { popScreen(props.componentId) },
-      leftIcon: 'arrow-left',
-      onRightPress: () => { console.log('Sağ tıklandı'); },
-      // rightIcon: 'menu'
-    }}
+    <Container
+      style={styles.container}
+      topBarProps={{
+        onLeftPress: () => { popScreen(props.componentId) },
+        leftIcon: 'arrow-left',
+        onRightPress: () => { console.log('Sağ tıklandı'); },
+      }}
       compId={props.componentId}
     >
       <View style={styles.content}>
-        <Carousel
-          vertical={false}
-          ref={carouselRef}
-          loop={false}
-          width={width}
-          autoPlay={false}
+        <FlashList
+          ref={flashListRef}
           data={carouselItemData}
-          windowSize={3}
-          pagingEnabled={true}
-          scrollAnimationDuration={300}
-          onSnapToItem={(index) => setActiveSlide(index)}
-          renderItem={({ item, index }) => <OnBoardCarouselItem svg={item.svg} titleText={item.titleText} descText={item.descText} />}
+          renderItem={renderItem}
+          width={width}
+          horizontal
+          pagingEnabled
+          estimatedItemSize={3}
+          onScrollToIndexFailed={() => {}}
+          showsHorizontalScrollIndicator={false}
+          onViewableItemsChanged={({ viewableItems }) => {
+            if (viewableItems.length > 0) {
+              setActiveSlide(viewableItems[0].index);
+            }
+          }}
+          viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
         />
       </View>
       <View style={{ marginBottom: 30 }}>
@@ -117,6 +126,7 @@ const AppInfoStudentScreen = props => {
 const getStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'space-between',
+    paddingHorizontal: theme.padding.default,
   },
   content: {
     flex: 1,

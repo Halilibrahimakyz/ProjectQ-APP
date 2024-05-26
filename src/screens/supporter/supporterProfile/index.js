@@ -1,8 +1,8 @@
 import { Button, View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
+import { setDarkTheme, setLightTheme,changeTheme } from '@/storeReduxToolkit/themeSlice';
 import { loginSuccess, logout } from '@/storeReduxToolkit/userStudentSlice';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
@@ -11,6 +11,7 @@ import RNRestart from 'react-native-restart';
 import { setRootScreen } from '@/navigation/navigationFunctions';
 import { Container } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
+import { setStatusBar } from '@/functions/setStatusBar';
 
 import ProfilePictureContainer from './components/ProfilePictureContainer';
 import ProfileNameText from './components/ProfileNameText';
@@ -49,27 +50,20 @@ const SupporterProfileScreen = props => {
     });
   };
 
-  const handleSetDarkTheme = () => {
-    dispatch(setDarkTheme());
-  };
-
-  const handleSetLightTheme = () => {
-    dispatch(setLightTheme());
-  };
-
-  const handleLogout = () => {
-    dispatch(logout())
-    setRootScreen({ isLoggedIn: false, userType: null });
-  };
+  useEffect(() => {
+    setStatusBar(props.componentId,theme)
+  }, [theme, props.componentId]);
 
   return (
     <Container style={styles.container} topBarProps={{
       title: getVal("profile"),
-      onLeftPress: () => { console.log('sol tıklandı'); },
-      leftIcon: 'menu',
+      onLeftPress: () => {dispatch(changeTheme())},
+      leftIcon: 'theme-light-dark',
       onRightPress: () => { pushScreen(props.componentId, "SupporterSettingsScreen"); },
       rightIcon: 'cog',
-      shadow: true
+      style: { backgroundColor: theme.primary },
+      textStyle: { color: theme.background },
+      buttonColor: theme.background
     }}
       compId={props.componentId}
     >

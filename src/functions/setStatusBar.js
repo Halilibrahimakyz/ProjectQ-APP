@@ -6,8 +6,8 @@ import React from 'react'
 const setStatusBar = (componentId, theme) => {
   Navigation.mergeOptions(componentId, {
     statusBar: {
-      backgroundColor: theme.background,
-      style: theme.type === "dark" ? "light" : "dark"
+      backgroundColor: theme.primary,
+      style: theme.type === "dark" ? "dark" : "light"
     }
   });
 }

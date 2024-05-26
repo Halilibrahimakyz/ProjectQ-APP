@@ -22,7 +22,7 @@ const Container = ({ children, style, topBarProps, compId }) => {
 const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 20,
+        // paddingHorizontal: 15,
         alignItems: 'center',
     },
 });

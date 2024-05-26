@@ -13,12 +13,15 @@ const baseTheme = {
     display1: 30, // Büyük ekran başlıkları veya önemli metinler için.
     display2: 36, // Çok büyük metinler için, örneğin açılış ekranında kullanılan metinler.
   },
+  padding: {
+    default:15
+  },
   primary: '#13B156',//Green
   accent: '#09101D',//Dark Blue
   black: '#151619',//Black
   white: '#FBFBFB',//White
   purple: '#8B13B1',
-  red: "#b11313",
+  red: "#EE1B1B",
   darkwhite:'#B9B9B9'
 };
 

@@ -35,6 +35,7 @@ import {
           leftIcon: 'arrow-left',
           onRightPress: () => { console.log('Sağ tıklandı'); },
           shadow: false,
+          style:{backgroundColor:'transparent',zIndex:1}
         }}
         compId={props.componentId}
       >
@@ -106,6 +107,8 @@ import {
     },
     imageContainer: {
       position: 'relative',
+      // top:-100,
+      // zIndex:999
     },
     projectImage: {
       width: '100%',

@@ -44,6 +44,7 @@ const OnBoardScreen = props => {
 const getStyles = (theme) => StyleSheet.create({
   container: {
     justifyContent: 'space-between',
+    paddingHorizontal: theme.padding.default,
   },
   content: {
     flex: 1,

@@ -103,13 +103,10 @@ android {
         }
     }
     compileOptions {
-        // JDK 17 için Java sürüm hedeflerini güncelleyin
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
     kotlinOptions {
-        // Kotlin için JVM hedefini JDK 17 ile uyumlu hale getirin
         jvmTarget = "17"
     }
 }
