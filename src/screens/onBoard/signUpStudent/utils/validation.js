@@ -12,13 +12,13 @@ export const handleValidation = (formData, key, value, getVal) => {
         error = getVal('profilePictureRequired') || 'Profile picture is required';
       }
       break;
-    case 'username':
+    case "username":
       if (value === '') {
-        error = getVal('usernameRequired') || 'username is required';
-      } else if (value.length < 2) {
-        error = getVal('usernameTooShort') || 'username must be at least 2 characters long';
-      } else if (!/^[a-zA-Z\s]+$/.test(value)) {
-        error = getVal('usernameInvalid') || 'username can only contain letters and spaces';
+        error = getVal('usernameRequired') || 'Username is required';
+      } else if (value.length < 5) {
+        error = getVal('usernameTooShort') || 'Username must be at least 5 characters long';
+      } else if (!/^[a-zA-Z0-9.]+$/.test(value)) {
+        error = getVal('usernameInvalid') || 'Username can only contain letters, numbers, and dots';
       }
       break;
     case 'name':
