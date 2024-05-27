@@ -6,6 +6,9 @@ import { useAuth } from '@/functions/authenticate';
 import { useDefaultOptions } from './navigation/navigationConfig';
 import { setRootScreen } from './navigation/navigationFunctions';
 import {useTheme} from '@/constants/colors';
+// import { enableScreens } from 'react-native-screens';
+
+// enableScreens();
 
 registerScreens();
 

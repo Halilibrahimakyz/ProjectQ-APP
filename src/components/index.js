@@ -6,6 +6,10 @@ import ProjectCard from './ProjectCard';
 import SegmentedControl from './SegmentedControl';
 import CustomSeparator from './CustomSeperator';
 import CustomTextInput from './CustomTextInput'
+import CustomPicker from './CustomPicker';
+import CustomModal from './CustomModal'
+import CustomDatePicker from './CustomDatePicker';
+import ProfilePicturePicker from './ProfilePicturePicker ';
 
 export {
     Container,
@@ -15,5 +19,9 @@ export {
     ProjectCard,
     SegmentedControl,
     CustomSeparator,
-    CustomTextInput
+    CustomTextInput,
+    CustomPicker,
+    CustomModal,
+    CustomDatePicker,
+    ProfilePicturePicker
 }

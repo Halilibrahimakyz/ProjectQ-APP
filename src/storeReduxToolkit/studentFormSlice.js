@@ -3,11 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   step: 1,
   formData: {
+    profilePicture: '',
+    username: '',
     name: '',
+    surname: '',
     email: '',
-    name2: '',
-    email2: '',
     password: '',
+    rePassword: '',
+    phoneNumber: '',
+    identificationNumber: '',
+    gender: '',
+    city: '',
+    school: '',
+    department: '',
+    country: '',
   },
   errors: {},
 };

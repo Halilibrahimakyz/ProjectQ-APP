@@ -1,37 +1,16 @@
-import React, { useState, useEffect, useCallback, forwardRef } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, withRepeat, withSequence } from 'react-native-reanimated';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@/constants/colors';
+import moment from 'moment';
 
-const debounce = (func, delay) => {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            func.apply(this, args);
-        }, delay);
-    };
-};
-
-const CustomTextInput = forwardRef(({
-    label,
-    value,
-    onChangeText,
-    placeholder,
-    error,
-    keyboardType = 'default',
-    autoCapitalize = 'sentences',
-    secureTextEntry = false,
-    icon = 'pencil',
-    returnKeyType,
-    onSubmitEditing
-}, ref) => {
+const CustomDatePicker = ({ label, value, onChange, placeholder, error, icon = 'calendar', minAge }) => {
     const theme = useTheme();
     const styles = getStyles(theme);
     const [isFocused, setIsFocused] = useState(false);
-    const [isSecure, setIsSecure] = useState(secureTextEntry);
-    const [internalValue, setInternalValue] = useState(value);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const labelOpacity = useSharedValue(0);
     const labelWidth = useSharedValue(0);
@@ -74,16 +53,29 @@ const CustomTextInput = forwardRef(({
         };
     });
 
-    const handleFocus = () => setIsFocused(true);
-    const handleBlur = () => setIsFocused(false);
-    const toggleSecureEntry = () => setIsSecure(!isSecure);
-
-    const debouncedOnChangeText = useCallback(debounce(onChangeText, 300), [onChangeText]);
-
-    const handleChangeText = (text) => {
-        setInternalValue(text);
-        debouncedOnChangeText(text);
+    const handleConfirm = (date) => {
+        setDatePickerVisibility(false);
+        onChange(date.toISOString());
     };
+
+    const handleCancel = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleFocus = () => {
+        setIsFocused(true);
+        setDatePickerVisibility(true);
+    };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+        setDatePickerVisibility(false);
+    };
+
+    const formattedDate = value ? moment(value).format('DD/MM/YYYY') : '';
+
+    // Calculate the maximum date based on the minAge prop
+    const maxDate = minAge ? moment().subtract(minAge, 'years').toDate() : undefined;
 
     return (
         <View style={styles.container}>
@@ -94,32 +86,31 @@ const CustomTextInput = forwardRef(({
                         {label}
                     </Animated.Text>
                 </View>
-                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth }]}>
-                    <TextInput
-                        ref={ref}
-                        style={[styles.input, error && styles.inputError]}
-                        value={internalValue}
-                        onChangeText={handleChangeText}
-                        placeholder={!isFocused && !value ? placeholder : ''}
-                        placeholderTextColor={theme.lightGrey}
-                        keyboardType={keyboardType}
-                        autoCapitalize={autoCapitalize}
-                        secureTextEntry={isSecure}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        returnKeyType={returnKeyType}
-                        onSubmitEditing={onSubmitEditing}
-                    />
-                </View>
-                {secureTextEntry && (
-                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={styles.iconContainerRight}>
-                        <MaterialCommunityIcons name={isSecure ? "eye-off" : "eye"} color={theme.lightGrey} size={24} />
-                    </TouchableOpacity>)}
+                <TouchableOpacity onPress={handleFocus} style={[styles.inputContainer, error && styles.inputError]}>
+                    <Text style={[styles.input, { color: value ? theme.secondary : theme.lightGrey }]}>
+                        {value ? formattedDate : placeholder}
+                    </Text>
+                </TouchableOpacity>
             </Animated.View>
             {error && <Text style={styles.error}>{error}</Text>}
+
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+                maximumDate={maxDate} // Set the maximum date
+                cancelTextStyle={{ color: theme.primary }}
+                confirmTextStyle={{ color: theme.primary }}
+                customHeaderIOS={() => (
+                    <View style={[styles.modalHeader, { backgroundColor: theme.primary }]}>
+                        <Text style={styles.modalHeaderText}>Select Date</Text>
+                    </View>
+                )}
+            />
         </View>
     );
-});
+};
 
 const getStyles = (theme) => StyleSheet.create({
     container: {
@@ -129,7 +120,7 @@ const getStyles = (theme) => StyleSheet.create({
     label: {
         color: theme.background,
         overflow: 'hidden',
-        textAlign: 'right'
+        textAlign: 'right',
     },
     row: {
         flexDirection: 'row',
@@ -141,6 +132,12 @@ const getStyles = (theme) => StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: theme.lightGrey,
         backgroundColor: theme.background,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        justifyContent: 'center',
+        paddingHorizontal: 5,
+        height: 50,
+        borderRightWidth: StyleSheet.hairlineWidth,
     },
     iconContainer: {
         backgroundColor: theme.primary,
@@ -154,22 +151,7 @@ const getStyles = (theme) => StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
-    iconContainerRight: {
-        height: '100%',
-        paddingHorizontal: 10,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderRightWidth: StyleSheet.hairlineWidth,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: theme.lightGrey,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
     input: {
-        flex: 1,
-        marginRight:10,
         color: theme.secondary,
         backgroundColor: theme.background,
     },
@@ -180,6 +162,15 @@ const getStyles = (theme) => StyleSheet.create({
         color: theme.red,
         marginTop: 5,
     },
+    modalHeader: {
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalHeaderText: {
+        color: 'white',
+        fontSize: 18,
+    },
 });
 
-export default CustomTextInput;
+export default CustomDatePicker;

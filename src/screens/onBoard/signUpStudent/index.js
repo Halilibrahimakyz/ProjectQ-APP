@@ -7,7 +7,7 @@ import { Container, CustomButton, DynamicSVG } from '@/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { nextStep, prevStep, setFormData, setError, clearErrors, clearError } from '@/storeReduxToolkit/studentFormSlice';
 import { validateStep, handleValidation } from './utils/validation';
-import { LocationStep, PersonalInfoStep } from './components'
+import { LocationStep, PersonalInfoStep,PersonalInfoStepTwo } from './components'
 
 const SignUpStudentScreen = props => {
 
@@ -20,7 +20,8 @@ const SignUpStudentScreen = props => {
 
     const steps = [
         { keys: ['country'], component: LocationStep },
-        { keys: ['username', 'name', 'surname', 'email', 'password', 'rePassword', 'phoneNumber', 'identificationNumber', 'gender', 'birthDate', 'city', 'school', 'department'], component: PersonalInfoStep },
+        { keys: ['profilePicture','username', 'name', 'surname', 'email', 'password', 'rePassword'], component: PersonalInfoStep },
+        { keys: ['phoneNumber', 'identificationNumber', 'gender', 'birthDate', 'city', 'school', 'department'], component: PersonalInfoStepTwo },
     ];
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const SignUpStudentScreen = props => {
                 dispatch(clearErrors(currentStep.keys));
                 dispatch(nextStep());
             } else {
-                // Submit form data here
+                console.log("formData: ",formData)
                 alert('Form submitted successfully!');
             }
         }
@@ -50,7 +51,7 @@ const SignUpStudentScreen = props => {
     const handleChange = (key, value) => {
         dispatch(setFormData({ [key]: value }));
         // console.log('validate, key, value', key, value); // Debug log
-        const error = handleValidation(key, value, getVal);
+        const error = handleValidation(formData,key, value, getVal);
         if (error) {
             dispatch(setError({ [key]: error }));
         } else {
