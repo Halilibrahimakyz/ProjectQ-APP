@@ -12,6 +12,7 @@ import CustomDatePicker from './CustomDatePicker';
 import ProfilePicturePicker from './ProfilePicturePicker ';
 import CustomIcon from './CustomIcon';
 import { DrawerLeft } from './DrawerLeft';
+import InterestSelection from './InterestSelection';
 
 export {
     Container,
@@ -27,5 +28,6 @@ export {
     CustomDatePicker,
     ProfilePicturePicker,
     CustomIcon,
-    DrawerLeft
+    DrawerLeft,
+    InterestSelection
 }

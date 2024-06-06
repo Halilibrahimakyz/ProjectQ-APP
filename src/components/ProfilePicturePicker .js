@@ -13,9 +13,9 @@ const ProfilePicturePicker = ({ label, value, onChange, placeholder, error, icon
     const pickImage = () => {
         const options = {
             mediaType: 'photo',
-            maxWidth: 200,
-            maxHeight: 200,
-            quality: 1,
+            maxWidth: 1080,  // Genişliği artırdık
+            maxHeight: 1080, // Yüksekliği artırdık
+            quality: 1,   // Kaliteyi artırdık
         };
 
         launchImageLibrary(options, async (response) => {
@@ -48,14 +48,14 @@ const ProfilePicturePicker = ({ label, value, onChange, placeholder, error, icon
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>{label}</Text>
-            <TouchableOpacity style={styles.imageContainer} onPress={pickImage}>
+            {label && <Text style={styles.label}>{label}</Text>}
+            <TouchableOpacity style={[styles.imageContainer,{borderColor:error ?theme.red: theme.primary,}]} onPress={pickImage}>
                 {imageUri ? (
                     <Image source={{ uri: imageUri }} style={styles.image} />
                 ) : (
                     <MaterialCommunityIcons name="account" color={theme.lightGrey} size={100} />
                 )}
-                <View style={styles.iconContainer}>
+                <View style={[styles.iconContainer,{backgroundColor:error ?theme.red: theme.primary,}]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
                 </View>
             </TouchableOpacity>
@@ -80,8 +80,9 @@ const getStyles = (theme) => StyleSheet.create({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.lightGrey,
+        backgroundColor: theme.background,
         position: 'relative',
+        borderWidth: 1,
     },
     image: {
         width: '100%',
@@ -97,9 +98,11 @@ const getStyles = (theme) => StyleSheet.create({
         padding: 4,
     },
     error: {
-        marginTop: 5,
         color: theme.red,
-        fontSize: 14,
+        marginTop: 5,
+        fontSize: theme.fontSize.small,
+        marginLeft: 0,
+        textAlign: 'center',
     },
 });
 

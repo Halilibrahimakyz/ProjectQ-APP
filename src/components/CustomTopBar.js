@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useCallback,useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/constants/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CustomTopBar = ({ 
-  title, 
-  onLeftPress, 
-  leftIcon, 
-  onRightPress, 
-  rightIcon, 
-  shadow, 
-  style, 
-  textStyle, 
+const CustomTopBar = React.memo(({
+  title,
+  onLeftPress,
+  leftIcon,
+  onRightPress,
+  rightIcon,
+  shadow,
+  style,
+  textStyle,
   buttonColor,
-  isAbsolute 
+  isAbsolute
 }) => {
     const theme = useTheme();
-    const styles = getStyles(theme, shadow, isAbsolute);
-    
+    const styles = useMemo(() => getStyles(theme, shadow, isAbsolute), [theme, shadow, isAbsolute]);
+
+    const handleLeftPress = useCallback(() => {
+        if (onLeftPress) onLeftPress();
+    }, [onLeftPress]);
+
+    const handleRightPress = useCallback(() => {
+        if (onRightPress) onRightPress();
+    }, [onRightPress]);
+
     return (
         <View style={[styles.container, style]}>
             <View style={styles.iconPlaceholder}>
                 {leftIcon && (
-                    <TouchableOpacity onPress={onLeftPress} style={styles.iconButton}>
+                    <TouchableOpacity onPress={handleLeftPress} style={styles.iconButton}>
                         <MaterialCommunityIcons
                             name={leftIcon}
                             color={buttonColor ? buttonColor : theme.primary}
@@ -34,7 +42,7 @@ const CustomTopBar = ({
             <Text style={[styles.title, textStyle]}>{title}</Text>
             <View style={styles.iconPlaceholder}>
                 {rightIcon && (
-                    <TouchableOpacity onPress={onRightPress} style={styles.iconButton}>
+                    <TouchableOpacity onPress={handleRightPress} style={styles.iconButton}>
                         <MaterialCommunityIcons
                             name={rightIcon}
                             color={buttonColor ? buttonColor : theme.primary}
@@ -45,12 +53,12 @@ const CustomTopBar = ({
             </View>
         </View>
     );
-};
+});
 
 const getStyles = (theme, shadow, isAbsolute) => StyleSheet.create({
     container: {
         height: 60,
-        marginTop:theme.dimensions.statusBarHeight,
+        marginTop: theme.dimensions.statusBarHeight,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

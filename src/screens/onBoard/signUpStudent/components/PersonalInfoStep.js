@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { useLanguage } from '@/constants/language';
 import { useTheme } from '@/constants/colors';
 import { CustomTextInput,ProfilePicturePicker } from '@/components';
@@ -28,8 +28,9 @@ const PersonalInfoStep = ({ formData, errors, handleChange }) => {
             enableOnAndroid={true}
             extraScrollHeight={100}
         >
+             {/* <Text style={styles.infoText}>{getVal('personal_info_instructions')}</Text> */}
             <ProfilePicturePicker
-                label="Profile Picture"
+                // label="Profile Picture"
                 value={formData.profilePicture}
                 onChange={(photo) => onHandleChange('profilePicture', photo)}
                 error={errors.profilePicture}
@@ -113,10 +114,17 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
+        paddingVertical:10
     },
     scrollView: {
         flexGrow: 1,
         paddingBottom: 20,
+    },
+    infoText: {
+        fontSize: theme.fontSize.subHeading,
+        color: theme.textPrimary,
+        textAlign: 'Left',
+        marginVertical: 20,
     },
 });
 

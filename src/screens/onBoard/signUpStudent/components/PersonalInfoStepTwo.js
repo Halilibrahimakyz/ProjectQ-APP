@@ -128,6 +128,7 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
+        paddingVertical:10
     },
     scrollView: {
         flexGrow: 1,

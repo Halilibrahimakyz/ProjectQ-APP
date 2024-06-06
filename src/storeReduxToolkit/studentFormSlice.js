@@ -17,6 +17,7 @@ const initialState = {
     school: '',
     department: '',
     country: '',
+    interests:[]
   },
   errors: {},
 };

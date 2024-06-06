@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
-import { View, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language';
-import { Container,CustomSeparator } from '@/components';
+import { Container } from '@/components';
 import { popScreen, setRootScreen } from '@/navigation/navigationFunctions';
-import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
 import { logout } from '@/storeReduxToolkit/userSupporterSlice';
 import SettingsItem from './components/SettingsItem';
+import {CustomSeparator} from '@/components';
 
 const SupporterSettingsScreen = (props) => {
   const theme = useTheme();
@@ -25,7 +25,7 @@ const SupporterSettingsScreen = (props) => {
     setRootScreen({ isLoggedIn: false, userType: null });
   };
 
-  const settingsData = [
+  const settingsData = useMemo(() => [
     {
       title: getVal('settings_edit_profile'),
       icon: "account",
@@ -77,7 +77,11 @@ const SupporterSettingsScreen = (props) => {
       containerColor: theme.redSupport,
       onPress: handleLogout,
     },
-  ];
+  ], [getVal, theme, language]);
+
+  const renderItem = ({ item }) => (
+    <SettingsItem {...item} />
+  );
 
   return (
     <Container
@@ -94,13 +98,12 @@ const SupporterSettingsScreen = (props) => {
       <FlatList
         data={settingsData}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <>
-            <SettingsItem {...item} />
-            <CustomSeparator/>
-          </>
-        )}
+        renderItem={renderItem}
+        ItemSeparatorComponent={CustomSeparator}
         contentContainerStyle={styles.contentContainer}
+        initialNumToRender={7} // İlk yüklemede kaç eleman render edilecek
+        maxToRenderPerBatch={5} // Her seferinde kaç eleman yüklenecek
+        windowSize={10} // Kaç eleman önceden yüklenecek
       />
     </Container>
   );
@@ -108,6 +111,7 @@ const SupporterSettingsScreen = (props) => {
 
 const getStyles = (theme) => StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: theme.padding.default,
   },

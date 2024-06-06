@@ -16,6 +16,14 @@ export const popScreen = (componentId) => {
   Navigation.pop(componentId, {});
 };
 
+export const navigateToTab = (componentId, tabIndex) => {
+  Navigation.mergeOptions(componentId, {
+    bottomTabs: {
+      currentTabIndex: tabIndex,
+    },
+  });
+};
+
 export const setStatusBar = (componentId, theme) => {
   Navigation.mergeOptions(componentId, {
     statusBar: {

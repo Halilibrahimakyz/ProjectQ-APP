@@ -83,7 +83,7 @@ export const handleValidation = (formData, key, value, getVal) => {
       } else {
         const today = new Date();
         const birthDate = new Date(value);
-        const age = today.getFullYear() - birthDate.getFullYear();
+        var age = today.getFullYear() - birthDate.getFullYear();
         const monthDifference = today.getMonth() - birthDate.getMonth();
         if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
           age--;
@@ -106,6 +106,11 @@ export const handleValidation = (formData, key, value, getVal) => {
     case 'department':
       if (value === '') {
         error = getVal('departmentRequired') || 'Department is required';
+      }
+      break;
+    case 'interests':
+      if (value.length<=2) {
+        error = getVal('interestMinRequired');
       }
       break;
     default:

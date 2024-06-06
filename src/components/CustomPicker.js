@@ -19,11 +19,11 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
     useEffect(() => {
         if (isFocused || value) {
             labelTranslateY.value = withTiming(-20);
-            labelScale.value = withTiming(0.8);
+            labelScale.value = withTiming(1);
             labelOpacity.value = withTiming(1);
         } else {
             labelTranslateY.value = withTiming(0);
-            labelScale.value = withTiming(1);
+            labelScale.value = withTiming(0);
             labelOpacity.value = withTiming(0);
         }
     }, [isFocused, value]);
@@ -112,16 +112,17 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
 
 const getStyles = (theme) => StyleSheet.create({
     container: {
-        marginBottom: 20,
+        marginVertical: 5,
         position: 'relative',
     },
     label: {
-        color: theme.secondary,
+        color: theme.primary,
         position: 'absolute',
         top: 10,
         left: 0,
         backgroundColor: theme.background,
         paddingHorizontal: 5,
+        fontSize:theme.fontSize.small
     },
     row: {
         flexDirection: 'row',
@@ -131,7 +132,7 @@ const getStyles = (theme) => StyleSheet.create({
         flex: 1,
         borderTopWidth: StyleSheet.hairlineWidth,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: theme.lightGrey,
+        borderColor: theme.primary,
         backgroundColor: theme.background,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,

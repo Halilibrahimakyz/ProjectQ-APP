@@ -41,11 +41,11 @@ const CustomTextInput = forwardRef(({
     useEffect(() => {
         if (isFocused || value) {
             labelTranslateY.value = withTiming(-20);
-            labelScale.value = withTiming(0.8);
+            labelScale.value = withTiming(1);
             labelOpacity.value = withTiming(1);
         } else {
             labelTranslateY.value = withTiming(0);
-            labelScale.value = withTiming(1);
+            labelScale.value = withTiming(0);
             labelOpacity.value = withTiming(0);
         }
     }, [isFocused, value]);
@@ -90,10 +90,10 @@ const CustomTextInput = forwardRef(({
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.row, animatedRowStyle]}>
-                <View style={[styles.iconContainer, { backgroundColor: error  ? theme.red : theme.primary, borderColor: error  ? theme.red : theme.primary }]}>
+                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red : theme.primary, borderColor: error ? theme.red : theme.primary }]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
                 </View>
-                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth,borderColor: error  ? theme.red : theme.primary }]}>
+                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth, borderColor: error ? theme.red : theme.primary }]}>
                     <TextInput
                         ref={ref}
                         style={[styles.input, error && styles.inputError]}
@@ -109,14 +109,15 @@ const CustomTextInput = forwardRef(({
                         returnKeyType={returnKeyType}
                         onSubmitEditing={onSubmitEditing}
                     />
-                    <Animated.Text style={[styles.label, animatedLabelStyle ,{ color: error  ? theme.red : theme.primary}]}>
+                    <Animated.Text style={[styles.label, animatedLabelStyle, { color: error ? theme.red : theme.primary }]}>
                         {label}
                     </Animated.Text>
                 </View>
                 {secureTextEntry && (
-                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={styles.iconContainerRight}>
+                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={[styles.iconContainerRight,{ borderColor: error ? theme.red : theme.primary}]}>
                         <MaterialCommunityIcons name={isSecure ? "eye-off" : "eye"} color={theme.lightGrey} size={24} />
-                    </TouchableOpacity>)}
+                    </TouchableOpacity>
+                )}
             </Animated.View>
             {error && <Text style={styles.error}>{error}</Text>}
         </View>
@@ -125,7 +126,7 @@ const CustomTextInput = forwardRef(({
 
 const getStyles = (theme) => StyleSheet.create({
     container: {
-        marginBottom: 20,
+        marginVertical: 5,
         position: 'relative',
     },
     label: {
@@ -135,6 +136,7 @@ const getStyles = (theme) => StyleSheet.create({
         left: 0,
         backgroundColor: theme.background,
         paddingHorizontal: 5,
+        fontSize:theme.fontSize.small
     },
     row: {
         flexDirection: 'row',
@@ -185,6 +187,8 @@ const getStyles = (theme) => StyleSheet.create({
     error: {
         color: theme.red,
         marginTop: 5,
+        fontSize: theme.fontSize.small,
+        marginLeft: 45,
     },
 });
 

@@ -3,13 +3,13 @@ import { Dimensions, Platform } from 'react-native';
 import { useTheme } from '@/constants/colors';
 const windowWidth = Dimensions.get('window').width;
 
-const getAnimationDuration = () => {
-  if (Platform.OS === 'android') {
-    return 300;
-  } else {
-    return 300;
-  }
-};
+// const getAnimationDuration = () => {
+//   if (Platform.OS === 'android') {
+//     return 300;
+//   } else {
+//     return 300;
+//   }
+// };
 
 export const useDefaultOptions = (theme) => {
   return {
@@ -18,7 +18,8 @@ export const useDefaultOptions = (theme) => {
       drawBehind: true,
       backgroundColor: 'transparent',
       titleDisplayMode: 'alwaysHide',
-      hideShadow:false,
+      hideShadow: false,
+      lazyLoad: true,
     },
     bottomTab: {
       iconColor: theme.lightGrey,
@@ -27,24 +28,8 @@ export const useDefaultOptions = (theme) => {
       selectedTextColor: theme.primary
     },
     topBar: {
-          visible: false,
-          // leftButtonColor: theme.primary,
-          // rightButtonColor: theme.primary,
-          // title: {
-          //   color: theme.primary
-          // },
-          // subtitle: {
-          //   fontSize: 12,
-          //   color: theme.primary
-          // },
-          // background: {
-          //   color: theme.background
-          // },
-          // backButton: {
-          //   color: theme.primary,
-          //   showTitle: false
-          // }
-        },
+      visible: false,
+    },
     animations: {
       push: {
         waitForRender: true,
@@ -52,7 +37,7 @@ export const useDefaultOptions = (theme) => {
           translationX: {
             from: windowWidth,
             to: 0,
-            duration: getAnimationDuration(),
+            duration: 300,
           },
         }
       },
@@ -62,7 +47,7 @@ export const useDefaultOptions = (theme) => {
           translationX: {
             from: 0,
             to: windowWidth,
-            duration: getAnimationDuration(),
+            duration: 300,
           }
         }
       },
@@ -79,14 +64,14 @@ export const useDefaultOptions = (theme) => {
     statusBar: {
       backgroundColor: 'transparent',
       style: theme.type === "dark" ? "light" : "dark",
-      drawBehind:true
+      drawBehind: true
     },
     layout: {
       backgroundColor: theme.background
     },
     navigationBar: {
       backgroundColor: theme.background,
-      visible:false
+      visible: false
     }
   };
 };

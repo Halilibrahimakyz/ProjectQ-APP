@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useMemo,memo } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/constants/colors';
-import { CustomTopBar } from '@/components';
-import { setStatusBar } from '@/functions/setStatusBar';
+import CustomTopBar from './CustomTopBar';
 
-const Container = ({ children, style, topBarProps, bottomBar }) => {
-
+const Container = memo(({ children, style, topBarProps, bottomBar }) => {
     const theme = useTheme();
-    const styles = getStyles(theme);
+    const styles = useMemo(() => getStyles(theme), [theme]);
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
@@ -15,12 +13,10 @@ const Container = ({ children, style, topBarProps, bottomBar }) => {
             <View style={[styles.container, style]}>
                 {children}
             </View>
-            {bottomBar && <View style={styles.bottomTabsContainer}>
-            </View>}
-
+            {bottomBar && <View style={styles.bottomTabsContainer}></View>}
         </SafeAreaView>
     );
-};
+});
 
 const getStyles = (theme) => StyleSheet.create({
     container: {
@@ -28,7 +24,7 @@ const getStyles = (theme) => StyleSheet.create({
         alignItems: 'center',
     },
     bottomTabsContainer: {
-        height: 60, // Alt sekmelerin yüksekliği
+        height: 60,
         backgroundColor: theme.background,
         borderTopColor: theme.lightgrey,
         flexDirection: 'row',
