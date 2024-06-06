@@ -21,7 +21,6 @@ import InterestsSection from './components/InterestsSection';
 
 const demoImage = require("@/assets/images/DemoStudentProfilePicture.jpg");
 
-
 const StudentProfileScreen = props => {
 
   const theme = useTheme();
@@ -64,6 +63,7 @@ const StudentProfileScreen = props => {
       rightIcon: 'cog',
       shadow: false
     }}
+    bottomBar={true}
       compId={props.componentId}
     >
       <ScrollView 

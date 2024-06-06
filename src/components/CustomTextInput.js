@@ -33,20 +33,20 @@ const CustomTextInput = forwardRef(({
     const [isSecure, setIsSecure] = useState(secureTextEntry);
     const [internalValue, setInternalValue] = useState(value);
 
+    const labelTranslateY = useSharedValue(0);
+    const labelScale = useSharedValue(1);
     const labelOpacity = useSharedValue(0);
-    const labelWidth = useSharedValue(0);
-    const labelHeight = useSharedValue(0);
     const shakeAnimation = useSharedValue(0);
 
     useEffect(() => {
         if (isFocused || value) {
+            labelTranslateY.value = withTiming(-20);
+            labelScale.value = withTiming(0.8);
             labelOpacity.value = withTiming(1);
-            labelWidth.value = withTiming(100);
-            labelHeight.value = withTiming(20);
         } else {
+            labelTranslateY.value = withTiming(0);
+            labelScale.value = withTiming(1);
             labelOpacity.value = withTiming(0);
-            labelWidth.value = withTiming(0);
-            labelHeight.value = withTiming(0);
         }
     }, [isFocused, value]);
 
@@ -62,9 +62,11 @@ const CustomTextInput = forwardRef(({
 
     const animatedLabelStyle = useAnimatedStyle(() => {
         return {
+            transform: [
+                { translateY: labelTranslateY.value },
+                { scale: labelScale.value },
+            ],
             opacity: labelOpacity.value,
-            width: labelWidth.value,
-            height: labelHeight.value,
         };
     });
 
@@ -88,13 +90,10 @@ const CustomTextInput = forwardRef(({
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.row, animatedRowStyle]}>
-                <View style={[styles.iconContainer, { backgroundColor: error && value ? theme.red : theme.primary, borderColor: error && value ? theme.red : theme.primary }]}>
+                <View style={[styles.iconContainer, { backgroundColor: error  ? theme.red : theme.primary, borderColor: error  ? theme.red : theme.primary }]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
-                    <Animated.Text style={[styles.label, animatedLabelStyle]}>
-                        {label}
-                    </Animated.Text>
                 </View>
-                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth }]}>
+                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth,borderColor: error  ? theme.red : theme.primary }]}>
                     <TextInput
                         ref={ref}
                         style={[styles.input, error && styles.inputError]}
@@ -110,6 +109,9 @@ const CustomTextInput = forwardRef(({
                         returnKeyType={returnKeyType}
                         onSubmitEditing={onSubmitEditing}
                     />
+                    <Animated.Text style={[styles.label, animatedLabelStyle ,{ color: error  ? theme.red : theme.primary}]}>
+                        {label}
+                    </Animated.Text>
                 </View>
                 {secureTextEntry && (
                     <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={styles.iconContainerRight}>
@@ -127,9 +129,12 @@ const getStyles = (theme) => StyleSheet.create({
         position: 'relative',
     },
     label: {
-        color: theme.background,
-        overflow: 'hidden',
-        textAlign: 'right'
+        color: theme.primary,
+        position: 'absolute',
+        top: 10,
+        left: 0,
+        backgroundColor: theme.background,
+        paddingHorizontal: 5,
     },
     row: {
         flexDirection: 'row',
@@ -141,6 +146,7 @@ const getStyles = (theme) => StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: theme.lightGrey,
         backgroundColor: theme.background,
+        position: 'relative',
     },
     iconContainer: {
         backgroundColor: theme.primary,
@@ -169,7 +175,7 @@ const getStyles = (theme) => StyleSheet.create({
     },
     input: {
         flex: 1,
-        marginRight:10,
+        marginRight: 10,
         color: theme.secondary,
         backgroundColor: theme.background,
     },

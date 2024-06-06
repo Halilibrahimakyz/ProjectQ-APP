@@ -11,20 +11,20 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
     const [isFocused, setIsFocused] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
+    const labelTranslateY = useSharedValue(0);
+    const labelScale = useSharedValue(1);
     const labelOpacity = useSharedValue(0);
-    const labelWidth = useSharedValue(0);
-    const labelHeight = useSharedValue(0);
     const shakeAnimation = useSharedValue(0);
 
     useEffect(() => {
         if (isFocused || value) {
+            labelTranslateY.value = withTiming(-20);
+            labelScale.value = withTiming(0.8);
             labelOpacity.value = withTiming(1);
-            labelWidth.value = withTiming(100);
-            labelHeight.value = withTiming(20);
         } else {
+            labelTranslateY.value = withTiming(0);
+            labelScale.value = withTiming(1);
             labelOpacity.value = withTiming(0);
-            labelWidth.value = withTiming(0);
-            labelHeight.value = withTiming(0);
         }
     }, [isFocused, value]);
 
@@ -40,9 +40,11 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
 
     const animatedLabelStyle = useAnimatedStyle(() => {
         return {
+            transform: [
+                { translateY: labelTranslateY.value },
+                { scale: labelScale.value },
+            ],
             opacity: labelOpacity.value,
-            width: labelWidth.value,
-            height: labelHeight.value,
         };
     });
 
@@ -78,19 +80,17 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
             <Animated.View style={[styles.row, animatedRowStyle]}>
                 <View style={[styles.iconContainer, { backgroundColor: error && value ? theme.red : theme.primary, borderColor: error && value ? theme.red : theme.primary }]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
-                    
-                    <Animated.Text style={[styles.label, animatedLabelStyle]}>
-                        {label}
-                    </Animated.Text>
                 </View>
                 <TouchableOpacity onPress={handleFocus} style={[styles.inputContainer, error && styles.inputError]}>
                     <Text style={[styles.input, { color: value ? theme.secondary : theme.lightGrey }]}>
                         {value ? getLabel(value) : placeholder}
                     </Text>
+                    <Animated.Text style={[styles.label, animatedLabelStyle,{ color: error  ? theme.red : theme.primary}]}>
+                        {label}
+                    </Animated.Text>
                 </TouchableOpacity>
             </Animated.View>
             {error && <Text style={styles.error}>{error}</Text>}
-
             <CustomModal visible={modalVisible} onClose={handleBlur}>
                 <FlatList
                     data={options}
@@ -116,9 +116,12 @@ const getStyles = (theme) => StyleSheet.create({
         position: 'relative',
     },
     label: {
-        color: theme.background,
-        overflow: 'hidden',
-        textAlign: 'right',
+        color: theme.secondary,
+        position: 'absolute',
+        top: 10,
+        left: 0,
+        backgroundColor: theme.background,
+        paddingHorizontal: 5,
     },
     row: {
         flexDirection: 'row',

@@ -16,6 +16,7 @@ const StudentListScreen = props => {
       onLeftPress: () => { console.log('sol tıklandı'); },
       onRightPress: () => { console.log('Sağ tıklandı'); },
     }}
+      bottomBar={true}
       compId={props.componentId}
     >
       <Text style={{ color: theme.primary }}>StudentListScreen</Text>

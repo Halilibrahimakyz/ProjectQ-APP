@@ -10,6 +10,8 @@ import CustomPicker from './CustomPicker';
 import CustomModal from './CustomModal'
 import CustomDatePicker from './CustomDatePicker';
 import ProfilePicturePicker from './ProfilePicturePicker ';
+import CustomIcon from './CustomIcon';
+import { DrawerLeft } from './DrawerLeft';
 
 export {
     Container,
@@ -23,5 +25,7 @@ export {
     CustomPicker,
     CustomModal,
     CustomDatePicker,
-    ProfilePicturePicker
+    ProfilePicturePicker,
+    CustomIcon,
+    DrawerLeft
 }

@@ -1,5 +1,11 @@
 
 import { useSelector } from 'react-redux';
+import {
+  Dimensions,
+  Platform,
+} from 'react-native';
+
+const { width,height } = Dimensions.get('window');
 
 const baseTheme = {
   fontSize: {
@@ -15,6 +21,11 @@ const baseTheme = {
   },
   padding: {
     default:15
+  },
+  dimensions:{
+    width:width,
+    height:height,
+    statusBarHeight:30
   },
   primary: '#13B156',//Green
   accent: '#09101D',//Dark Blue

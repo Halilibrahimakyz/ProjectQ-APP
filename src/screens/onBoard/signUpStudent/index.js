@@ -5,7 +5,7 @@ import { useLanguage } from '@/constants/language'
 import { popScreen, pushScreen, setRootScreen } from '@/navigation/navigationFunctions';
 import { Container, CustomButton, DynamicSVG } from '@/components';
 import { useSelector, useDispatch } from 'react-redux';
-import { nextStep, prevStep, setFormData, setError, clearErrors, clearError } from '@/storeReduxToolkit/studentFormSlice';
+import { nextStep, prevStep, setFormData, setError, clearErrors, clearError,resetForm } from '@/storeReduxToolkit/studentFormSlice';
 import { validateStep, handleValidation } from './utils/validation';
 import { LocationStep, PersonalInfoStep,PersonalInfoStepTwo } from './components'
 
@@ -59,6 +59,12 @@ const SignUpStudentScreen = props => {
         }
     };
 
+    const handleBack = () => {
+        dispatch(resetForm());
+        popScreen(props.componentId);
+    };
+
+
     const stepProps = {
         formData,
         errors,
@@ -70,7 +76,7 @@ const SignUpStudentScreen = props => {
             style={styles.container}
             topBarProps={{
                 title: 'Choose your Location',
-                onLeftPress: () => { popScreen(props.componentId); },
+                onLeftPress: () => { handleBack() },
                 leftIcon: 'arrow-left',
                 onRightPress: () => { console.log('Sağ tıklandı'); },
             }}

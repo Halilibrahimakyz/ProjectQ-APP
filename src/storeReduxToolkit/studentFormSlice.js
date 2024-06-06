@@ -54,9 +54,14 @@ const studentFormSlice = createSlice({
         }
       });
     },
+    resetForm: (state) => {
+      state.step = initialState.step;
+      state.formData = initialState.formData;
+      state.errors = initialState.errors;
+    },
   },
 });
 
-export const { nextStep, prevStep, setFormData, setError, clearErrors,clearError  } = studentFormSlice.actions;
+export const { nextStep, prevStep, setFormData, setError, clearErrors, clearError, resetForm } = studentFormSlice.actions;
 
 export default studentFormSlice.reducer;

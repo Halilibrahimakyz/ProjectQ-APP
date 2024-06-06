@@ -16,7 +16,7 @@ export const useDefaultOptions = (theme) => {
     bottomTabs: {
       visible: true,
       drawBehind: true,
-      backgroundColor: theme.background,
+      backgroundColor: 'transparent',
       titleDisplayMode: 'alwaysHide',
       hideShadow:false,
     },
@@ -53,7 +53,7 @@ export const useDefaultOptions = (theme) => {
             from: windowWidth,
             to: 0,
             duration: getAnimationDuration(),
-          }
+          },
         }
       },
       pop: {
@@ -77,11 +77,16 @@ export const useDefaultOptions = (theme) => {
       },
     },
     statusBar: {
-      backgroundColor: theme.background,
-      style: theme.type === "dark" ? "light" : "dark"
+      backgroundColor: 'transparent',
+      style: theme.type === "dark" ? "light" : "dark",
+      drawBehind:true
     },
     layout: {
       backgroundColor: theme.background
     },
+    navigationBar: {
+      backgroundColor: theme.background,
+      visible:false
+    }
   };
 };

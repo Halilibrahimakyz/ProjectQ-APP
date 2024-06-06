@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from 'react-native';
-import React, { useMemo,useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
 import { Container } from '@/components';
@@ -17,6 +17,7 @@ const StudentHomeScreen = props => {
       onLeftPress: () => { console.log('sol tıklandı'); },
       onRightPress: () => { console.log('Sağ tıklandı'); },
     }}
+      bottomBar={true}
       compId={props.componentId}
     >
       <Text style={{ color: theme.primary }}>StudentHomeScreen</Text>

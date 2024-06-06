@@ -16,6 +16,15 @@ export const popScreen = (componentId) => {
   Navigation.pop(componentId, {});
 };
 
+export const setStatusBar = (componentId, theme) => {
+  Navigation.mergeOptions(componentId, {
+    statusBar: {
+      backgroundColor: 'transparent',
+      style: theme.type === "dark" ? "dark" : "light",
+      drawBehind:true
+    }
+  });
+}
 export const setRootScreen = ({ isLoggedIn, userType, initialTab = 0 }) => {
   let root;
 

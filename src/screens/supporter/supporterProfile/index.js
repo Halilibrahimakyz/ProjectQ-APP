@@ -2,7 +2,7 @@ import { Button, View, ScrollView, Text, StyleSheet, TouchableOpacity } from 're
 import React, { useMemo, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setDarkTheme, setLightTheme,changeTheme } from '@/storeReduxToolkit/themeSlice';
+import { setDarkTheme, setLightTheme, changeTheme } from '@/storeReduxToolkit/themeSlice';
 import { loginSuccess, logout } from '@/storeReduxToolkit/userStudentSlice';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
@@ -50,14 +50,10 @@ const SupporterProfileScreen = props => {
     });
   };
 
-  // useEffect(() => {
-  //   setStatusBar(props.componentId,theme)
-  // }, [theme, props.componentId]);
-
   return (
     <Container style={styles.container} topBarProps={{
       title: getVal("profile"),
-      onLeftPress: () => {dispatch(changeTheme())},
+      onLeftPress: () => { dispatch(changeTheme()) },
       leftIcon: 'theme-light-dark',
       onRightPress: () => { pushScreen(props.componentId, "SupporterSettingsScreen"); },
       rightIcon: 'cog',
@@ -65,25 +61,26 @@ const SupporterProfileScreen = props => {
       // textStyle: { color: theme.background },
       // buttonColor: theme.background
     }}
+      bottomBar={true}
       compId={props.componentId}
     >
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.scroller}
-        contentContainerStyle={{alignItems: "center"}}
+        contentContainerStyle={{ alignItems: "center" }}
       >
-        <ProfilePictureContainer image={demoImage}/>
-        <ProfileNameText userName="Jane Doe"/>
+        <ProfilePictureContainer image={demoImage} />
+        <ProfileNameText userName="Jane Doe" />
         <SocialStatistics
           initiativesNum={6}
           followersNum={132}
           followingNum={435}
         />
-        <View style={styles.horizontalRuler}/>
-        <WalletSection balanceAmount={1479} onTopUpPress={() => pushScreen(props.componentId, "SupporterWalletScreen")}/>
-        <AboutSection aboutText={aboutText}/>
-        <InterestsSection interestsArray={interestsArray}/>
-        <View style={{height: 200}}/>
+        <View style={styles.horizontalRuler} />
+        <WalletSection balanceAmount={1479} onTopUpPress={() => pushScreen(props.componentId, "SupporterWalletScreen")} />
+        <AboutSection aboutText={aboutText} />
+        <InterestsSection interestsArray={interestsArray} />
+        <View style={{ height: 200 }} />
       </ScrollView>
     </Container>
   );

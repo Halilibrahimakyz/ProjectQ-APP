@@ -100,6 +100,7 @@ const SupporterHomeScreen = props => {
       onLeftPress: () => { console.log('sol tıklandı'); },
       onRightPress: () => { console.log('Sağ tıklandı'); },
     }}
+      bottomBar={true}
       compId={props.componentId}
     >
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>

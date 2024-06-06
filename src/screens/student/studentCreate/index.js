@@ -17,6 +17,7 @@ const StudentCreateScreen = props => {
       onRightPress: () => { console.log('Sağ tıklandı'); },
       shadow: false
     }}
+      bottomBar={true}
       compId={props.componentId}
     >
       <Text style={{ color: theme.primary }}>StudentCreateScreen</Text>
