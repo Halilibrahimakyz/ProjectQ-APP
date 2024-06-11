@@ -7,7 +7,8 @@ import { Container, CustomButton, DynamicSVG } from '@/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { nextStep, prevStep, setFormData, setError, clearErrors, clearError, resetForm } from '@/storeReduxToolkit/studentFormSlice';
 import { validateStep, handleValidation } from './utils/validation';
-import { LocationStep, PersonalInfoStep, PersonalInfoStepTwo,InterestStep } from './components'
+import { LocationStep, PersonalInfoStep, PersonalInfoStepTwo, InterestStep } from './components'
+import { signupStudent } from '@/services'
 
 const SignUpStudentScreen = props => {
 
@@ -21,7 +22,7 @@ const SignUpStudentScreen = props => {
     const steps = [
         { keys: ['country'], component: LocationStep },
         { keys: ['profilePicture', 'username', 'name', 'surname', 'email', 'password', 'rePassword'], component: PersonalInfoStep },
-        { keys: ['phoneNumber', 'identificationNumber', 'gender', 'birthDate', 'city', 'school', 'department'], component: PersonalInfoStepTwo },
+        { keys: ['phoneNumber', 'idNumber', 'gender', 'birthDate', 'city', 'school', 'department'], component: PersonalInfoStepTwo },
         { keys: ['interests'], component: InterestStep },
     ];
 
@@ -48,15 +49,16 @@ const SignUpStudentScreen = props => {
         return () => backHandler.remove(); // Etkinlik dinleyicisini temizle
     }, [step]);
 
-    const handleNext = () => {
+    const handleNext = async () => {
         const currentStep = steps[step - 1];
         if (isNextEnabled) {
-            console.log("formData: ", formData);
+            console.log("formData: ", formData.interests);
             if (step < steps.length) {
                 dispatch(clearErrors(currentStep.keys));
                 dispatch(nextStep());
             } else {
                 console.log("formData: ", formData);
+                const response = await signupStudent(formData);
                 alert('Form submitted successfully!');
             }
         } else {
@@ -96,6 +98,7 @@ const SignUpStudentScreen = props => {
         handleChange,
     };
     const CurrentStepComponent = steps[step - 1].component;
+    
     return (
         <Container
             style={styles.container}
@@ -131,7 +134,7 @@ const SignUpStudentScreen = props => {
                             backgroundColor: isNextEnabled ? theme.primary : theme.lightGrey,
                         },
                     ]}
-                    // disabled={!isNextEnabled}
+                // disabled={!isNextEnabled}
                 >
                     <Text style={styles.buttonText}>{getVal("next")}</Text>
                 </TouchableOpacity>

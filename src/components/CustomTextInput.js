@@ -128,6 +128,7 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         marginVertical: 5,
         position: 'relative',
+        width:'100%',
     },
     label: {
         color: theme.primary,
@@ -149,6 +150,7 @@ const getStyles = (theme) => StyleSheet.create({
         borderColor: theme.lightGrey,
         backgroundColor: theme.background,
         position: 'relative',
+        height:50
     },
     iconContainer: {
         backgroundColor: theme.primary,
@@ -180,6 +182,7 @@ const getStyles = (theme) => StyleSheet.create({
         marginRight: 10,
         color: theme.secondary,
         backgroundColor: theme.background,
+        
     },
     inputError: {
         borderColor: theme.red,

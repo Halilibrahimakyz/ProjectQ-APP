@@ -49,6 +49,7 @@ const ProjectScreen = (props) => {
         style: { backgroundColor: 'transparent', zIndex: 1, top: 0 },
         isAbsolute: true,
       }}
+      bottomBar={true}
       compId={props.componentId}
     >
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
@@ -123,7 +124,7 @@ const getStyles = (theme) => StyleSheet.create({
   },
   projectImage: {
     width: theme.dimensions.width,
-    height: 350,
+    height: 1250,
   },
   projectInfo: {
     paddingTop: 10,

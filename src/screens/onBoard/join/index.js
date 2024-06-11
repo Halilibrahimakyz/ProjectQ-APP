@@ -20,20 +20,20 @@ const JoinScreen = props => {
     //     setRootScreen({ isLoggedIn: true, userType: "student" });
     // };
 
-    const handleGoogleLogin = (userType) => {
+    const handleGoogleLogin = () => {
         console.log("Google ile giriş");
     };
 
-    const handleAppleLogin = (userType) => {
+    const handleAppleLogin = () => {
         console.log("Apple ile giriş");
     };
 
-    const handleCreateAccount = (userType) => {
+    const handleCreateAccount = () => {
         pushScreen(props.componentId, "SignUpStudentScreen");
     };
 
-    const handleLogin = (userType) => {
-        console.log("Giriş yap");
+    const handleLogin = () => {
+        pushScreen(props.componentId, "LoginStudentScreen");
     };
 
 

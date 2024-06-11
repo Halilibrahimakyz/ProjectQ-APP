@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    userInfo: null, // Kullanıcı bilgileri için
+    userInfo: {
+        username:'arda',
+        name:''
+    }, // Kullanıcı bilgileri için
     isAuthenticated: false, // Oturum açma durumu
     error: null, // Hata mesajları için
 };

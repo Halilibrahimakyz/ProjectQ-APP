@@ -5,6 +5,7 @@ import AppInfoStudentScreen from './onBoard/appInfoStudent';
 import AppInfoSupporterScreen from './onBoard/appInfoSupporter';
 import JoinScreen from './onBoard/join';
 import SignUpStudentScreen from './onBoard/signUpStudent'
+import LoginStudentScreen from './onBoard/loginStudent';
 
 //Student
 import StudentHomeScreen from './student/studentHome'
@@ -14,6 +15,7 @@ import StudentMessagesScreen from './student/studentMessages';
 import StudentProfileScreen from './student/studentProfile';
 import StudentSettingsScreen from './student/studentSettings';
 import StudentWalletScreen from './student/studentWalletScreen';
+
 
 //Supporter
 import SupporterHomeScreen from './supporter/supporterHome';
@@ -49,5 +51,6 @@ export {
     SupporterProfileScreen,
     SupporterSettingsScreen,
     SupporterWalletScreen,
-    ProjectScreen
+    ProjectScreen,
+    LoginStudentScreen
 }

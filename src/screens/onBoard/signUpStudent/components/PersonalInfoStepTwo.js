@@ -11,7 +11,7 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
     const { getVal } = useLanguage();
 
     const phoneNumberRef = useRef(null);
-    const identificationNumberRef = useRef(null);
+    const idNumberRef = useRef(null);
     const birthDateRef = useRef(null);
     const cityRef = useRef(null);
     const departmentRef = useRef(null);
@@ -56,19 +56,19 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
                 error={errors.phoneNumber}
                 secureTextEntry={false}
                 returnKeyType="next"
-                onSubmitEditing={() => identificationNumberRef.current.focus()}
+                onSubmitEditing={() => phoneNumberRef.current.focus()}
             />
             <CustomTextInput
-                ref={identificationNumberRef}
+                ref={idNumberRef}
                 icon="card-account-details"
                 label={getVal('identificationNumber_label')}
-                value={formData.identificationNumber}
-                onChangeText={(text) => onHandleChange('identificationNumber', text)}
+                value={formData.idNumber}
+                onChangeText={(text) => onHandleChange('idNumber', text)}
                 placeholder={getVal('identificationNumber_placeholder')}
-                error={errors.identificationNumber}
+                error={errors.idNumber}
                 secureTextEntry={false}
                 returnKeyType="next"
-                onSubmitEditing={() => birthDateRef.current.focus()}
+                onSubmitEditing={() => idNumberRef.current.focus()}
             />
             <CustomPicker
                 icon="gender-male-female"
@@ -96,9 +96,7 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
                 onChangeText={(text) => onHandleChange('city', text)}
                 placeholder={getVal('city_placeholder')}
                 error={errors.city}
-                secureTextEntry={false}
-                returnKeyType="next"
-                onSubmitEditing={() => departmentRef.current.focus()}
+                secureTextEntry={false}                
             />
             <CustomPicker
                 icon="school"
@@ -119,6 +117,7 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
                 error={errors.department}
                 secureTextEntry={false}
                 returnKeyType="done"
+                onSubmitEditing={() => departmentRef.current.focus()}
             />
         </KeyboardAwareScrollView>
     );

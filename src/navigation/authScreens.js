@@ -7,7 +7,8 @@ import {
     AppInfoSupporterScreen,
     HomeScreen,
     JoinScreen,
-    SignUpStudentScreen
+    SignUpStudentScreen,
+    LoginStudentScreen
 } from '@/screens'
 
 export const registerAuthScreens = () => {
@@ -18,4 +19,5 @@ export const registerAuthScreens = () => {
   Navigation.registerComponent('HomeScreen', () => withProviders(HomeScreen));
   Navigation.registerComponent('JoinScreen', () => withProviders(JoinScreen));
   Navigation.registerComponent('SignUpStudentScreen', () => withProviders(SignUpStudentScreen));
+  Navigation.registerComponent('LoginStudentScreen', () => withProviders(LoginStudentScreen));
 };

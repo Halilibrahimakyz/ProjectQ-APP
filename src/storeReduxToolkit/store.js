@@ -5,6 +5,7 @@ import languageReducer from './languageSlice'
 import userSupporterReducer from './userSupporterSlice'
 import userStudentReducer from './userStudentSlice'
 import studentFormReducer from './studentFormSlice'
+import authorizationReducer from './authorizationSlice'
 
 import {
   persistReducer,
@@ -32,6 +33,7 @@ const persistedThemeReducer = persistReducer(persistConfig('theme'), themeReduce
 const persistedLanguageReducer = persistReducer(persistConfig('language'), languageReducer);
 const persistedUserSupporterReducer = persistReducer(persistConfig('userSupporter'), userSupporterReducer);
 const persistedUserStudentReducer = persistReducer(persistConfig('userStudent'), userStudentReducer);
+const persistedAuthReducer = persistReducer(persistConfig('authorization'), authorizationReducer);
 
 // Configure store with persisted reducers and middleware
 export const store = configureStore({
@@ -41,7 +43,8 @@ export const store = configureStore({
     language: persistedLanguageReducer,
     userSupporter: persistedUserSupporterReducer,
     userStudent: persistedUserStudentReducer,
-    studentForm:studentFormReducer
+    studentForm:studentFormReducer,
+    authorization:persistedAuthReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

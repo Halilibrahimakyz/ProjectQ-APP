@@ -65,7 +65,7 @@ export const handleValidation = (formData, key, value, getVal) => {
         error = getVal('phoneNumberInvalid') || 'Phone number is invalid';
       }
       break;
-    case 'identificationNumber':
+    case 'idNumber':
       if (value === '') {
         error = getVal('identificationNumberRequired') || 'Identification number is required';
       } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
