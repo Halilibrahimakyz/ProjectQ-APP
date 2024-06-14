@@ -13,12 +13,12 @@ import { Container } from '@/components';
 import { popScreen, pushScreen } from '@/navigation/navigationFunctions';
 import { setStatusBar } from '@/functions/setStatusBar';
 
-import ProfilePictureContainer from './components/ProfilePictureContainer';
-import ProfileNameText from './components/ProfileNameText';
-import SocialStatistics from './components/SocialStatistics';
-import WalletSection from './components/WalletSection';
-import AboutSection from './components/AboutSection';
-import InterestsSection from './components/InterestsSection';
+import ProfilePictureContainer from '@/components/profile/ProfilePictureContainer';
+import ProfileNameText from '@/components/profile/ProfileNameText';
+import SocialStatistics from '@/components/profile/SocialStatistics';
+import WalletSection from '@/components/profile/WalletSection';
+import AboutSection from '@/components/profile/AboutSection';
+import InterestsSection from '@/components/profile/InterestsSection';
 
 const demoImage = require("@/assets/images/DemoSupporterProfilePicture.jpg");
 
@@ -55,7 +55,7 @@ const SupporterProfileScreen = props => {
       title: getVal("profile"),
       onLeftPress: () => { dispatch(changeTheme()) },
       leftIcon: 'theme-light-dark',
-      onRightPress: () => { pushScreen(props.componentId, "SupporterSettingsScreen"); },
+      onRightPress: () => { pushScreen(props.componentId, "Settings"); },
       rightIcon: 'cog',
       // style: { backgroundColor: theme.primary },
       // textStyle: { color: theme.background },

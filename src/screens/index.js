@@ -7,13 +7,13 @@ import JoinScreen from './onBoard/join';
 import SignUpStudentScreen from './onBoard/signUpStudent'
 import LoginStudentScreen from './onBoard/loginStudent';
 
+
 //Student
 import StudentHomeScreen from './student/studentHome'
 import StudentCreateScreen from './student/studentCreate';
 import StudentListScreen from './student/studentList';
 import StudentMessagesScreen from './student/studentMessages';
 import StudentProfileScreen from './student/studentProfile';
-import StudentSettingsScreen from './student/studentSettings';
 import StudentWalletScreen from './student/studentWalletScreen';
 
 
@@ -23,8 +23,16 @@ import SupporterHistoryScreen from './supporter/supporterHistory';
 import SupporterListScreen from './supporter/supporterList';
 import SupporterMessagesScreen from './supporter/supporterMessages';
 import SupporterProfileScreen from './supporter/supporterProfile';
-import SupporterSettingsScreen from './supporter/supporterSettingsScreen';
 import SupporterWalletScreen from './supporter/supporterWalletScreen';
+
+
+//Settings
+import Settings from './settings';
+import EditProfile from './settings/screens/editProfile';
+import Help from './settings/screens/help';
+import InviteFriends from './settings/screens/inviteFriends';
+import Notifications from './settings/screens/notifications';
+import Security from './settings/screens/security';
 
 
 //Others
@@ -42,15 +50,19 @@ export {
     StudentListScreen,
     StudentMessagesScreen,
     StudentProfileScreen,
-    StudentSettingsScreen,
     StudentWalletScreen,
     SupporterHomeScreen,
     SupporterHistoryScreen,
     SupporterListScreen,
     SupporterMessagesScreen,
     SupporterProfileScreen,
-    SupporterSettingsScreen,
     SupporterWalletScreen,
     ProjectScreen,
-    LoginStudentScreen
+    LoginStudentScreen,
+    Settings,
+    EditProfile,
+    Help,
+    InviteFriends,
+    Notifications,
+    Security
 }

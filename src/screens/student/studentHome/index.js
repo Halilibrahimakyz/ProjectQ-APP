@@ -2,7 +2,7 @@ import { Text, StyleSheet } from 'react-native';
 import React, { useMemo, useEffect } from 'react';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language'
-import { Container } from '@/components';
+import { Container, CustomSwitch } from '@/components';
 import { setStatusBar } from '@/functions/setStatusBar';
 
 const StudentHomeScreen = props => {
@@ -21,6 +21,7 @@ const StudentHomeScreen = props => {
       compId={props.componentId}
     >
       <Text style={{ color: theme.primary }}>StudentHomeScreen</Text>
+      <CustomSwitch/>
     </Container>
   );
 };

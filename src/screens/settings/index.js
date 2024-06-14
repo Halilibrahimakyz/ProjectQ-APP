@@ -1,37 +1,47 @@
 import React, { useMemo } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language';
-import { Container } from '@/components';
-import { popScreen, setRootScreen } from '@/navigation/navigationFunctions';
-import { logout } from '@/storeReduxToolkit/userSupporterSlice';
-import SettingsItem from './components/SettingsItem';
-import {CustomSeparator} from '@/components';
+import { Container, CustomSeparator } from '@/components';
+import { pushScreen, popScreen, setRootScreen } from '@/navigation/navigationFunctions';
+import { setDarkTheme, setLightTheme } from '@/storeReduxToolkit/themeSlice';
+import { logout as studentLogout } from '@/storeReduxToolkit/userStudentSlice';
+import { logout as supporterLogout } from '@/storeReduxToolkit/userSupporterSlice';
+import SettingsItem from '@/components/settings/SettingsItem';
 
-const SupporterSettingsScreen = (props) => {
+const Settings = (props) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
   const language = useSelector((state) => state.language.value);
   const { getVal, changeLanguage } = useLanguage();
   const dispatch = useDispatch();
 
+  const handleSetDarkTheme = () => dispatch(setDarkTheme());
+  const handleSetLightTheme = () => dispatch(setLightTheme());
+
+  const handleChangeTheme = () => {
+    theme.type === 'dark' ? handleSetLightTheme() : handleSetDarkTheme();
+  };
+
   const handleChangeLanguage = () => {
     changeLanguage(language === 'tr' ? 'en' : 'tr');
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(studentLogout());
+    dispatch(supporterLogout());
     setRootScreen({ isLoggedIn: false, userType: null });
   };
 
-  const settingsData = useMemo(() => [
+  const settingsData = [
     {
       title: getVal('settings_edit_profile'),
       icon: "account",
       hasChevron: true,
       iconColor: theme.primary,
       containerColor: theme.primarySupport,
+      onPress: () => { pushScreen(props.componentId, "EditProfile"); },
     },
     {
       title: getVal('settings_notifications'),
@@ -39,6 +49,7 @@ const SupporterSettingsScreen = (props) => {
       hasChevron: true,
       iconColor: theme.primary,
       containerColor: theme.primarySupport,
+      onPress: () => { pushScreen(props.componentId, "Notifications"); },
     },
     {
       title: getVal('settings_security'),
@@ -46,6 +57,7 @@ const SupporterSettingsScreen = (props) => {
       hasChevron: true,
       iconColor: theme.primary,
       containerColor: theme.primarySupport,
+      onPress: () => { pushScreen(props.componentId, "Security"); },
     },
     {
       title: getVal('settings_change_language'),
@@ -61,6 +73,7 @@ const SupporterSettingsScreen = (props) => {
       hasChevron: true,
       iconColor: theme.primary,
       containerColor: theme.primarySupport,
+      onPress: () => { pushScreen(props.componentId, "Help"); },
     },
     {
       title: getVal('settings_invite_friends'),
@@ -68,6 +81,7 @@ const SupporterSettingsScreen = (props) => {
       hasChevron: true,
       iconColor: theme.primary,
       containerColor: theme.primarySupport,
+      onPress: () => { pushScreen(props.componentId, "InviteFriends"); },
     },
     {
       title: getVal('settings_logout'),
@@ -77,11 +91,7 @@ const SupporterSettingsScreen = (props) => {
       containerColor: theme.redSupport,
       onPress: handleLogout,
     },
-  ], [getVal, theme, language]);
-
-  const renderItem = ({ item }) => (
-    <SettingsItem {...item} />
-  );
+  ];
 
   return (
     <Container
@@ -90,7 +100,7 @@ const SupporterSettingsScreen = (props) => {
         title: getVal('settings'),
         onLeftPress: () => popScreen(props.componentId),
         leftIcon: 'arrow-left',
-        onRightPress: () => console.log('Right icon pressed'),
+        onRightPress: () => console.log('Sağ tıklandı'),
         shadow: false,
       }}
       compId={props.componentId}
@@ -98,20 +108,21 @@ const SupporterSettingsScreen = (props) => {
       <FlatList
         data={settingsData}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        ItemSeparatorComponent={CustomSeparator}
+        renderItem={({ item }) => (
+          <>
+            <CustomSeparator />
+            <SettingsItem {...item} />
+          </>
+        )}
         contentContainerStyle={styles.contentContainer}
-        initialNumToRender={7} // İlk yüklemede kaç eleman render edilecek
-        maxToRenderPerBatch={5} // Her seferinde kaç eleman yüklenecek
-        windowSize={10} // Kaç eleman önceden yüklenecek
       />
+      <View style={{ height: 50 }} />
     </Container>
   );
 };
 
 const getStyles = (theme) => StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: theme.padding.default,
   },
@@ -120,4 +131,4 @@ const getStyles = (theme) => StyleSheet.create({
   },
 });
 
-export default SupporterSettingsScreen;
+export default Settings;
