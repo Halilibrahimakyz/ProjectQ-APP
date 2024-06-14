@@ -4,6 +4,8 @@ import { FlashList } from '@shopify/flash-list';
 import { useLanguage } from '@/constants/language';
 import { useTheme } from '@/constants/colors';
 import { countries } from '../utils/data';
+import { setFormData } from '@/storeReduxToolkit/studentFormSlice';
+import { useDispatch } from 'react-redux';
 
 const LocationStep = ({ formData, errors, handleChange }) => {
     const theme = useTheme();
@@ -11,9 +13,12 @@ const LocationStep = ({ formData, errors, handleChange }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const { getVal } = useLanguage();
     const [filteredCountries, setFilteredCountries] = useState(countries);
+    const dispatch = useDispatch();
 
     const onHandleChange = (field, value) => {
         handleChange(field, value);
+        dispatch(setFormData({ city: '' }));
+        dispatch(setFormData({ school: '' }));
     };
 
     useEffect(() => {
@@ -27,11 +32,11 @@ const LocationStep = ({ formData, errors, handleChange }) => {
     }, [formData, searchQuery]);
 
     const renderItem = ({ item }) => {
-        const isSelected = formData.country === item.value;
+        const isSelected = formData.country === item.code;
 
         return (
             <TouchableOpacity
-                onPress={() => onHandleChange('country', item.value)}
+                onPress={() => onHandleChange('country', item.code)}
                 style={[styles.item, isSelected && styles.selectedItem]}
             >
                 <Image source={item.flag} style={styles.flag} />

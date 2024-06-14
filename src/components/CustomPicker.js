@@ -17,6 +17,7 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
     const shakeAnimation = useSharedValue(0);
 
     useEffect(() => {
+        console.log("valuegender: ",value)
         if (isFocused || value) {
             labelTranslateY.value = withTiming(-20);
             labelScale.value = withTiming(1);
@@ -72,20 +73,20 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
 
     const getLabel = (value) => {
         const option = options.find(opt => opt.value === value);
-        return option ? option.label : '';
+        return option ? option.label : placeholder;
     };
 
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.row, animatedRowStyle]}>
-                <View style={[styles.iconContainer, { backgroundColor: error && value ? theme.red : theme.primary, borderColor: error && value ? theme.red : theme.primary }]}>
+                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red :value ? theme.primary : theme.lightGrey, borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey }]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
                 </View>
-                <TouchableOpacity onPress={handleFocus} style={[styles.inputContainer, error && styles.inputError]}>
+                <TouchableOpacity onPress={handleFocus} style={[styles.inputContainer, error && styles.inputError,{borderColor:error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
                     <Text style={[styles.input, { color: value ? theme.secondary : theme.lightGrey }]}>
-                        {value ? getLabel(value) : placeholder}
+                        {getLabel(value)}
                     </Text>
-                    <Animated.Text style={[styles.label, animatedLabelStyle,{ color: error  ? theme.red : theme.primary}]}>
+                    <Animated.Text style={[styles.label, animatedLabelStyle,{ color:error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
                         {label}
                     </Animated.Text>
                 </TouchableOpacity>
@@ -132,7 +133,7 @@ const getStyles = (theme) => StyleSheet.create({
         flex: 1,
         borderTopWidth: StyleSheet.hairlineWidth,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: theme.primary,
+        // borderColor: theme.primary,
         backgroundColor: theme.background,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
@@ -146,7 +147,7 @@ const getStyles = (theme) => StyleSheet.create({
         height: '100%',
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
-        borderColor: theme.primary,
+        // borderColor: theme.primary,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
         justifyContent: 'center',

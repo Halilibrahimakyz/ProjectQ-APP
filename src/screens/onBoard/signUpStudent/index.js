@@ -9,6 +9,7 @@ import { nextStep, prevStep, setFormData, setError, clearErrors, clearError, res
 import { validateStep, handleValidation } from './utils/validation';
 import { LocationStep, PersonalInfoStep, PersonalInfoStepTwo, InterestStep } from './components'
 import { signupStudent } from '@/services'
+import { loginSuccess } from '@/storeReduxToolkit/userStudentSlice';
 
 const SignUpStudentScreen = props => {
 
@@ -27,9 +28,13 @@ const SignUpStudentScreen = props => {
     ];
 
     useEffect(() => {
-        const currentStep = steps[step - 1];
-        const { isValid } = validateStep(formData, currentStep.keys, getVal);
-        setIsNextEnabled(isValid);
+        const validateCurrentStep = async () => {
+            const currentStep = steps[step - 1];
+            const { isValid } = await validateStep(formData, currentStep.keys, getVal);
+            setIsNextEnabled(isValid);
+        };
+
+        validateCurrentStep();
     }, [formData, step]);
 
     useEffect(() => {
@@ -52,17 +57,48 @@ const SignUpStudentScreen = props => {
     const handleNext = async () => {
         const currentStep = steps[step - 1];
         if (isNextEnabled) {
-            console.log("formData: ", formData.interests);
-            if (step < steps.length) {
+            const { isValid, errors } = await validateStep(formData, currentStep.keys, getVal);
+            if (!isValid) {
+                for (const key in errors) {
+                    dispatch(setError({ [key]: errors[key] }));
+                }
+            } else if (step < steps.length) {
                 dispatch(clearErrors(currentStep.keys));
                 dispatch(nextStep());
             } else {
-                console.log("formData: ", formData);
                 const response = await signupStudent(formData);
+                const { student } = response;
+                const userInfo = {
+                    username: student.user.username,
+                    name: student.user.name,
+                    surname: student.user.surname,
+                    email: student.user.email,
+                    profilePicture: student.user.profilePicture,
+                    idNumber: student.user.idNumber,
+                    phoneNumber: student.user.phoneNumber,
+                    gender: student.user.gender,
+                    country: student.user.country,
+                    city: student.user.city,
+                    birthDate: student.user.birthDate,
+                    bio: student.user.bio,
+                    identificate: student.user.identificate,
+                    isActive: student.user.isActive,
+                    userType: student.user.userType,
+                    interests: student.user.interests,
+                    school: student.school,
+                    studentClass: student.class,
+                    department: student.department,
+                    gpa: student.gpa,
+                    verification: student.verification,
+                    goals: student.goals,
+                };
+
+                dispatch(loginSuccess(userInfo));
+                setRootScreen({ isLoggedIn: true, userType: "student" });
                 alert('Form submitted successfully!');
             }
         } else {
-            const { isValid, errors } = validateStep(formData, currentStep.keys, getVal);
+            const { isValid, errors } = await validateStep(formData, currentStep.keys, getVal);
             if (!isValid) {
                 for (const key in errors) {
                     dispatch(setError({ [key]: errors[key] }));
@@ -75,10 +111,11 @@ const SignUpStudentScreen = props => {
         dispatch(prevStep());
     };
 
-    const handleChange = (key, value) => {
+    const handleChange = async (key, value) => {
         dispatch(setFormData({ [key]: value }));
         // console.log('validate, key, value', key, value); // Debug log
-        const error = handleValidation(formData, key, value, getVal);
+        const error = await handleValidation(formData, key, value, getVal);
+        console.log("errorvalidate: ", error)
         if (error) {
             dispatch(setError({ [key]: error }));
         } else {
@@ -98,7 +135,7 @@ const SignUpStudentScreen = props => {
         handleChange,
     };
     const CurrentStepComponent = steps[step - 1].component;
-    
+
     return (
         <Container
             style={styles.container}
@@ -157,7 +194,7 @@ const getStyles = (theme) => StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginVertical: 20,
     },
     button: {
         paddingVertical: 10,

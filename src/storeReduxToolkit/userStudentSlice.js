@@ -2,8 +2,28 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     userInfo: {
-        username:'arda',
-        name:''
+        username: '',
+        name:'',
+        surname: '',
+        email: '',
+        profilePicture: '',
+        idNumber: '',
+        phoneNumber: '',
+        gender: '',
+        country: '',
+        city: '',
+        birthDate: '',
+        bio: '',
+        identificate: false,
+        isActive: false,
+        userType: '',
+        interests: [],
+        school: '',
+        studentClass: '',
+        department: '',
+        gpa: '',
+        verification: false,
+        goals: '',
     }, // Kullanıcı bilgileri için
     isAuthenticated: false, // Oturum açma durumu
     error: null, // Hata mesajları için

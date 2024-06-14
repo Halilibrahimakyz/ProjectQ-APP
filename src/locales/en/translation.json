@@ -334,5 +334,9 @@
     "cinema": "Cinema",
     "writing": "Writing",
     "dance": "Dance",
-    "theater": "Theater"
+    "theater": "Theater",
+    "usernameAlreadyTaken":"Username is already taken",
+    "male":"Male",
+    "female":"Female",
+    "idontwantspecify":"I don't want to specify"
 }

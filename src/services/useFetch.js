@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api/apiClient';
 
-const useFetch = (url) => {
+const useFetch = (url, params = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,9 +12,10 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await api.get(url);
+        const response = await api.get(url, { params });
         if (isMounted) {
           setData(response.data);
+          // console.log("fetched data: ",response)
         }
       } catch (err) {
         if (isMounted) {
@@ -33,7 +34,7 @@ const useFetch = (url) => {
       isMounted = false;
     };
   }, [url]);
-
+  
   return { data, loading, error };
 };
 

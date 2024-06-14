@@ -1,4 +1,5 @@
-export const handleValidation = (formData, key, value, getVal) => {
+import {checkUsernameAvailability} from '@/services/validateService'
+export const handleValidation = async  (formData, key, value, getVal) => {
   let error = '';
 
   switch (key) {
@@ -19,6 +20,12 @@ export const handleValidation = (formData, key, value, getVal) => {
         error = getVal('usernameTooShort') || 'Username must be at least 5 characters long';
       } else if (!/^[a-zA-Z0-9.]+$/.test(value)) {
         error = getVal('usernameInvalid') || 'Username can only contain letters, numbers, and dots';
+      } else {
+        const isAvailable = await checkUsernameAvailability(value);
+        console.log("isAvailable: ",isAvailable)
+        if (!isAvailable) {
+          error = getVal('usernameAlreadyTaken') || 'Username is already taken';
+        }
       }
       break;
     case 'name':
@@ -109,7 +116,7 @@ export const handleValidation = (formData, key, value, getVal) => {
       }
       break;
     case 'interests':
-      if (value.length<=2) {
+      if (value.length <= 2) {
         error = getVal('interestMinRequired');
       }
       break;
@@ -120,17 +127,17 @@ export const handleValidation = (formData, key, value, getVal) => {
   return error;
 };
 
-export const validateStep = (formData, keys, getVal) => {
+export const validateStep = async (formData, keys, getVal) => {
   let isValid = true;
   let errors = {};
 
-  keys.forEach((key) => {
-    const error = handleValidation(formData, key, formData[key], getVal);
+  for (const key of keys) {
+    const error = await handleValidation(formData, key, formData[key], getVal);
     if (error) {
       isValid = false;
       errors[key] = error;
     }
-  });
+  };
 
   return { isValid, errors };
 };

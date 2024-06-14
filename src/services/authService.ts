@@ -3,34 +3,7 @@ import * as Keychain from 'react-native-keychain';
 import { store } from '../storeReduxToolkit/store';
 import { setAccessToken, removeAccessToken } from '../storeReduxToolkit/authorizationSlice';
 import { LOGIN_STUDENT, LOGIN_SUPPORTER, SIGNUP_STUDENT, SIGNUP_SUPPORTER, LOGOUT, REFRESH_TOKEN } from '../api/endpoints';
-
-interface Credentials {
-  username: string;
-  password: string;
-}
-
-interface SignupData {
-  email: string;
-  password: string;
-  name: string;
-  surname: string;
-  idNumber: string;
-  phoneNumber: string;
-  gender: string;
-  school?: string; // for students
-  studentClass?: string; // for students
-  gpa?: number; // for students
-  goals?: string; // for students
-  occupation?: string; // for supporters
-  company?: string; // for supporters
-  behalfCompany?: boolean; // for supporters
-  wantsAnonymous?: boolean; // for supporters
-}
-
-interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
-}
+import {Credentials,SignupDataStudent,SignupDataSupporter} from '@/types'
 
 export const loginStudent = async (credentials: Credentials) => {
   try {
@@ -60,13 +33,15 @@ export const loginSupporter = async (credentials: Credentials) => {
   }
 };
 
-export const signupStudent = async (signupData: SignupData) => {
+export const signupStudent = async (signupData: SignupDataStudent) => {
   try {
-    console.log("signup Student",signupData)
+    // console.log("signup Student",signupData)
     const response = await api.post(SIGNUP_STUDENT, signupData);
-    console.log("response: ",response)
+    // console.log("response: ",response)
     const { accessToken, refreshToken } = response.data;
-
+    console.log("response.data;: ",response.data)
+    console.log("accessToken: ",accessToken)
+    console.log("refreshToken: ",refreshToken)
     await Keychain.setGenericPassword('refreshToken', refreshToken, { service: 'refreshToken' });
     store.dispatch(setAccessToken(accessToken));
 
@@ -77,7 +52,7 @@ export const signupStudent = async (signupData: SignupData) => {
   }
 };
 
-export const signupSupporter = async (signupData: SignupData) => {
+export const signupSupporter = async (signupData: SignupDataSupporter) => {
   try {
     const response = await api.post(SIGNUP_SUPPORTER, signupData);
     const { accessToken, refreshToken } = response.data;

@@ -80,7 +80,7 @@ const CustomTextInput = forwardRef(({
     const handleBlur = () => setIsFocused(false);
     const toggleSecureEntry = () => setIsSecure(!isSecure);
 
-    const debouncedOnChangeText = useCallback(debounce(onChangeText, 300), [onChangeText]);
+    const debouncedOnChangeText = useCallback(debounce(onChangeText, 100), [onChangeText]);
 
     const handleChangeText = (text) => {
         setInternalValue(text);
@@ -90,10 +90,10 @@ const CustomTextInput = forwardRef(({
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.row, animatedRowStyle]}>
-                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red : theme.primary, borderColor: error ? theme.red : theme.primary }]}>
+                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red :value ? theme.primary : theme.lightGrey, borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
                 </View>
-                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth, borderColor: error ? theme.red : theme.primary }]}>
+                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth, borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
                     <TextInput
                         ref={ref}
                         style={[styles.input, error && styles.inputError]}
@@ -114,7 +114,7 @@ const CustomTextInput = forwardRef(({
                     </Animated.Text>
                 </View>
                 {secureTextEntry && (
-                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={[styles.iconContainerRight,{ borderColor: error ? theme.red : theme.primary}]}>
+                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={[styles.iconContainerRight,{ borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
                         <MaterialCommunityIcons name={isSecure ? "eye-off" : "eye"} color={theme.lightGrey} size={24} />
                     </TouchableOpacity>
                 )}

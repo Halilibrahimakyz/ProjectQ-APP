@@ -1,9 +1,11 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useLanguage } from '@/constants/language';
 import { useTheme } from '@/constants/colors';
 import { CustomTextInput, CustomPicker, CustomDatePicker } from '@/components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { GET_CITIES, GET_UNIVERTIES } from '@/api/endpoints';
+import { useFetch } from '@/services';
 
 const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
     const theme = useTheme();
@@ -15,13 +17,37 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
     const birthDateRef = useRef(null);
     const cityRef = useRef(null);
     const departmentRef = useRef(null);
+    const [formattedCities, setFormattedCities] = useState([]);
+    const [formattedUniversities, setFormattedUniversities] = useState([]);
+    const { data: citiesData } = useFetch(GET_CITIES, { countryCode: formData.country });
+    const { data: universitiesData } = useFetch(GET_UNIVERTIES, { countryCode: formData.country });
 
+
+    useEffect(() => {
+        if (citiesData && citiesData.success) {
+            const formattedData = citiesData.data.map(city => ({
+                label: city.label,
+                value: city.value
+            }));
+            setFormattedCities(formattedData);
+        }
+    }, [citiesData]);
+
+    useEffect(() => {
+        if (universitiesData && universitiesData.success) {
+            const formattedData = universitiesData.data.map(city => ({
+                label: city.label,
+                value: city.value
+            }));
+            setFormattedUniversities(formattedData);
+        }
+    }, [universitiesData]);
     const onHandleChange = (field, value) => {
         handleChange(field, value);
     };
 
     const options = [
-        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 1', value: 'mskü' },
         { label: 'Option 2', value: 'option2' },
         { label: 'Option 3', value: 'option3' },
         { label: 'Option 4', value: 'option4' },
@@ -34,10 +60,11 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
     ];
 
     const genderOptions = [
-        { label: 'Option 1', value: 'option1' },
-        { label: 'Option 2', value: 'option2' },
-        { label: 'Option 3', value: 'option3' },
+        { label: getVal("male"), value: 'male' },
+        { label: getVal("female"), value: 'female' },
+        { label: getVal("idontwantspecify"), value: 'idontwantspecify' },
     ];
+
 
     return (
         <KeyboardAwareScrollView
@@ -88,15 +115,14 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
                 error={errors.birthDate}
                 minAge={18}
             />
-            <CustomTextInput
-                ref={cityRef}
+            <CustomPicker
                 icon="city"
                 label={getVal('city_label')}
                 value={formData.city}
-                onChangeText={(text) => onHandleChange('city', text)}
+                onChange={(text) => onHandleChange('city', text)}
                 placeholder={getVal('city_placeholder')}
                 error={errors.city}
-                secureTextEntry={false}                
+                options={formattedCities}
             />
             <CustomPicker
                 icon="school"
@@ -105,7 +131,7 @@ const PersonalInfoStepTwo = ({ formData, errors, handleChange }) => {
                 onChange={(text) => onHandleChange('school', text)}
                 placeholder={getVal('school_placeholder')}
                 error={errors.school}
-                options={options}
+                options={formattedUniversities}
             />
             <CustomTextInput
                 ref={departmentRef}
@@ -127,7 +153,7 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        paddingVertical:10
+        paddingVertical: 10
     },
     scrollView: {
         flexGrow: 1,

@@ -49,7 +49,7 @@ const ProfilePicturePicker = ({ label, value, onChange, placeholder, error, icon
     return (
         <View style={styles.container}>
             {label && <Text style={styles.label}>{label}</Text>}
-            <TouchableOpacity style={[styles.imageContainer,{borderColor:error ?theme.red: theme.primary,}]} onPress={pickImage}>
+            <TouchableOpacity style={[styles.imageContainer,{borderColor:error ? theme.red :imageUri ? theme.primary : theme.lightGrey}]} onPress={pickImage}>
                 {imageUri ? (
                     <Image source={{ uri: imageUri }} style={styles.image} />
                 ) : (

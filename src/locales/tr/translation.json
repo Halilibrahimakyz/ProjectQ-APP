@@ -334,5 +334,9 @@
   "cinema": "Sinema",
   "writing": "Yazı",
   "dance": "Dans",
-  "theater": "Tiyatro"
+  "theater": "Tiyatro",
+  "usernameAlreadyTaken":"Kullanıcı adı zaten alınmış",
+  "male":"Erkek",
+  "female":"Kadın",
+  "idontwantspecify":"Belirtmek istemiyorum"
 }
