@@ -47,8 +47,10 @@ const AppInfoStudentScreen = props => {
         setActiveSlide(nextIndex);
         flashListRef.current.scrollToIndex({ index: nextIndex, animated: true });
       } else {
-        dispatch(loginSuccess({ name: "Student", surname: "test2" }));
-        setRootScreen({ isLoggedIn: true, userType: "student" });
+        const someProps = {
+          userType: "student",
+        };
+        pushScreen(props.componentId, "JoinScreen", someProps);
       }
     }
   }, [activeSlide, carouselItemData.length, dispatch]);

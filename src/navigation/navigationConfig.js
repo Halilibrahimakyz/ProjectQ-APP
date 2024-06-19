@@ -71,7 +71,7 @@ export const useDefaultOptions = (theme) => {
     },
     navigationBar: {
       backgroundColor: theme.background,
-      visible: false
+      visible: true
     }
   };
 };

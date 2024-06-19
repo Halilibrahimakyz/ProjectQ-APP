@@ -14,6 +14,7 @@ import CustomIcon from './CustomIcon';
 import { DrawerLeft } from './DrawerLeft';
 import InterestSelection from './InterestSelection';
 import CustomSwitch from './CustomSwitch';
+import CustomLoader from './CustomLoader';
 
 export {
     Container,
@@ -31,5 +32,6 @@ export {
     ProfilePicturePicker,
     CustomIcon,
     DrawerLeft,
-    InterestSelection
+    InterestSelection,
+    CustomLoader
 }

@@ -1,6 +1,7 @@
 import {
   loginStudent,
   loginSupporter,
+  login,
   signupStudent,
   signupSupporter,
   logout,
@@ -11,6 +12,7 @@ import useFetch from './useFetch';
 export {
   loginStudent,
   loginSupporter,
+  login,
   signupStudent,
   signupSupporter,
   logout,

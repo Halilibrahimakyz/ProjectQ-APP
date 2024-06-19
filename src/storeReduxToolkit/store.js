@@ -6,6 +6,7 @@ import userSupporterReducer from './userSupporterSlice'
 import userStudentReducer from './userStudentSlice'
 import studentFormReducer from './studentFormSlice'
 import authorizationReducer from './authorizationSlice'
+import supporterFormSlice from './supporterFormSlice'
 
 import {
   persistReducer,
@@ -44,6 +45,7 @@ export const store = configureStore({
     userSupporter: persistedUserSupporterReducer,
     userStudent: persistedUserStudentReducer,
     studentForm:studentFormReducer,
+    supporterForm:supporterFormSlice,
     authorization:persistedAuthReducer
   },
   middleware: (getDefaultMiddleware) =>

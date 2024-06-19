@@ -14,6 +14,7 @@ const JoinScreen = props => {
     const theme = useTheme();
     const styles = getStyles(theme);
     const { getVal } = useLanguage();
+    console.log("props join screen: ",props)
 
     // const handlePass = () => {
     //     dispatch(loginSuccess({ name: "Student", surname: "test2" }))
@@ -28,12 +29,16 @@ const JoinScreen = props => {
         console.log("Apple ile giriş");
     };
 
-    const handleCreateAccount = () => {
-        pushScreen(props.componentId, "SignUpStudentScreen");
+    const handleCreateAccount = (userType) => {
+        if(userType=="student"){
+            pushScreen(props.componentId, "SignUpStudentScreen");
+        }else{
+            pushScreen(props.componentId, "SignUpSupporterScreen");
+        }
     };
 
     const handleLogin = () => {
-        pushScreen(props.componentId, "LoginStudentScreen");
+        pushScreen(props.componentId, "LoginScreen");
     };
 
 
@@ -67,7 +72,7 @@ const JoinScreen = props => {
             <View style={styles.buttonContainer}>
                 <CustomButton
                     title={getVal("create_account")}
-                    onPress={() => handleCreateAccount("student")}
+                    onPress={() => handleCreateAccount(props.userType)}
                 />
                 <View style={styles.loginContainer}>
                     <Text style={styles.loginText}>

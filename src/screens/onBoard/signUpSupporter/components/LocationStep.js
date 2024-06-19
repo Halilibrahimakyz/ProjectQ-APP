@@ -18,7 +18,7 @@ const LocationStep = ({ formData, errors, handleChange }) => {
     const onHandleChange = (field, value) => {
         handleChange(field, value);
         dispatch(setFormData({ cityId: '' }));
-        dispatch(setFormData({ schoolId: '' }));
+        dispatch(setFormData({ school: '' }));
     };
 
     useEffect(() => {

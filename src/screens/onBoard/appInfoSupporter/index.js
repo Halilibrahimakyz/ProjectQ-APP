@@ -47,8 +47,9 @@ const AppInfoSupporterScreen = props => {
         setActiveSlide(nextIndex);
         flashListRef.current.scrollToIndex({ index: nextIndex, animated: true });
       } else {
-        dispatch(loginSuccess({ name: "Supporter", surname: "test2" }));
-        setRootScreen({ isLoggedIn: true, userType: "supporter" });
+        const someProps = {
+          userType: "supporter",
+        };
       }
     }
   }, [activeSlide, carouselItemData.length, dispatch]);

@@ -5,10 +5,10 @@ import {
     OnBoardScreen,
     AppInfoStudentScreen,
     AppInfoSupporterScreen,
-    HomeScreen,
     JoinScreen,
     SignUpStudentScreen,
-    LoginStudentScreen
+    SignUpSupporterScreen,
+    LoginScreen
 } from '@/screens'
 
 export const registerAuthScreens = () => {
@@ -16,8 +16,8 @@ export const registerAuthScreens = () => {
   Navigation.registerComponent('OnBoardScreen', () => withProviders(OnBoardScreen));
   Navigation.registerComponent('AppInfoStudentScreen', () => withProviders(AppInfoStudentScreen));
   Navigation.registerComponent('AppInfoSupporterScreen', () => withProviders(AppInfoSupporterScreen));
-  Navigation.registerComponent('HomeScreen', () => withProviders(HomeScreen));
   Navigation.registerComponent('JoinScreen', () => withProviders(JoinScreen));
   Navigation.registerComponent('SignUpStudentScreen', () => withProviders(SignUpStudentScreen));
-  Navigation.registerComponent('LoginStudentScreen', () => withProviders(LoginStudentScreen));
+  Navigation.registerComponent('LoginScreen', () => withProviders(LoginScreen));
+  Navigation.registerComponent('SignUpSupporterScreen', () => withProviders(SignUpSupporterScreen));
 };

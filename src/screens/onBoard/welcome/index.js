@@ -29,7 +29,7 @@ const WelcomeScreen = props => {
                     <Text style={styles.loginText}>
                         {getVal("have_acc")}{' '}
                     </Text>
-                    <TouchableOpacity onPress={() => pushScreen(props.componentId, "HomeScreen")}>
+                    <TouchableOpacity onPress={() => pushScreen(props.componentId, "LoginScreen")}>
                         <Text style={styles.loginButtonText}>{getVal("log_in")}</Text>
                     </TouchableOpacity>
                 </View>

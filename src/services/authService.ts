@@ -2,7 +2,7 @@ import api from '../api/apiClient';
 import * as Keychain from 'react-native-keychain';
 import { store } from '../storeReduxToolkit/store';
 import { setAccessToken, removeAccessToken } from '../storeReduxToolkit/authorizationSlice';
-import { LOGIN_STUDENT, LOGIN_SUPPORTER, SIGNUP_STUDENT, SIGNUP_SUPPORTER, LOGOUT, REFRESH_TOKEN } from '../api/endpoints';
+import { LOGIN_STUDENT, LOGIN_SUPPORTER,LOGIN, SIGNUP_STUDENT, SIGNUP_SUPPORTER, LOGOUT, REFRESH_TOKEN } from '../api/endpoints';
 import {Credentials,SignupDataStudent,SignupDataSupporter} from '@/types'
 
 export const loginStudent = async (credentials: Credentials) => {
@@ -33,18 +33,28 @@ export const loginSupporter = async (credentials: Credentials) => {
   }
 };
 
-export const signupStudent = async (signupData: SignupDataStudent) => {
+export const login = async (credentials: Credentials) => {
   try {
-    // console.log("signup Student",signupData)
-    const response = await api.post(SIGNUP_STUDENT, signupData);
-    // console.log("response: ",response)
+    const response = await api.post(LOGIN, credentials);
     const { accessToken, refreshToken } = response.data;
-    console.log("response.data;: ",response.data)
-    console.log("accessToken: ",accessToken)
-    console.log("refreshToken: ",refreshToken)
+
     await Keychain.setGenericPassword('refreshToken', refreshToken, { service: 'refreshToken' });
     store.dispatch(setAccessToken(accessToken));
 
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const signupStudent = async (signupData: SignupDataStudent) => {
+  try {
+    console.log("signup request starter")
+    const response = await api.post(SIGNUP_STUDENT, signupData);
+    const { accessToken, refreshToken } = response.data;
+    await Keychain.setGenericPassword('refreshToken', refreshToken, { service: 'refreshToken' });
+    store.dispatch(setAccessToken(accessToken));
+    console.log("signup request finished")
     return response.data;
   } catch (error) {
     console.log("error: ",error)

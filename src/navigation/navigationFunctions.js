@@ -120,6 +120,7 @@ export const setRootScreen = ({ isLoggedIn, userType, initialTab = 0 }) => {
                         bottomTab: {
                           icon: MaterialCommunityIcons.getImageSourceSync('account', 28),
                           testID: userType === 'supporter' ? 'SupporterProfile' : 'StudentProfile',
+                          popToRoot :true
                         },
                       },
                     },

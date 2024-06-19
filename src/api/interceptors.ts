@@ -18,23 +18,34 @@ const onRefreshed = (token: string) => {
 
 export const setupInterceptorsTo = (api: AxiosInstance) => {
   const excludedEndpoints = [
-    '/login',
-    '/signup',
+    'auth/login/student',
+    'auth/login/supporter',
     '/auth/signup/student',
     '/auth/signup/supporter',
   ];
 
   api.interceptors.request.use(
     async (config: InternalAxiosRequestConfig) => {
+      const state = store.getState();
+      const clientLanguage = state.language.value.toLowerCase();
+      console.log("clientLanguage: ", clientLanguage);
+  
+      if (clientLanguage && config.headers) {
+        config.headers['accept-language'] = clientLanguage;
+      }
+  
       if (excludedEndpoints.some(endpoint => config.url?.includes(endpoint))) {
         return config;
       }
-
-      const state = store.getState();
+     
       const token = state.authorization.accessToken;
       console.log('Sending request with accessToken: ', token);
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;
+      }
+
+      if (clientLanguage && config.headers) {
+        config.headers['clientLanguage'] = clientLanguage;
       }
       return config;
     },
