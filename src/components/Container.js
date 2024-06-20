@@ -3,8 +3,9 @@ import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/constants/colors';
 import CustomTopBar from './CustomTopBar';
 import CustomLoader from './CustomLoader'
+import CustomTabBar from './CustomTabBar';
 
-const Container = memo(({ children, style, topBarProps, bottomBar, loading }) => {
+const Container = memo(({ children, style, topBarProps, bottomBar, loading, compId }) => {
     const theme = useTheme();
     const styles = useMemo(() => getStyles(theme), [theme]);
 
@@ -18,7 +19,8 @@ const Container = memo(({ children, style, topBarProps, bottomBar, loading }) =>
                     <View style={[styles.container, style]}>
                         {children}
                     </View>
-                    {bottomBar && <View style={styles.bottomTabsContainer}></View>}
+                    
+                    {bottomBar && <CustomTabBar componentId={compId} />}
                 </>
             )}
         </SafeAreaView>

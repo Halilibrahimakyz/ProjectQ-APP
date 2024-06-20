@@ -7,7 +7,8 @@ import { Container, CustomButton, DynamicSVG } from '@/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '@/services'
 import { CustomTextInput } from '@/components';
-import { loginSuccess } from '@/storeReduxToolkit/userStudentSlice';
+import { loginSuccess as loginSuccessStudent } from '@/storeReduxToolkit/userStudentSlice';
+import { loginSuccess as loginSuccessSupporter } from '@/storeReduxToolkit/userSupporterSlice';
 
 const LoginScreen = props => {
 
@@ -87,7 +88,12 @@ const LoginScreen = props => {
                 };
             }
             console.log("userInfo: ", userInfo)
-            dispatch(loginSuccess(userInfo));
+            if(user.userType==='student'){
+                dispatch(loginSuccessStudent(userInfo));
+            }else{
+                dispatch(loginSuccessSupporter(userInfo));
+            }
+            
             setRootScreen({ isLoggedIn: true, userType: user.userType });
             setLoading(false)
         } catch (error) {

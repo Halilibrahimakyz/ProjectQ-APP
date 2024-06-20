@@ -7,6 +7,7 @@ import userStudentReducer from './userStudentSlice'
 import studentFormReducer from './studentFormSlice'
 import authorizationReducer from './authorizationSlice'
 import supporterFormSlice from './supporterFormSlice'
+import tabIndexSlice from './tabIndexSlice'
 
 import {
   persistReducer,
@@ -46,7 +47,8 @@ export const store = configureStore({
     userStudent: persistedUserStudentReducer,
     studentForm:studentFormReducer,
     supporterForm:supporterFormSlice,
-    authorization:persistedAuthReducer
+    authorization:persistedAuthReducer,
+    tabIndex:tabIndexSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,21 +1,22 @@
 import { useSelector } from 'react-redux';
+import { makeSelectIsSupporterLoggedIn, makeSelectIsStudentLoggedIn } from '@/storeReduxToolkit/selector';
+import { useEffect, useMemo } from 'react';
 
 export const useAuth = () => {
-  const isSupporterLoggedIn = useSelector((state) => state.userSupporter.isAuthenticated);
-  const isStudentLoggedIn = useSelector((state) => state.userStudent.isAuthenticated);
+  const isSupporterLoggedIn = useSelector(makeSelectIsSupporterLoggedIn);
+  const isStudentLoggedIn = useSelector(makeSelectIsStudentLoggedIn);
 
-  let userType = null;
-  let isLoggedIn = false;
+  const userType = useMemo(() => {
+    return isSupporterLoggedIn ? 'supporter' : (isStudentLoggedIn ? 'student' : null);
+  }, [isSupporterLoggedIn, isStudentLoggedIn]);
 
-  if (isSupporterLoggedIn) {
-    userType = 'supporter';
-    isLoggedIn = true;
-  } else if (isStudentLoggedIn) {
-    userType = 'student';
-    isLoggedIn = true;
-  }
+  const isLoggedIn = useMemo(() => {
+    return isSupporterLoggedIn || isStudentLoggedIn;
+  }, [isSupporterLoggedIn, isStudentLoggedIn]);
 
-  console.log('useAuth userType:', userType, 'isLoggedIn:', isLoggedIn); // Debug log
+  useEffect(() => {
+    console.log('useAuth userType:', userType, 'isLoggedIn:', isLoggedIn);
+  }, [userType, isLoggedIn]);
 
   return { userType, isLoggedIn };
 };

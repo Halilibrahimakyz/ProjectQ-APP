@@ -14,7 +14,7 @@ const windowWidth = Dimensions.get('window').width;
 export const useDefaultOptions = (theme) => {
   return {
     bottomTabs: {
-      visible: true,
+      visible: false ,
       drawBehind: true,
       backgroundColor: 'transparent',
       titleDisplayMode: 'alwaysHide',
