@@ -32,7 +32,7 @@ const SupporterProfileScreen = props => {
 
   const { getVal } = useLanguage();
 
-  const userSupporter = useSelector((state) => state.userSupporter);
+  const userSupporter = useSelector((state) => state.userSupporter.userInfo);
   const userStudent = useSelector((state) => state.userStudent);
 
   const { changeLanguage } = useLanguage();
@@ -69,8 +69,8 @@ const SupporterProfileScreen = props => {
         style={styles.scroller}
         contentContainerStyle={{ alignItems: "center" }}
       >
-        <ProfilePictureContainer image={demoImage} />
-        <ProfileNameText userName="Jane Doe" />
+        <ProfilePictureContainer image={userSupporter.profilePicture}/>
+        <ProfileNameText userName={userSupporter.username}/>
         <SocialStatistics
           initiativesNum={6}
           followersNum={132}

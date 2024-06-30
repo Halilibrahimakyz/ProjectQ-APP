@@ -7,6 +7,9 @@ import {
   logout,
   refreshToken,
 } from './authService';
+import {
+  createProject
+} from './project'
 import useFetch from './useFetch';
 
 export {
@@ -18,4 +21,5 @@ export {
   logout,
   refreshToken,
   useFetch,
+  createProject
 };

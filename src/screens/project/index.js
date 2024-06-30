@@ -1,19 +1,9 @@
-import {
-  Text,
-  StyleSheet,
-  ScrollView,
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  StatusBar,
-} from 'react-native';
 import React, { useMemo, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { useTheme } from '@/constants/colors';
 import { useLanguage } from '@/constants/language';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Container, CustomButton } from '@/components';
-import { popScreen, setStatusBar } from '@/navigation/navigationFunctions';
+import { Container, CustomButton,CustomModal } from '@/components';
+import { popScreen, setStatusBar,showModal } from '@/navigation/navigationFunctions';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
@@ -22,89 +12,117 @@ const ProjectScreen = (props) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme]);
   const { getVal } = useLanguage();
-  const { project } = props;
-  const progress = Math.min((project.raised / project.goal) * 100, 100);
+  const {
+    title,
+    currentAmount,
+    goalAmount,
+    endDate,
+    photos,
+    student,
+    supporters,
+    description
+  } = props.project;
 
-  console.log("props: ", props);
-
-  useEffect(() => {
-    setStatusBar(props.componentId, theme)
-  }, []);
+  const progress = Math.min((currentAmount / goalAmount) * 100, 100);
+  const today = new Date();
+  const endDateObj = new Date(endDate);
+  const timeDiff = endDateObj - today;
+  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
   const handleDoubleTap = (event) => {
     if (event.nativeEvent.state === State.ACTIVE) {
       console.log("Image liked!");
-      // Add your like functionality here
+      // Like functionality can be added here
     }
   };
+
+  const profilePictureUrl = student?.user?.profilePicture;
+  const imageUrls = photos?.length > 0 ? photos.map(photo => `http://192.168.1.100:3333${photo.url}`) : [];
 
   return (
     <Container
       style={styles.container}
       topBarProps={{
-        onLeftPress: () => { popScreen(props.componentId); },
+        onLeftPress: () => popScreen(props.componentId),
         leftIcon: 'arrow-left',
-        onRightPress: () => { console.log('Sağ tıklandı'); },
         shadow: false,
         style: { backgroundColor: 'transparent', zIndex: 1, top: 0 },
         isAbsolute: true,
       }}
-      bottomBar={true}
+      bottomBar={false}
       compId={props.componentId}
     >
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-        <View style={styles.imageContainer}>
-          <TapGestureHandler
-            onHandlerStateChange={handleDoubleTap}
-            numberOfTaps={2}
-          >
-            <Image source={project.image} style={styles.projectImage} resizeMode="cover" />
-          </TapGestureHandler>
-        </View>
+        <ScrollView horizontal pagingEnabled style={styles.imageContainer}>
+          {imageUrls.length > 0 ? (
+            imageUrls.map((url, index) => (
+              <TapGestureHandler key={index} onHandlerStateChange={handleDoubleTap} numberOfTaps={2}>
+                <Image
+                  source={{ uri: url }}
+                  style={styles.projectImage}
+                  resizeMode="cover"
+                  onError={(e) => console.log('Image Load Error', e.nativeEvent.error)}
+                />
+              </TapGestureHandler>
+            ))
+          ) : (
+            <View style={styles.placeholderImage}>
+              <Text style={styles.placeholderText}>No Image</Text>
+            </View>
+          )}
+        </ScrollView>
         <View style={styles.projectInfo}>
-          <Text style={styles.projectTitle}>
-            {project.title}
-          </Text>
+          <Text style={styles.projectTitle}>{title}</Text>
           <Text style={styles.projectRaised}>
-            <Text style={styles.projectRaisedValue}>${project.raised}</Text>
+            <Text style={styles.projectRaisedValue}>${currentAmount}</Text>
             <Text style={styles.projectRaisedText}> fund raised from </Text>
-            <Text style={styles.projectGoal}>${project.goal}</Text>
+            <Text style={styles.projectGoal}>${goalAmount}</Text>
           </Text>
           <View style={styles.progressBarBackground}>
             <View style={[styles.progressBarFill, { width: `${progress}%` }]} />
           </View>
           <View style={styles.row}>
             <Text style={styles.projectSupporters}>
-              <Text style={styles.supportersValue}>{project.supporters}</Text>
-              <Text style={styles.supportersText}> Supporter{project.supporters > 1 ? 's' : ''}</Text>
+              <Text style={styles.supportersValue}>{supporters || 0}</Text>
+              <Text style={styles.supportersText}> Supporter{supporters > 1 ? 's' : ''}</Text>
             </Text>
             <Text style={styles.projectDaysLeft}>
-              <Text style={styles.daysLeftValue}>{project.daysLeft}</Text>
+              <Text style={styles.daysLeftValue}>{daysLeft}</Text>
               <Text style={styles.daysLeftText}> days left</Text>
             </Text>
           </View>
           <View style={styles.buttonContainer}>
-            <CustomButton
-              title={"Donate Now"}
-              onPress={() => console.log("donate")}
-            />
+            <CustomButton title={"Donate Now"} onPress={()=> showModal('DonateScreen', {project:props.project})} />
           </View>
         </View>
+        
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Student</Text>
-          <View style={styles.sectionContent}>
-            <Text style={styles.sectionContentText}>{project.student.name} {project.student.surname}</Text>
-            <TouchableOpacity style={styles.followButton}>
-              <Text style={styles.followButtonText}>Follow</Text>
-            </TouchableOpacity>
+          <View style={styles.profileContainer}>
+            {profilePictureUrl ? (
+              <Image
+                source={{ uri: profilePictureUrl }}
+                style={styles.profileImage}
+                resizeMode="cover"
+              />
+            ) : (
+              <View style={styles.placeholderProfileImage}>
+                <Text style={styles.placeholderProfileText}>No Image</Text>
+              </View>
+            )}
+            <View style={styles.profileInfo}>
+              <View>
+                <Text style={styles.username}>{student?.user?.username} ({student?.user?.name} {student?.user?.surname})</Text>
+                <Text style={styles.sectionSubtitle}>Verified</Text>
+              </View>
+              <TouchableOpacity style={styles.followButton}>
+                <Text style={styles.followButtonText}>Follow</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <Text style={styles.sectionSubtitle}>Verified</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Description</Text>
-          <Text style={styles.storyText}>
-            {project.description}
-          </Text>
+          <Text style={styles.storyText}>{description}</Text>
         </View>
       </ScrollView>
     </Container>
@@ -117,27 +135,28 @@ const getStyles = (theme) => StyleSheet.create({
     padding: 0,
   },
   scrollView: {
-    paddingBottom: 100
+    paddingBottom: 100,
   },
   imageContainer: {
     position: 'relative',
+    height: 400,
   },
   projectImage: {
-    width: theme.dimensions.width,
-    height: 1250,
+    width,
+    height: 400,
+  },
+  placeholderImage: {
+    width: width,
+    height: 400,
+    backgroundColor: theme.lightGrey,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  placeholderText: {
+    color: theme.darkGrey,
   },
   projectInfo: {
-    paddingTop: 10,
-    paddingHorizontal: theme.padding.default,
-    backgroundColor: theme.background,
-  },
-  saveButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: theme.primary,
-    borderRadius: 5,
-    padding: 5,
+    padding: 10,
   },
   projectTitle: {
     fontSize: theme.fontSize.large,
@@ -167,7 +186,6 @@ const getStyles = (theme) => StyleSheet.create({
   progressBarFill: {
     height: '100%',
     backgroundColor: theme.primary,
-
   },
   row: {
     flexDirection: 'row',
@@ -195,21 +213,6 @@ const getStyles = (theme) => StyleSheet.create({
   daysLeftText: {
     color: theme.lightGrey,
   },
-  iconContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 20,
-    borderTopWidth: 1,
-    borderTopColor: theme.lightGrey,
-  },
-  iconButton: {
-    alignItems: 'center',
-  },
-  iconText: {
-    marginTop: 5,
-    color: theme.primary,
-    fontSize: theme.fontSize.small,
-  },
   section: {
     backgroundColor: theme.background,
     borderBottomLeftRadius: 10,
@@ -223,16 +226,45 @@ const getStyles = (theme) => StyleSheet.create({
     color: theme.secondary,
     paddingTop: 10,
   },
-  sectionContent: {
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  placeholderProfileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: theme.lightGrey,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  placeholderProfileText: {
+    color: theme.darkGrey,
+  },
+  profileInfo: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  sectionContentText: {
-    fontSize: theme.fontSize.body,
+  username: {
+    fontSize: 14,
     color: theme.secondary,
+    fontWeight: 'bold',
+  },
+  sectionSubtitle: {
+    fontSize: theme.fontSize.small,
+    color: theme.lightGrey,
   },
   followButton: {
+    alignItems: 'center',
     borderColor: theme.primary,
     borderWidth: 1,
     borderRadius: 5,
@@ -241,10 +273,6 @@ const getStyles = (theme) => StyleSheet.create({
   },
   followButtonText: {
     color: theme.primary,
-  },
-  sectionSubtitle: {
-    fontSize: theme.fontSize.small,
-    color: theme.lightGrey,
   },
   storyText: {
     fontSize: theme.fontSize.body,

@@ -24,6 +24,47 @@ export const navigateToTab = (componentId, tabIndex) => {
   });
 };
 
+export const showModal = (componentName, passProps = {}, options = {}) => {
+  Navigation.showModal({
+    stack: {
+      children: [{
+        component: {
+          name: componentName,
+          passProps: passProps,
+          options: {
+            topBar: {
+              title: {
+                text: options.title || '',
+              },
+              ...options.topBar
+            },
+            ...options
+          }
+        }
+      }]
+    }
+  });
+};
+
+export const showOverlay = (componentName, passProps = {}, options = {}) => {
+  Navigation.showOverlay({
+    component: {
+      name: componentName,
+      passProps: passProps,
+      options: {
+        overlay: {
+          interceptTouchOutside: options.interceptTouchOutside || false,
+        },
+        ...options,
+      },
+    },
+  });
+};
+
+export const dismissModal = (componentId) => {
+  Navigation.dismissModal(componentId);
+};
+
 export const setStatusBar = (componentId, theme) => {
   Navigation.mergeOptions(componentId, {
     statusBar: {

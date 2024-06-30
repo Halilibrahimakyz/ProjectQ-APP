@@ -28,8 +28,7 @@ const StudentProfileScreen = props => {
 
   const language = useSelector((state) => state.language.value);
 
-  const userSupporter = useSelector((state) => state.userSupporter);
-  const userStudent = useSelector((state) => state.userStudent);
+  const userStudent = useSelector((state) => state.userStudent.userInfo);
 
   const { getVal, changeLanguage } = useLanguage();
 
@@ -71,8 +70,8 @@ const StudentProfileScreen = props => {
         style={styles.scroller}
         contentContainerStyle={{alignItems: "center"}}
       >
-        <ProfilePictureContainer image={demoImage}/>
-        <ProfileNameText userName="Adam Smith"/>
+        <ProfilePictureContainer image={userStudent.profilePicture}/>
+        <ProfileNameText userName={userStudent.username}/>
         <SocialStatistics
           initiativesNum={12}
           followersNum={487}

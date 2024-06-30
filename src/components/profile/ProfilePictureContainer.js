@@ -7,12 +7,12 @@ const ProfilePictureContainer = ({image}) => {
   const theme = useTheme();
   const styles = useMemo(() => getStyles(theme), [theme])
 
-
+console.log("image",image)
   return (
     <View style={styles.container}>
       <View style={styles.profilePictureContainer}>
         <Image
-          source={image}
+          source={{ uri: image }}
           style={{width: "100%", height: "100%"}}
           resizeMode='cover'
         />

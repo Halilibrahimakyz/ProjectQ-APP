@@ -15,6 +15,8 @@ import { DrawerLeft } from './DrawerLeft';
 import InterestSelection from './InterestSelection';
 import CustomSwitch from './CustomSwitch';
 import CustomLoader from './CustomLoader';
+import CustomPhotoAdd from './CustomPhotoAdd';
+import CustomCheckbox from './CustomCheckBox';
 
 export {
     Container,
@@ -33,5 +35,7 @@ export {
     CustomIcon,
     DrawerLeft,
     InterestSelection,
-    CustomLoader
+    CustomLoader,
+    CustomPhotoAdd,
+    CustomCheckbox
 }

@@ -7,6 +7,8 @@ import { useDefaultOptions } from './navigation/navigationConfig';
 import { setRootScreen } from './navigation/navigationFunctions';
 import {useTheme} from '@/constants/colors';
 import DrawerLeft from './components/DrawerLeft';
+import { CustomLoader } from './components';
+import { refreshToken } from './services';
 // import { enableScreens } from 'react-native-screens';
 
 // enableScreens();
@@ -19,15 +21,14 @@ const App = (props) => {
   const theme = useTheme();
 
   useEffect(() => {   
+    const token = refreshToken()
     const defaultOptions = useDefaultOptions(theme);
     Navigation.setDefaultOptions(defaultOptions);
     setRootScreen({ isLoggedIn: isLoggedIn, userType: userType});
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Loading...</Text>
-    </View>
+    <CustomLoader/>
   );
 };
 

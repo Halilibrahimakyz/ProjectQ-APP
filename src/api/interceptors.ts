@@ -3,6 +3,9 @@ import * as Keychain from 'react-native-keychain';
 import { store } from '../storeReduxToolkit/store';
 import { setAccessToken, removeAccessToken } from '../storeReduxToolkit/authorizationSlice';
 import { refreshToken } from '../services';
+import { logout as studentLogout } from '@/storeReduxToolkit/userStudentSlice';
+import { logout as supporterLogout } from '@/storeReduxToolkit/userSupporterSlice';
+import { setRootScreen } from '@/navigation/navigationFunctions';
 
 let isRefreshing = false;
 let refreshSubscribers: ((token: string) => void)[] = [];
@@ -12,7 +15,7 @@ const subscribeTokenRefresh = (cb: (token: string) => void) => {
 };
 
 const onRefreshed = (token: string) => {
-  refreshSubscribers.map(cb => cb(token));
+  refreshSubscribers.forEach(cb => cb(token));
   refreshSubscribers = [];
 };
 
@@ -79,17 +82,19 @@ export const setupInterceptorsTo = (api: AxiosInstance) => {
             const data = await refreshToken();
             const { accessToken } = data;
             console.log('New access token: ', accessToken);
-            store.dispatch(setAccessToken(accessToken));
 
+            store.dispatch(setAccessToken(accessToken));
             onRefreshed(accessToken);
-            isRefreshing = false;
           } catch (err) {
-            isRefreshing = false;
             console.error('Failed to refresh token:', err);
             await Keychain.resetGenericPassword({ service: 'refreshToken' });
             store.dispatch(removeAccessToken());
-            // TODO Navigation needed to login
+            store.dispatch(studentLogout());
+            store.dispatch(supporterLogout());
+            setRootScreen({ isLoggedIn: false, userType: null });
             return Promise.reject(err);
+          } finally {
+            isRefreshing = false;
           }
         }
 

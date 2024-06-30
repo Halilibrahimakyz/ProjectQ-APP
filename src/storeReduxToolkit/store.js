@@ -8,6 +8,7 @@ import studentFormReducer from './studentFormSlice'
 import authorizationReducer from './authorizationSlice'
 import supporterFormSlice from './supporterFormSlice'
 import tabIndexSlice from './tabIndexSlice'
+import projectFormReducer from './projectFormSlice'
 
 import {
   persistReducer,
@@ -36,6 +37,7 @@ const persistedLanguageReducer = persistReducer(persistConfig('language'), langu
 const persistedUserSupporterReducer = persistReducer(persistConfig('userSupporter'), userSupporterReducer);
 const persistedUserStudentReducer = persistReducer(persistConfig('userStudent'), userStudentReducer);
 const persistedAuthReducer = persistReducer(persistConfig('authorization'), authorizationReducer);
+const persistedProjectFormReducer = persistReducer(persistConfig('projectForm'), projectFormReducer);
 
 // Configure store with persisted reducers and middleware
 export const store = configureStore({
@@ -48,7 +50,8 @@ export const store = configureStore({
     studentForm:studentFormReducer,
     supporterForm:supporterFormSlice,
     authorization:persistedAuthReducer,
-    tabIndex:tabIndexSlice
+    tabIndex:tabIndexSlice,
+    projectForm:persistedProjectFormReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

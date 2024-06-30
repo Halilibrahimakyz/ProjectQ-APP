@@ -8,3 +8,6 @@ export const REFRESH_TOKEN = '/auth/refresh-token';
 export const CHECK_USERNAME = '/validate/check-user-name';
 export const GET_CITIES  = '/info/cities';
 export const GET_UNIVERTIES  = '/info/universities';
+export const POST_CREATE_PROJECT = '/project/create';
+export const GET_PROJECTS = '/project/projects';
+export const POST_DONATE_TO_PROJECT = '/transaction/donate';

@@ -9,7 +9,7 @@ export const loginStudent = async (credentials: Credentials) => {
   try {
     const response = await api.post(LOGIN_STUDENT, credentials);
     const { accessToken, refreshToken } = response.data;
-
+   
     await Keychain.setGenericPassword('refreshToken', refreshToken, { service: 'refreshToken' });
     store.dispatch(setAccessToken(accessToken));
 
@@ -37,7 +37,8 @@ export const login = async (credentials: Credentials) => {
   try {
     const response = await api.post(LOGIN, credentials);
     const { accessToken, refreshToken } = response.data;
-
+    console.log("accessToken: ",accessToken)
+    console.log("refreshToken: ",refreshToken)
     await Keychain.setGenericPassword('refreshToken', refreshToken, { service: 'refreshToken' });
     store.dispatch(setAccessToken(accessToken));
 
@@ -98,8 +99,9 @@ export const refreshToken = async () => {
     if (!refreshToken) throw new Error('No refresh token available');
 
     const response = await api.post(REFRESH_TOKEN, { refreshToken });
+    
     const { accessToken } = response.data;
-
+    console.log("accessToken",accessToken)
     store.dispatch(setAccessToken(accessToken));
 
     return response.data;

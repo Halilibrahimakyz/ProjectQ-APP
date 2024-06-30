@@ -17,7 +17,7 @@ const CustomPicker = ({ label, value, onChange, placeholder, error, options, ico
     const shakeAnimation = useSharedValue(0);
 
     useEffect(() => {
-        console.log("valuegender: ",value)
+        // console.log("valuegender: ",value)
         if (isFocused || value) {
             labelTranslateY.value = withTiming(-20);
             labelScale.value = withTiming(1);

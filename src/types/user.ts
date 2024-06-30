@@ -50,3 +50,4 @@ export interface SignupDataSupporter {
   behalfCompany?: boolean;
   wantsAnonymous?: boolean;
 }
+

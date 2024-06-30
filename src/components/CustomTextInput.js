@@ -25,7 +25,8 @@ const CustomTextInput = forwardRef(({
     secureTextEntry = false,
     icon = 'pencil',
     returnKeyType,
-    onSubmitEditing
+    onSubmitEditing,
+    multiline = false
 }, ref) => {
     const theme = useTheme();
     const styles = getStyles(theme);
@@ -90,13 +91,13 @@ const CustomTextInput = forwardRef(({
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.row, animatedRowStyle]}>
-                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red :value ? theme.primary : theme.lightGrey, borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
+                <View style={[styles.iconContainer, { backgroundColor: error ? theme.red : value ? theme.primary : theme.lightGrey, borderColor: error ? theme.red : value ? theme.primary : theme.lightGrey }]}>
                     <MaterialCommunityIcons name={icon} color={theme.background} size={24} />
                 </View>
-                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth, borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
+                <View style={[styles.inputContainer, { borderTopRightRadius: secureTextEntry ? 0 : 10, borderBottomRightRadius: secureTextEntry ? 0 : 10, borderRightWidth: secureTextEntry ? 0 : StyleSheet.hairlineWidth, borderColor: error ? theme.red : value ? theme.primary : theme.lightGrey, height: multiline ? 100 : 50 }]}>
                     <TextInput
                         ref={ref}
-                        style={[styles.input, error && styles.inputError]}
+                        style={[styles.input, error && styles.inputError, { height: multiline ? 100 : 50,textAlignVertical:multiline?'top':'center' }]}
                         value={internalValue}
                         onChangeText={handleChangeText}
                         placeholder={!isFocused && !value ? placeholder : ''}
@@ -108,13 +109,14 @@ const CustomTextInput = forwardRef(({
                         onBlur={handleBlur}
                         returnKeyType={returnKeyType}
                         onSubmitEditing={onSubmitEditing}
+                        multiline={multiline}
                     />
                     <Animated.Text style={[styles.label, animatedLabelStyle, { color: error ? theme.red : theme.primary }]}>
                         {label}
                     </Animated.Text>
                 </View>
                 {secureTextEntry && (
-                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={[styles.iconContainerRight,{ borderColor: error ? theme.red :value ? theme.primary : theme.lightGrey}]}>
+                    <TouchableOpacity onPress={toggleSecureEntry} activeOpacity={1} style={[styles.iconContainerRight, { borderColor: error ? theme.red : value ? theme.primary : theme.lightGrey }]}>
                         <MaterialCommunityIcons name={isSecure ? "eye-off" : "eye"} color={theme.lightGrey} size={24} />
                     </TouchableOpacity>
                 )}
@@ -128,7 +130,7 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         marginVertical: 5,
         position: 'relative',
-        width:'100%',
+        width: '100%',
     },
     label: {
         color: theme.primary,
@@ -137,7 +139,7 @@ const getStyles = (theme) => StyleSheet.create({
         left: 0,
         backgroundColor: theme.background,
         paddingHorizontal: 5,
-        fontSize:theme.fontSize.small
+        fontSize: theme.fontSize.small
     },
     row: {
         flexDirection: 'row',
@@ -150,7 +152,6 @@ const getStyles = (theme) => StyleSheet.create({
         borderColor: theme.lightGrey,
         backgroundColor: theme.background,
         position: 'relative',
-        height:50
     },
     iconContainer: {
         backgroundColor: theme.primary,
@@ -182,7 +183,6 @@ const getStyles = (theme) => StyleSheet.create({
         marginRight: 10,
         color: theme.secondary,
         backgroundColor: theme.background,
-        
     },
     inputError: {
         borderColor: theme.red,

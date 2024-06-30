@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@/constants/colors';
 import { changeIndex } from '@/storeReduxToolkit/tabIndexSlice';
-import { navigateToTab } from '@/navigation/navigationFunctions';
+import { navigateToTab, showModal } from '@/navigation/navigationFunctions';
 import { useAuth } from '@/functions/authenticate';
 
 const CustomTabBar = ({ componentId }) => {
@@ -19,8 +19,12 @@ const CustomTabBar = ({ componentId }) => {
     navigateToTab(componentId, index);
   };
 
-  const TabButton = ({ screenName, icon, index, selectedIcon }) => (
-    <TouchableOpacity style={styles.buttons} onPress={() => navigateToScreen(screenName, index)}>
+  const openModal = (screenName) => {
+    showModal(screenName, {}, { title: 'Create' });
+  };
+
+  const TabButton = ({ screenName, icon, index, selectedIcon, onPress }) => (
+    <TouchableOpacity style={styles.buttons} onPress={onPress || (() => navigateToScreen(screenName, index))}>
       <MaterialCommunityIcons
         name={selectedTab === index ? selectedIcon : icon}
         color={selectedTab === index ? theme.primary : theme.lightGrey}
@@ -43,7 +47,13 @@ const CustomTabBar = ({ componentId }) => {
         <>
           <TabButton screenName="StudentHomeScreen" icon="home-outline" selectedIcon="home" index={0} />
           <TabButton screenName="StudentListScreen" icon="format-list-bulleted" selectedIcon="format-list-bulleted" index={1} />
-          <TabButton screenName="StudentCreateScreen" icon="plus-box-outline" selectedIcon="plus-box-outline" index={2} />
+          <TabButton
+            screenName="StudentCreateScreen"
+            icon="plus-box-outline"
+            selectedIcon="plus-box-outline"
+            index={2}
+            onPress={() => openModal('StudentCreateScreen')}
+          />
           <TabButton screenName="StudentMessagesScreen" icon="message-processing-outline" selectedIcon="message-processing" index={3} />
           <TabButton screenName="StudentProfileScreen" icon="account-outline" selectedIcon="account" index={4} />
         </>
@@ -57,7 +67,7 @@ const getStyles = (theme) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: 60,
+    height:theme.dimensions.bottomTabsHeight,
     paddingHorizontal: 10,
   },
   buttons: {

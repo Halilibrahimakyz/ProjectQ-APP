@@ -4,6 +4,12 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
+const { Navigation } = require('react-native-navigation');
+const {
+  statusBarHeight,
+  topBarHeight,
+  bottomTabsHeight
+} = Navigation.constantsSync();
 
 const { width,height } = Dimensions.get('window');
 
@@ -25,7 +31,9 @@ const baseTheme = {
   dimensions:{
     width:width,
     height:height,
-    statusBarHeight:30
+    statusBarHeight:statusBarHeight,
+    topBarHeight:topBarHeight,
+    bottomTabsHeight:bottomTabsHeight
   },
   primary: '#13B156',//Green
   accent: '#09101D',//Dark Blue

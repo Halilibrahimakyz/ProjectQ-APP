@@ -38,6 +38,7 @@ import Security from './settings/screens/security';
 
 //Others
 import ProjectScreen from './project'
+import DonateScreen from './donate';
 
 export {
     WelcomeScreen,
@@ -66,5 +67,6 @@ export {
     InviteFriends,
     Notifications,
     Security,
-    SignUpSupporterScreen
+    SignUpSupporterScreen,
+    DonateScreen
 }

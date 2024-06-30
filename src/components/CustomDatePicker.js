@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useTheme } from '@/constants/colors';
 import moment from 'moment';
 
-const CustomDatePicker = ({ label, value, onChange, placeholder, error, icon = 'calendar', minAge }) => {
+const CustomDatePicker = ({ label, value, onChange, placeholder, error, icon = 'calendar', minAge,minDate }) => {
     const theme = useTheme();
     const styles = getStyles(theme);
     const [isFocused, setIsFocused] = useState(false);
@@ -101,6 +101,7 @@ const CustomDatePicker = ({ label, value, onChange, placeholder, error, icon = '
                 onConfirm={handleConfirm}
                 onCancel={handleCancel}
                 maximumDate={maxDate} // Set the maximum date
+                minimumDate={minDate}
                 cancelTextStyle={{ color: theme.primary }}
                 confirmTextStyle={{ color: theme.primary }}
                 customHeaderIOS={() => (

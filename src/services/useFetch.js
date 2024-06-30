@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api/apiClient';
 
-const useFetch = (url, params = {}) => {
+const useFetch = (url, params = {}, refreshTrigger) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,7 +33,7 @@ const useFetch = (url, params = {}) => {
     return () => {
       isMounted = false;
     };
-  }, [url]);
+  }, [url, refreshTrigger]);
   
   return { data, loading, error };
 };

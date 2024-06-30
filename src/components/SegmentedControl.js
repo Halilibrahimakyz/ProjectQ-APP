@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useTheme } from '@/constants/colors';
-const categories = ['All', 'Education', 'Technology', 'Art', 'Science', 'Health', 'Sports'];
+const categories = ['All', 'technology',
+  'science',
+  'art',
+  'music',
+  'sports',
+  'literature',
+  'gaming',
+  'travel',
+  'food',
+  'history',
+  'photography',
+  'other'];
 
 const SegmentedControl = ({ onCategoryChange }) => {
-  
+
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -16,7 +27,7 @@ const SegmentedControl = ({ onCategoryChange }) => {
       onCategoryChange(category);
     }
   };
-  
+
   return (
     <View style={styles.wrapper}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.container}>
